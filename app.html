@@ -11,13 +11,7 @@
 </head>
 <body>
   <div id="root">
-    <div id="cont">
-        <div id="cpu">cpu</div>
-        <div id="mb">mb</div>
-        <div id="pw">pw</div>
-        <div id="ram">ram</div>
-        <div id="cas">case</div>
-    </div>
+    <div id="cont"></div>
     <div id="result">
       <button id="bnt">result</button>
     <div>
@@ -48,64 +42,53 @@
     bnt.style.height = "10vh";
     bnt.style.right = '0vh';
 
-    // bnt
-    // let cpu = document.getElementById('cpu');
-    // cpu.style.width = "15vw";
-    // cpu.style.height = "15vw";
-    // cpu.style.backgroundRepeat = "no-repeat";
-    // cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // cpu.style.backgroundSize = "15vw";
-    // cpu.style.fontSize = "7vh";
-    let itemList = [cpu, mb, ram, pw, cas];
-    
-    function tagMaker(item) {
-      let mk = document.createElement(`${item}`);
-      cont.appendChild(mk);
-      item.style.width = "10vw";
-      item.style.height = "10vw";
-      item.style.backgroundRepeat = "no-repeat";
-      item.style.backgroundImage = `url('./unhw/${item}.jpg')`;
-      item.style.backgroundSize = "10vw";
-      item.style.fontSize = "5vh";      
-    }
+    // itemList
+    let itemList = ['cpu', 'mb', 'ram', 'pw', 'cas'];
 
-    for(i=0; i<itemList.length; i++){
-      console.log(tagMaker(itemList[i]));
+    // tagMaker('cpu');
+        //make child function
+    function makeChild(faTagId, tagName){
+      let cre = document.createElement(`${tagName}`);
+      faTagId.appendChild(cre);  }; 
+    // bntStyle
+    function bntStyle(faTagId, tagName){
+      tagName.style.width = "10vw";
+      tagName.style.height = "10vw";
+      tagName.style.fontSize = "5vh";      
+      tagName.style.backgroundRepeat = "no-repeat";
+      tagName.style.backgroundImage = "url('./png/cpu.png')";
+      tagName.style.backgroundSize = "10vw";
     }
-    // let handler = true;
-    //   cpu.addEventListener('click', function(){
-    //     if (handler === true) {
-    //       handler = false;
-    //       cpu.style.color = "red";
-    //       console.log(handler);
-    //       // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
-    //     } else {
-    //       handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-    //       cpu.style.color = "green";
-    //       console.log(handler);
-    //     }
-    //   })
-
-    function toggleMaker(item){
+    // toggleMaker
+    function toggleMaker(tagName){
       let handler = true;
-      item.addEventListener('click', function(){
+      tagName.addEventListener('click', function(){
         if (handler === true) {
           handler = false;
-          item.style.color = "red";
+          tagName.style.color = "red";
           console.log(handler);
           // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
         } else {
           handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-          item.style.color = "green";
+          tagName.style.color = "green";
           console.log(handler);
         }
       })
     }
+
+
+    makeChild(bnt, 'div', 3)
+      
+
+
+
+    // // toggleMaker fnc
+
   
-    
-    for(i=0; i<itemList.length; i++){
-      console.log(toggleMaker(itemList[i]));
-    }
+    // // toggleMaker launch
+    // for(i=0; i<itemList.length; i++){
+    //   console.log(toggleMaker(itemList[i]));
+    // }
 
     
 
