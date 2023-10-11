@@ -6,30 +6,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * { margin:0; padding:0; box-sizing: border-box; 
-      width: 10hw; height: 10hw; background-color: gray;}
+    * { margin:0; padding:0; box-sizing: border-box; }
   </style>
 </head>
 <body>
   <div id="root">
-    <div id="pw"></div>
-    <div id="mb"></div>
-    <div id="ram"></div>
-    <div id="cpu"></div>
-    <div id="gpu"></div>
-    <div id="case"></div>
+    <div id="cont">
+      <div id="pw"></div>
+      <div id="mb"></div>
+      <div id="case"></div>
+      <div id="ram"></div>
+      <div id="gpu"></div>
+      <div id="cpu"></div>
+    </div>
     <div id="result"></div>
   </div>
   <script>
     let root = document.getElementById('root');
+    root.style.width = "100vw";
+    root.style.height = "100vh";
+    root.style.backgroundColor = "gray";
+    
+    let cont = document.getElementById('cont');
+    cont.style.display = "flex";
+    cont.style.flexWrap = "wrap";
+    cont.style.width = "80vw";
+    cont.style.height = "100vh";
+    cont.style.backgroundColor = "white";
+    
+
+    
     let result = document.getElementById('result');
     
+
+
+
+
+    
+
+
     let pw = document.getElementById('pw');
+
+
     let mb = document.getElementById('mb');
     let ram = document.getElementById('ram');
     let cpu = document.getElementById('cpu');
     let gpu = document.getElementById('gpu');
-    
+
+
   </script>
 </body>
 </html>
