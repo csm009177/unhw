@@ -19,32 +19,28 @@
       <div id="gpu"></div>
       <div id="cpu"></div>
     </div>
-    <div id="result"></div>
+    <p id="result"></p>
   </div>
   <script>
     let root = document.getElementById('root');
     root.style.width = "100vw";
     root.style.height = "100vh";
     root.style.backgroundColor = "gray";
+    root.style.style = "flex";
     
     let cont = document.getElementById('cont');
     cont.style.display = "flex";
     cont.style.flexWrap = "wrap";
-    cont.style.width = "80vw";
-    cont.style.height = "100vh";
+    cont.style.width = "100vw";
+    cont.style.height = "80vh";
     cont.style.backgroundColor = "white";
     
-
-    
     let result = document.getElementById('result');
+    result.style.content = "test";
+    result.style.color = "black";
+    result.style.width = "100vw";
+    result.style.height = "20vh";
     
-
-
-
-
-    
-
-
     let pw = document.getElementById('pw');
 
 
