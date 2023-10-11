@@ -49,24 +49,29 @@
     bnt.style.right = '0vh';
 
     // bnt
-    let itemList = [cpu, mb, ram, pw];
+    // let cpu = document.getElementById('cpu');
+    // cpu.style.width = "15vw";
+    // cpu.style.height = "15vw";
+    // cpu.style.backgroundRepeat = "no-repeat";
+    // cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
+    // cpu.style.backgroundSize = "15vw";
+    // cpu.style.fontSize = "7vh";
+    let itemList = [cpu, mb, ram, pw, cas];
     
-    function button(item) {
-      cpu.style.width = "15vw";
-      cpu.style.height = "15vw";
-      cpu.style.backgroundRepeat = "no-repeat";
-      cpu.style.backgroundImage = `url('./unhw/${itme}.jpg')`;
-      cpu.style.backgroundSize = "15vw";
-      cpu.style.fontSize = "7vh";      
+    function tagMaker(item) {
+      let mk = document.createElement(`${item}`);
+      cont.appendChild(mk);
+      item.style.width = "10vw";
+      item.style.height = "10vw";
+      item.style.backgroundRepeat = "no-repeat";
+      item.style.backgroundImage = `url('./unhw/${item}.jpg')`;
+      item.style.backgroundSize = "10vw";
+      item.style.fontSize = "5vh";      
     }
-    let cpu = document.getElementById('cpu');
-    cpu.style.width = "15vw";
-    cpu.style.height = "15vw";
-    cpu.style.backgroundRepeat = "no-repeat";
-    cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    cpu.style.backgroundSize = "15vw";
-    cpu.style.fontSize = "7vh";
 
+    for(i=0; i<itemList.length; i++){
+      console.log(tagMaker(itemList[i]));
+    }
     // let handler = true;
     //   cpu.addEventListener('click', function(){
     //     if (handler === true) {
