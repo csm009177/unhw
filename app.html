@@ -28,7 +28,7 @@
     root.style.height = "100vh";
     root.style.backgroundColor = "gray";
 
-    
+
     let cont = document.getElementById('cont');
     cont.style.display = "flex";
     cont.style.flexWrap = "wrap";
@@ -49,7 +49,7 @@
     bnt.style.right = '0vh';
 
     // bnt
-
+    
     let cpu = document.getElementById('cpu');
     cpu.style.width = "15vw";
     cpu.style.height = "15vw";
@@ -58,22 +58,40 @@
     cpu.style.backgroundSize = "15vw";
     cpu.style.fontSize = "7vh";
 
-    
-    let handler = true;
-    cpu.addEventListener('click', function(){
-      if (handler === true) {
-        handler = false;
-        cpu.style.color = "red";
-        console.log(handler);
-        // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
-      } else {
-        handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-        cpu.style.color = "green";
-        console.log(handler);
-      }
-    })
+    // let handler = true;
+    //   cpu.addEventListener('click', function(){
+    //     if (handler === true) {
+    //       handler = false;
+    //       cpu.style.color = "red";
+    //       console.log(handler);
+    //       // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
+    //     } else {
+    //       handler = true; // 아니라면 핸들러를 참으로 바꿔줘
+    //       cpu.style.color = "green";
+    //       console.log(handler);
+    //     }
+    //   })
 
+    function toggleMaker(item){
+      let handler = true;
+      item.addEventListener('click', function(){
+        if (handler === true) {
+          handler = false;
+          item.style.color = "red";
+          console.log(handler);
+          // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
+        } else {
+          handler = true; // 아니라면 핸들러를 참으로 바꿔줘
+          item.style.color = "green";
+          console.log(handler);
+        }
+      })
+    }
   
+  let itemList = [];
+  for(i=0; i<)
+    toggleMaker(cpu);
+
 
   </script>
 </body>
