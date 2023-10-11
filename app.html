@@ -49,7 +49,16 @@
     bnt.style.right = '0vh';
 
     // bnt
+    let itemList = [cpu, mb, ram, pw];
     
+    function button(item) {
+      cpu.style.width = "15vw";
+      cpu.style.height = "15vw";
+      cpu.style.backgroundRepeat = "no-repeat";
+      cpu.style.backgroundImage = `url('./unhw/${itme}.jpg')`;
+      cpu.style.backgroundSize = "15vw";
+      cpu.style.fontSize = "7vh";      
+    }
     let cpu = document.getElementById('cpu');
     cpu.style.width = "15vw";
     cpu.style.height = "15vw";
@@ -88,9 +97,12 @@
       })
     }
   
-  let itemList = [];
-  for(i=0; i<)
-    toggleMaker(cpu);
+    
+    for(i=0; i<itemList.length; i++){
+      console.log(toggleMaker(itemList[i]));
+    }
+
+    
 
 
   </script>
