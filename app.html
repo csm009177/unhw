@@ -49,83 +49,31 @@
     bnt.style.right = '0vh';
 
     // bnt
-    
+
     let cpu = document.getElementById('cpu');
     cpu.style.width = "15vw";
-    cpu.style.height = "10vw";
+    cpu.style.height = "15vw";
     cpu.style.backgroundRepeat = "no-repeat";
     cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
     cpu.style.backgroundSize = "15vw";
-    // cpu.style.color = "green";
-    cpu.style.fontSize = "5vh";
+    cpu.style.fontSize = "7vh";
 
-
-    let itemList = ['cpu', 'mb'];
     
-
-
-    // cpubnt.addEventListener('click', function(){
-    //   if (handler === true) {
-    //     handler = false;
-    //     cpubnt.style.color = "red";
-    //     console.log(handler);
-    //     // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
-    //   } else {
-    //     handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-    //     cpubnt.style.color = "green";
-    //     console.log(handler);
-    //   }
-    // })
-    function toggleMaker(item){
-      let handler = true;
-    item.addEventListener('click', function(){
+    let handler = true;
+    cpu.addEventListener('click', function(){
       if (handler === true) {
         handler = false;
-        item.style.color = "red";
+        cpu.style.color = "red";
         console.log(handler);
         // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
       } else {
         handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-        item.style.color = "green";
+        cpu.style.color = "green";
         console.log(handler);
       }
     })
-  }
-  for(i=0; i<itemList.length; i++){
-  console.log(toggleMaker(itemList[i]));  
-}
+
   
-  
-    // let mb = document.getElementById('mb');
-    // mb.style.width = "15vw";
-    // mb.style.height = "10vw";
-    // mb.style.backgroundRepeat = "no-repeat";
-    // mb.style.backgroundImage = "url('./unhw/mb.jpg')";
-    // mb.style.backgroundSize = "15vw";
-    // let pw = document.getElementById('pw');    
-    // pw.style.width = "15vw";
-    // pw.style.height = "10vw";
-    // pw.style.backgroundRepeat = "no-repeat";
-    // pw.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // pw.style.backgroundSize = "15vw";
-    // let ram = document.getElementById('ram');
-    // ram.style.width = "15vw";
-    // ram.style.height = "10vw";
-    // ram.style.backgroundRepeat = "no-repeat";
-    // ram.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // ram.style.backgroundSize = "15vw";
-    // let gpu = document.getElementById('gpu');
-    // gpu.style.width = "15vw";
-    // gpu.style.height = "10vw";
-    // gpu.style.backgroundRepeat = "no-repeat";
-    // gpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // gpu.style.backgroundSize = "15vw";
-    // let cas = document.getElementById('cas');
-    // cas.style.width = "15vw";
-    // cas.style.height = "10vw";
-    // cas.style.backgroundRepeat = "no-repeat";
-    // cas.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // cas.style.backgroundSize = "15vw";
 
   </script>
 </body>
