@@ -11,13 +11,7 @@
 </head>
 <body>
   <div id="root">
-    <div id="cont">
-        <div id="cpu">cpu</div>
-        <div id="mb">mb</div>
-        <div id="pw">pw</div>
-        <div id="ram">ram</div>
-        <div id="cas">case</div>
-    </div>
+    <div id="cont"></div>
     <div id="result">
       <button id="bnt">result</button>
     <div>
@@ -49,14 +43,14 @@
     bnt.style.right = '0vh';
 
     // bnt
-    // let cpu = document.getElementById('cpu');
-    // cpu.style.width = "15vw";
-    // cpu.style.height = "15vw";
-    // cpu.style.backgroundRepeat = "no-repeat";
-    // cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
-    // cpu.style.backgroundSize = "15vw";
-    // cpu.style.fontSize = "7vh";
-    let itemList = [cpu, mb, ram, pw, cas];
+    let cpu = document.getElementById('cpu');
+    cpu.style.width = "15vw";
+    cpu.style.height = "15vw";
+    cpu.style.backgroundRepeat = "no-repeat";
+    cpu.style.backgroundImage = "url('./unhw/cpu.jpg')";
+    cpu.style.backgroundSize = "15vw";
+    cpu.style.fontSize = "7vh";
+    let itemList = [cpu];
     
     function tagMaker(item) {
       let mk = document.createElement(`${item}`);
