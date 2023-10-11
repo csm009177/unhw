@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * { margin:0; padding:0; box-sizing: border-box; align-content: center;}
+    *{ margin:0; padding:0; box-sizing: border-box; align-content: center;}
   </style>
 </head>
 <body>
@@ -45,52 +45,48 @@
     // itemList
     let itemList = ['cpu', 'mb', 'ram', 'pw', 'cas'];
 
-    // tagMaker('cpu');
-        //make child function
+    //make child function
     function makeChild(faTagId, tagName){
       let cre = document.createElement(`${tagName}`);
-      faTagId.appendChild(cre);  }; 
+     faTagId.appendChild(cre);  }; 
+    //giv tagName function
+    function givId(faTagId, tagName){
+        let call = faTagId.getElementsByTagName(`${tagName}`);
+        call.id = `${tagName}` }
+
+
     // bntStyle
-    function bntStyle(faTagId, tagName){
-      tagName.style.width = "10vw";
-      tagName.style.height = "10vw";
-      tagName.style.fontSize = "5vh";      
-      tagName.style.backgroundRepeat = "no-repeat";
-      tagName.style.backgroundImage = "url('./png/cpu.png')";
-      tagName.style.backgroundSize = "10vw";
+    function bntStyle(tagId){
+      tagId.style.width = "10vw";
+      tagId.style.height = "10vw";
+      tagId.style.fontSize = "5vh";      
+      tagId.style.backgroundRepeat = "no-repeat";
+      tagId.style.backgroundImage = `url('./png/${tagId}.png')`;
+      tagId.style.backgroundSize = "10vw";
     }
+
     // toggleMaker
-    function toggleMaker(tagName){
+    function toggleMaker(tagId){
       let handler = true;
-      tagName.addEventListener('click', function(){
+      tagId.addEventListener('click', function(){
         if (handler === true) {
           handler = false;
-          tagName.style.color = "red";
+          tagId.style.color = "red";
           console.log(handler);
           // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
         } else {
           handler = true; // 아니라면 핸들러를 참으로 바꿔줘
-          tagName.style.color = "green";
+          tagId.style.color = "green";
           console.log(handler);
         }
       })
     }
 
 
-    makeChild(bnt, 'div', 3)
-      
+    makeChild(bnt, 'div')
+    bntStyle()
+    toggleMaker(cont)
 
-
-
-    // // toggleMaker fnc
-
-  
-    // // toggleMaker launch
-    // for(i=0; i<itemList.length; i++){
-    //   console.log(toggleMaker(itemList[i]));
-    // }
-
-    
 
 
   </script>
