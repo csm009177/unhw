@@ -1,12 +1,16 @@
 const http = require('http');
 const fs = require('fs');
 const contenType = require('./mod/contenType');
-let cont = contenType('text/html','utf8')
+const checkreq = require('./mod/checkreq');
+let contHtml = contenType('text/html','utf8')
+
 
 let serv = http.createServer((req,res)=> {
-  if(req.method === 'GET'){
+  if(req.method === 'GET' && req.url === '/'){
     console.log(req.method);
-    res.writeHead(200, cont); 
+    console.log(req.url);
+    checkreq();
+    res.writeHead(200, contHtml); 
     res.end('hello');
   }
 })
