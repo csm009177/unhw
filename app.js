@@ -1,12 +1,13 @@
 const http = require('http');
 const fs = require('fs');
 const contenType = require('./mod/contenType');
+let cont = contenType('text/html','utf8')
 
 let serv = http.createServer((req,res)=> {
   if(req.method === 'GET'){
     console.log(req.method);
-    res.writeHead(200, contenType); 
-    res.end(req.method);
+    res.writeHead(200, cont); 
+    res.end('hello');
   }
 })
 
