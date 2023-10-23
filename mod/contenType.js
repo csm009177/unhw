@@ -1,7 +1,8 @@
-function contenType(){ 
+function contenType(type, encode){ 
   const contenType = {
-  'Content-Type' : 'text/html',
-  'charset' : 'utf-8', }
+  'Content-Type' : `${type}`,
+  'charset' : `${encode}`, }
 }
 
 module.exports = contenType;
+
