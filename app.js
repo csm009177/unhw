@@ -8,4 +8,10 @@ let serv = http.createServer((req,res)=> {
   }
 })
 
-serv.listen(3217)
+let port =3217;
+serv.listen(port, () => {
+  console.log(`
+아래의 링크를 Clt와 함께 누르세요
+http://localhost:${port}  
+  `)
+})
