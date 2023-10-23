@@ -1,6 +1,8 @@
-function checkreq(){
-  const allReq = req.method+req.url;
-  return  console.log(allReq);
+function checkreq(method, url){
+  function callback () {
+  return  console.log(`${method}
+  ${url}
+  `);
+  }
 }
-
 module.exports = checkreq;
