@@ -1,14 +1,20 @@
-function StyleDark(){
+function styleDark(){
   return `*{margin:0; padding:0; box-sizing: border-box; background-color:black}`
 }
-function StyleGray(){
+function styleGray(){
   return `*{margin:0; padding:0; box-sizing: border-box; background-color:gray}`
 }
-function StyleDarkGray(){
+function styleDarkGray(){
   return `*{margin:0; padding:0; box-sizing: border-box; background-color:darkgray}`
 }
-function StyleWhite(){
+function styleWhite(){
   return `*{margin:0; padding:0; box-sizing: border-box; background-color:white}`
 }
 
 
+module.exports = {
+styleDark,
+styleGray,
+styleDarkGray,
+styleWhite,
+}

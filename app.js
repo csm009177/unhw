@@ -6,11 +6,13 @@ const contenType = require('./mod/contenType');
 const checkreq = require('./mod/checkreq');
 const docMaker = require('./doc/doc');
 const tagMaker = require('./mod/tagMaker');
+const { styleWhite, styleDark } = require('./mod/asteriskStyle');
+
+
 // custom module use
 let contHtml = contenType('text/html','utf8')
 let testTag = tagMaker('div','width:100vw; height:100vh; background:black;', 'good')
-let testDoc = docMaker('main', '*{ margin:0; padding:0; box-sizing: border-box; align-content: center;};',testTag)
-
+let testDoc = docMaker('main', styleDark() ,testTag)
 
 
 // make server
