@@ -17,7 +17,7 @@ let submitBnt   = tagMaker('button',  'search',  '',
   'width:15vw; height:10vh; background:darkgray;');
 let searchInput = tagMaker('input',   '',     'type="text"', 
 'width:40vw; height:10vh; background:white;');
-let toggle      = tagMaker('button',  '',     'type="button" value=""', 
+let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value=""', 
   'width:15vw; height:10vh; background:darkgray;');
 let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 
   'display:flex; width:70vw; height:10vh; background:black;');
@@ -43,9 +43,10 @@ let serv = http.createServer((req,res)=> {
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end(mainDoc);
-    // document.addEventListener('click', (event)=> {
+    let toggle = document.getElementById('tog')
+    toggle.addEventListener('click', (event)=> {
       
-    // })
+    })
   } 
     
 
