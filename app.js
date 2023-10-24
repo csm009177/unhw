@@ -44,8 +44,18 @@ let serv = http.createServer((req,res)=> {
     res.writeHead(200, contHtml); 
     res.end(mainDoc);
     let toggle = document.getElementById('tog')
-    toggle.addEventListener('click', (event)=> {
-      
+    let togHandle = true;
+    toggle.addEventListener('click', ()=> {
+      if (togHandle === true) {
+        togHandle = false;
+        toggle.style.color = "red";
+        console.log(togHandle);
+        // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
+      } else {
+        togHandle = true; // 아니라면 핸들러를 참으로 바꿔줘
+        toggle.style.color = "green";
+        console.log(togHandle);
+      }
     })
   } 
     
