@@ -7,9 +7,9 @@ let contHtml = contenType('text/html','utf8')
 
 let serv = http.createServer((req,res)=> {
   if(req.method === 'GET' && req.url === '/'){
-    console.log(req.method);
-    console.log(req.url);
-    checkreq();
+    // console.log(req.method);
+    // console.log(req.url);
+    checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end('hello');
   }
