@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    *{ margin:0; padding:0; box-sizing: border-box; align-content: center;}
+    *{ margin:0; padding:0; box-sizing: border-box; align-content: center;
+      
+    }
   </style>
 </head>
 <body>
@@ -48,7 +50,7 @@
     //make child function
     function makeChild(faTagId, tagName){
       let cre = document.createElement(`${tagName}`);
-     faTagId.appendChild(cre);  }; 
+    faTagId.appendChild(cre);  }; 
     //giv tagName function
     function givId(faTagId, tagName){
         let call = faTagId.getElementsByTagName(`${tagName}`);

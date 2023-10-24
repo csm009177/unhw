@@ -7,17 +7,15 @@ const checkreq = require('./mod/checkreq');
 const docMaker = require('./doc/doc');
 const tagMaker = require('./mod/tagMaker');
 const { styleWhite, styleDark } = require('./mod/asteriskStyle');
-
-
 // custom module use
 let contHtml = contenType('text/html','utf8');
-let submitBnt = tagMaker('input', '','width:15vw; height:10vh; background:black;', '');
-let searchInput = tagMaker('input', '', '', 'width:40vw; height:10vh; background:black;', '');
-let toggle = tagMaker('button', '', '',
-  'width:15vw; height:10vh; background:black;', 'search');
-let cont = tagMaker('div', '', '',
-  'width:70vw; height:10vh; background:black;');
-let testDoc = docMaker('main', styleDark() ,cont);
+// cont
+let testTag = tagMaker('button', 'button', 
+  'style="width:10vw; height:10vh; background:gray; color:white;"');
+let inputTag = tagMaker('input', 'placeholder = "search here"', 'style="width:20vw; height:10vh; background:gray; color:white;"'  )
+let cont = tagMaker('div', inputTag+testTag, 
+  'style ="width:50vw; height:10vh; background:darkgray;"');
+let testDoc = docMaker('main', styleDark(), cont);
 
 
 // make server
@@ -30,8 +28,6 @@ let serv = http.createServer((req,res)=> {
     }
   });
   if(req.method === 'GET' && req.url === '/'){
-    // console.log(req.method);
-    // console.log(req.url);
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end(testDoc);
