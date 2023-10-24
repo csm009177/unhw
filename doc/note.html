@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로젝트 이름</title>
+</head>
+<body>
+    <h1>환영합니다</h1>
+    <input type="text" id="search" placeholder="검색">
+    
+    <div id="modeSwitch">
+        <button id="toggleMode">전문가 모드</button>
+        <p id="currentMode">현재 모드: 일반 모드</p>
+    </div>
+    
+    <button id="searchButton">검색</button>
+    
+    <script>
+        const toggleModeButton = document.getElementById('toggleMode');
+        const currentModeText = document.getElementById('currentMode');
+        let isExpertMode = false; // 초기에는 일반 모드로 시작
+        
+        toggleModeButton.addEventListener('click', () => {
+            isExpertMode = !isExpertMode; // 전문가 모드와 일반 모드를 토글
+            toggleModeButton.textContent = isExpertMode ? '일반 모드' : '전문가 모드';
+            currentModeText.textContent = isExpertMode ? '현재 모드: 전문가 모드' : '현재 모드: 일반 모드';
+        });
+        
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', () => {
+            const searchTerm = document.getElementById('search').value;
+            
+            if (isExpertMode) {
+                // 전문가 모드에서의 처리
+            } else {
+                // 일반 모드에서의 처리
+            }
+            
+            // 여기에 검색을 처리하는 공통 로직 추가
+        });
+    </script>
+</body>
+</html>
