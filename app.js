@@ -9,7 +9,7 @@ const tagMaker = require('./mod/tagMaker');
 // custom module use
 let contHtml = contenType('text/html','utf8')
 let testTag = tagMaker('div','width:100vw; height:100vh; background:black;', 'good')
-let testDoc = docMaker('main', 'width:100vw; height:100vh;',testTag)
+let testDoc = docMaker('main', '*{ margin:0; padding:0; box-sizing: border-box; align-content: center;};',testTag)
 
 
 
