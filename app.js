@@ -5,6 +5,7 @@ const checkreq = require('./mod/checkreq');
 let contHtml = contenType('text/html','utf8')
 
 
+
 let serv = http.createServer((req,res)=> {
   if(req.method === 'GET' && req.url === '/'){
     // console.log(req.method);
