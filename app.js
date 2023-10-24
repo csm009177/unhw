@@ -11,11 +11,14 @@ const { styleWhite, styleDark, styleGray } = require('./mod/asteriskStyle');
 
 // custom module use
 let contHtml = contenType('text/html','utf8');
+// tags
 let submitBnt = tagMaker('button', '','', 'width:15vw; height:10vh; background:darkgray;');
 let searchInput = tagMaker('input', '', 'text', 'width:40vw; height:10vh; background:white;');
 let toggle = tagMaker('button', ''  , 'search', 'width:15vw; height:10vh; background:darkgray;');
 let cont = tagMaker('div', toggle+searchInput+submitBnt, '', 'display:flex; width:70vw; height:10vh; background:black;');
-let testDoc = docMaker('main', styleGray(), cont);
+let bigCont = tagMaker('div', cont, '', 'display:flex; width:100vw; height:100vh; background:black;align-content: center; justify-content: center;');
+
+let testDoc = docMaker('main', styleGray(), bigCont);
 
 
 // make server
