@@ -7,12 +7,12 @@ const checkreq = require('./mod/checkreq');
 const docMaker = require('./doc/doc');
 const tagMaker = require('./mod/tagMaker');
 const { styleWhite, styleDark } = require('./mod/asteriskStyle');
-
-
 // custom module use
-let contHtml = contenType('text/html','utf8')
-let testTag = tagMaker('div','width:100vw; height:100vh; background:black;', 'good')
-let testDoc = docMaker('main', styleDark() ,testTag)
+let contHtml = contenType('text/html','utf8');
+// cont
+let testTag = tagMaker('div','width:10vw; height:10vh; background:black; color:white;', 'test');
+let cont = tagMaker('div', 'width:50vw; height:10vh; background:gray;', testTag);
+let testDoc = docMaker('main', styleDark() ,cont);
 
 
 // make server
@@ -25,8 +25,6 @@ let serv = http.createServer((req,res)=> {
     }
   });
   if(req.method === 'GET' && req.url === '/'){
-    // console.log(req.method);
-    // console.log(req.url);
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end(testDoc);
