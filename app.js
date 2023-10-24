@@ -10,9 +10,12 @@ const { styleWhite, styleDark } = require('./mod/asteriskStyle');
 // custom module use
 let contHtml = contenType('text/html','utf8');
 // cont
-let testTag = tagMaker('div','width:10vw; height:10vh; background:black; color:white;', 'test');
-let cont = tagMaker('div', 'width:50vw; height:10vh; background:gray;', testTag);
-let testDoc = docMaker('main', styleDark() ,cont);
+let testTag = tagMaker('button', 'button', 
+  'style="width:10vw; height:10vh; background:gray; color:white;"');
+let inputTag = tagMaker('input', 'placeholder = "search here"', 'style="width:20vw; height:10vh; background:gray; color:white;"'  )
+let cont = tagMaker('div', inputTag+testTag, 
+  'style ="width:50vw; height:10vh; background:darkgray;"');
+let testDoc = docMaker('main', styleDark(), cont);
 
 
 // make server
