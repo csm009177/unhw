@@ -4,21 +4,28 @@ const fs = require('fs');
 // custom module
 const contenType = require('./mod/contenType');
 const checkreq = require('./mod/checkreq');
-const docMaker = require('./doc/doc');
+const docMaker = require('./doc/docMaker');
 const tagMaker = require('./mod/tagMaker');
-const { styleWhite, styleDark, styleGray } = require('./mod/asteriskStyle');
+const { styleWhite, styleDark, styleGray } = require('./style/asteriskStyle');
+const middle = require('./mod/contentArrange');
 
 
 // custom module use
 let contHtml = contenType('text/html','utf8');
 // tags
-let submitBnt = tagMaker('button', '','', 'width:15vw; height:10vh; background:darkgray;');
-let searchInput = tagMaker('input', '', 'text', 'width:40vw; height:10vh; background:white;');
-let toggle = tagMaker('button', ''  , 'search', 'width:15vw; height:10vh; background:darkgray;');
-let cont = tagMaker('div', toggle+searchInput+submitBnt, '', 'display:flex; width:70vw; height:10vh; background:black;');
-let bigCont = tagMaker('div', cont, '', 'display:flex; width:100vw; height:100vh; background:black;align-content: center; justify-content: center;');
-
-let testDoc = docMaker('main', styleGray(), bigCont);
+let submitBnt   = tagMaker('button',  'search',  '', 
+  'width:15vw; height:10vh; background:darkgray;');
+let searchInput = tagMaker('input',   '',     
+  'text', 'width:40vw; height:10vh; background:white;');
+let toggle      = tagMaker('button',  '',     '', 
+  'width:15vw; height:10vh; background:darkgray;');
+let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 
+  'display:flex; width:70vw; height:10vh; background:black;');
+// bigcont created for centering
+let bigCont     = tagMaker('div',     cont,    '', 
+  middle('center', 'center')+'width:100vw; height:100vh; background:black;');
+// doc
+let mainDoc = docMaker('main', styleGray(), bigCont);
 
 
 // make server
@@ -35,7 +42,7 @@ let serv = http.createServer((req,res)=> {
     // console.log(req.url);
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
-    res.end(testDoc);
+    res.end(mainDoc);
   }
   
 })
