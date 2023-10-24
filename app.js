@@ -6,8 +6,8 @@ const contenType = require('./mod/contenType');
 const checkreq = require('./mod/checkreq');
 const docMaker = require('./doc/docMaker');
 const tagMaker = require('./mod/tagMaker');
-const { styleWhite, styleDark, styleGray } = require('./style/asteriskStyle');
-const middle = require('./mod/contentArrange');
+const { styleWhite, styleDark, styleGray } = require('./mod/asteriskStyle');
+const arrange = require('./mod/contentArrange');
 
 
 // custom module use
@@ -23,7 +23,7 @@ let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '',
   'display:flex; width:70vw; height:10vh; background:black;');
 // bigcont created for centering
 let bigCont     = tagMaker('div',     cont,    '', 
-  middle('center', 'center')+'width:100vw; height:100vh; background:black;');
+  arrange('center', 'center')+'width:100vw; height:100vh; background:black;');
 // doc
 let mainDoc = docMaker('main', styleGray(), bigCont);
 
@@ -43,8 +43,12 @@ let serv = http.createServer((req,res)=> {
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end(mainDoc);
-  }
-  
+    document.addEventListener('click', (event)=> {
+      
+    })
+  } 
+    
+
 })
 
 
