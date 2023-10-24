@@ -8,8 +8,9 @@ const docMaker = require('./doc/doc');
 const tagMaker = require('./mod/tagMaker');
 // custom module use
 let contHtml = contenType('text/html','utf8')
-let testTag = tagMaker('div','width:100vw; height:100vh; background:black;')
+let testTag = tagMaker('div','width:100vw; height:100vh; background:black;', 'good')
 let testDoc = docMaker('main', testTag)
+
 // make server
 let serv = http.createServer((req,res)=> {
   if(req.method === 'GET' && req.url === '/'){
