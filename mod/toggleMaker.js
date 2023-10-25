@@ -18,3 +18,4 @@ function togColor(tagetId, before, after) {
     targetElement.style.color = togHandle ? before : after;
 }
 
+module.exports= togColor;
