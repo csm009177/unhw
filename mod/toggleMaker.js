@@ -16,7 +16,7 @@ function togColor(doc ,tagetId, before, after) {
     }
   })
     // 초기 상태 설정
-    
+    targetElement.style.color = togHandle ? before : after;
   </Script>`
 }
 
