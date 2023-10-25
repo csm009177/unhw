@@ -1,6 +1,5 @@
-
 // toggleStringModule.js
-function generateToggleString(tagId, beforeText, beforeColor, afterText, afterColor) {
+function toggleMaker(tagId, beforeText, beforeColor, afterText, afterColor) {
   return `
     <script>
       let toggle = document.getElementById('${tagId}');
@@ -23,6 +22,6 @@ function generateToggleString(tagId, beforeText, beforeColor, afterText, afterCo
   `;
 }
 
-module.exports = generateToggleString;
+module.exports = toggleMaker;
 
 
