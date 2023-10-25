@@ -13,23 +13,24 @@ const toggleMaker = require('./mod/toggleMaker');
 
 // custom module use
 let contHtml = contenType('text/html','utf8');
-// tags
+// submit Bnt
 let submitBnt   = tagMaker('button',  'search',  '', 
   'width:15vw; height:10vh; background:darkgray;');
+// input
 let searchInput = tagMaker('input',   '',     'type="text"', 
 'width:40vw; height:10vh; background:white;');
-
-let toggleString = toggleMaker('tog', 'User', 'green', 'Expert', 'red');
-    
-let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value="" ', 
+// toggle tag
+let toggleScript = toggleMaker('tog', 'User', 'green', 'Expert', 'red');
+let toggleTag   = tagMaker('button',  '',     'id= "tog" type="button" value="" ', 
   'width:15vw; height:10vh; background:darkgray;');
-let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 
+//cont
+let cont        = tagMaker('div',     toggleTag+searchInput+submitBnt, '', 
   'display:flex; width:70vw; height:10vh; background:black;');
-// bigcont created for centering
+// bigcont is body cont
 let bigCont     = tagMaker('div',     cont,    '', 
   arrange('center', 'center')+'width:100vw; height:100vh; background:black;');
   // doc
-  let mainDoc = docMaker('main', styleGray(), bigCont+toggleString);
+let mainDoc = docMaker('main', styleGray(), bigCont+toggleScript);
 
 
 
