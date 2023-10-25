@@ -17,6 +17,26 @@ let submitBnt   = tagMaker('button',  'search',  '',
   'width:15vw; height:10vh; background:darkgray;');
 let searchInput = tagMaker('input',   '',     'type="text"', 
 'width:40vw; height:10vh; background:white;');
+let toggleString = `
+  <script>
+    let toggle = mainDoc.getElementById('tog');
+    toggle.innerHTML = "User";
+    toggle.style.color = "green";
+    let togHandle = true;
+      toggle.addEventListener('click', ()=> {
+        if (togHandle === true) {
+          togHandle = false;
+          toggle.style.color = "red";
+          toggle.innerHTML = "Expert"
+          console.log(togHandle);
+          // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
+        } else {
+          togHandle = true; // 아니라면 핸들러를 참으로 바꿔줘
+          toggle.style.color = "green";
+          toggle.innerHTML = "User";
+          console.log(togHandle);
+        }
+      })</script>`
 let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value=""', 
   'width:15vw; height:10vh; background:darkgray;');
 let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 
@@ -25,7 +45,7 @@ let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '',
 let bigCont     = tagMaker('div',     cont,    '', 
   arrange('center', 'center')+'width:100vw; height:100vh; background:black;');
 // doc
-let mainDoc = docMaker('main', styleGray(), bigCont);
+let mainDoc = docMaker('main', styleGray(), bigCont+toggleString);
 
 
 // make server
@@ -43,20 +63,8 @@ let serv = http.createServer((req,res)=> {
     checkreq(req.method, req.url);
     res.writeHead(200, contHtml); 
     res.end(mainDoc);
-    let toggle = document.getElementById('tog')
-    let togHandle = true;
-      toggle.addEventListener('click', ()=> {
-        if (togHandle === true) {
-          togHandle = false;
-          toggle.style.color = "red";
-          console.log(togHandle);
-          // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
-        } else {
-          togHandle = true; // 아니라면 핸들러를 참으로 바꿔줘
-          toggle.style.color = "green";
-          console.log(togHandle);
-        }
-      })
+    
+
   } 
     
 
