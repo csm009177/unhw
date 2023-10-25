@@ -8,7 +8,8 @@ const docMaker = require('./doc/docMaker');
 const tagMaker = require('./mod/tagMaker');
 const { styleWhite, styleDark, styleGray } = require('./mod/asteriskStyle');
 const arrange = require('./mod/contentArrange');
-const toggleMaker = require('./mod/toggleMaker');
+const toggleStringModule = require('./toggleStringModule');
+
 
 // custom module use
 let contHtml = contenType('text/html','utf8');
@@ -38,8 +39,9 @@ let toggleString = `
         }
       })</script>`
 
-let toggleString2 = toggleMaker('tog', 'User', 'geen','expert', 'red');
 
+const toggleString2 = toggleStringModule('tog', 'User', 'green', 'Expert', 'red');
+      
 let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value="" ', 
   'width:15vw; height:10vh; background:darkgray;');
 let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 
@@ -49,9 +51,6 @@ let bigCont     = tagMaker('div',     cont,    '',
   arrange('center', 'center')+'width:100vw; height:100vh; background:black;');
   // doc
   let mainDoc = docMaker('main', styleGray(), bigCont+toggleString2);
-
-
-
 
 
 
