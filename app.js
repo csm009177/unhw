@@ -37,6 +37,7 @@ let toggleString = `
           console.log(togHandle);
         }
       })</script>`
+
 let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value=""', 
   'width:15vw; height:10vh; background:darkgray;');
 let cont        = tagMaker('div',     toggle+searchInput+submitBnt, '', 

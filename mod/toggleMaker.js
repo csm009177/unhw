@@ -1,4 +1,4 @@
-function toggleMaker(tagetId, ) {
+function toggleMaker(tagetId, before, aftrer) {
   let tagetId = (tagetId+'tog');
   let tagetId = document.getElementById(tagetId)
   let togHandle = true;
@@ -15,3 +15,5 @@ function toggleMaker(tagetId, ) {
     }
   })
 }
+
+module.exports = toggleMaker;
