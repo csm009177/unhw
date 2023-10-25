@@ -8,7 +8,7 @@ const docMaker = require('./doc/docMaker');
 const tagMaker = require('./mod/tagMaker');
 const { styleWhite, styleDark, styleGray } = require('./mod/asteriskStyle');
 const arrange = require('./mod/contentArrange');
-
+const togColor = require('./mod/toggleMaker');
 
 // custom module use
 let contHtml = contenType('text/html','utf8');
@@ -17,26 +17,27 @@ let submitBnt   = tagMaker('button',  'search',  '',
   'width:15vw; height:10vh; background:darkgray;');
 let searchInput = tagMaker('input',   '',     'type="text"', 
 'width:40vw; height:10vh; background:white;');
-let toggleString = `
-  <script>
-    let toggle = mainDoc.getElementById('tog');
-    toggle.innerHTML = "User";
-    toggle.style.color = "green";
-    let togHandle = true;
-      toggle.addEventListener('click', ()=> {
-        if (togHandle === true) {
-          togHandle = false;
-          toggle.style.color = "red";
-          toggle.innerHTML = "Expert"
-          console.log(togHandle);
-          // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
-        } else {
-          togHandle = true; // 아니라면 핸들러를 참으로 바꿔줘
-          toggle.style.color = "green";
-          toggle.innerHTML = "User";
-          console.log(togHandle);
-        }
-      })</script>`
+// let toggleString = `
+//   <script>
+//     let toggle = mainDoc.getElementById('tog');
+//     toggle.innerHTML = "User";
+//     toggle.style.color = "green";
+//     let togHandle = true;
+//       toggle.addEventListener('click', ()=> {
+//         if (togHandle === true) {
+//           togHandle = false;
+//           toggle.style.color = "red";
+//           toggle.innerHTML = "Expert"
+//           console.log(togHandle);
+//           // 핸들러가 참이라면 핸들러를 거짓으로 바꿔줘
+//         } else {
+//           togHandle = true; // 아니라면 핸들러를 참으로 바꿔줘
+//           toggle.style.color = "green";
+//           toggle.innerHTML = "User";
+//           console.log(togHandle);
+//         }
+//       })</script>`
+let toggleString = togColor('maindoc', 'tog', 'green','red');
 
 let toggle      = tagMaker('button',  '',     'id= "tog" type="button" value=""', 
   'width:15vw; height:10vh; background:darkgray;');
