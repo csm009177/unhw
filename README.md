@@ -1,3 +1,38 @@
+프로젝트 개요
+
+1. 틀린 정보만 재공하는 하드웨어 플랫폼
+  ex) 조립이 되는 조건은 배재한다
+2. 초기화면 구성
+  - 구글 플랫폼을 따라가지만 expert 모드와 nomal모드
+3. 상단에 버튼을 만들어서
+
+4. firebase 배포
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 ### 0. 프로젝트 생성
 - 로컬 디렉토리 생성 or github repository
 ### 1. app.js 
@@ -96,3 +131,5 @@ i  Writing gitignore file to .gitignore...
 `firebase serve`
 - firebase 기본 서버 포트는 5000번 이므로 live server 확장플러그인이 활성화되어있으면 충돌이 일어날 수 있다.
 - CLI에 간편하게 localhost 주소값을 확인 할 수 있다.
+
+
