@@ -6,7 +6,9 @@
   <title>UNHW</title>
   <style>
     *{margin:0;padding:0;box-sizing: border-box; 
-      background-color: rgb(70, 70, 70); color:black;}
+      background-color: rgb(70, 70, 70); color:black;
+      justify-content: center; align-content: center;
+    }
     #root{
       width: 100vw;
       height: 100vh;
@@ -18,6 +20,7 @@
       width: 100vw;
       height: 10vh;
       background-color: rgb(100,100,100);
+      display: flex;
     }
     #root>div:nth-child(2){
       width: 100vw;
@@ -30,11 +33,15 @@
       background-color: rgb(100,100,100);
     }
 
+    button{ font-size: 3vw; background-color: rgb(100,100,100)}
+
   </style>
 </head>
 <body>
   <div id="root">
-    <div id="head"></div>
+    <div id="head">
+      <button>button</button>
+    </div>
     <div id="body"></div>
     <div id="tail"></div>
   </div>
