@@ -57,14 +57,30 @@
 <body>
   <div id="root">
     <div id="head">
-      <button>Login</button>
-      <button>Login</button>
+      <button id="mode">Usual</button>
+      <button id="loginButton2">Login</button>
     </div>
     <div id="body"></div>
     <div id="tail"></div>
   </div>
   <script>
-    // 여기에 JavaScript 코드를 추가하세요 (필요에 따라)
+    const modeButton = document.getElementById("mode");
+
+    // 초기 모드 설정
+    let toggle = true;
+
+    modeButton.addEventListener("click", () => {
+      toggle = !toggle; // 모드 토글
+      modeButton.textContent = toggle ? "Usual" : "Expert"; // 버튼 텍스트 업데이트
+      // 여기에서 모드에 따른 다른 동작을 수행할 수 있습니다
+      if (toggle) {
+        modeButton.textContent = "Usual";
+        
+      } else {
+        modeButton.textContent = "Expert";
+        
+      }
+    });
   </script>
 </body>
 </html>
