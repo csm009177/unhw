@@ -3,16 +3,20 @@ const http = require('http');
 const fs = require('fs');
 // port
 let port =3217;
+// custom module
+const contentType = require('./mod/contenType')
 
-CheckServerError(port, serv)
+
 // make server
 let serv = http.createServer((req,res)=> {
   if(req.method === 'GET' && req.url === '/'){
-    // console.log(req.method);
-    // console.log(req.url);
-    checkreq(req.method, req.url);
-    res.writeHead(200, contHtml); 
-    res.end(mainDoc);
+    fs.readFileSync('./doc/index.html', (err, data)=> {
+      if(err){console.log(`readFile error : ${err}`)}
+      else {        
+        res.writeHead(200, contentType)
+        res.end(data)
+      }
+    })
   } 
 })
 
