@@ -9,6 +9,7 @@ let port = 3217;
 
 let serv = http.createServer((req, res)=> {
   entryPoint(req, res, contenType)
+    
 })
 
 serv.listen(port, ()=> {

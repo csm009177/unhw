@@ -16,3 +16,19 @@ url : ${req.url}`)
     })
   }
 }
+
+export function login(req, res, contenType){
+  if (req.method === "POST"&&req.url === '/login'){
+    console.log(`
+method : ${req.method} 
+url : ${req.url}`)
+    fs.readFile('./doc/index.html', (err,data)=> {
+      if(err) {
+        console.log('readFile error')
+      } else {
+        res.writeHead(200, contenType)
+        res.end(data)
+      }
+    })
+  }
+}
