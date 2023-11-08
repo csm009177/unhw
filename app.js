@@ -1,29 +1,29 @@
-// http, fs
-const http = require('http');
-const fs = require('fs');
-// port
-let port =3217;
-// custom module
-const contentType = require('./mod/contenType')
+// import protocol
+import http from 'http';
+import fs from 'fs';
+import { contenType } from './mod/contenType.mjs';
+
+// declare port
+let port = 3217;
 
 
-// make server
-let serv = http.createServer((req,res)=> {
-  if(req.method === 'GET' && req.url === '/'){
-    fs.readFileSync('./doc/index.html', (err, data)=> {
-      if(err){console.log(`readFile error : ${err}`)}
-      else {        
-        res.writeHead(200, contentType)
+let serv = http.createServer((req, res)=> {
+  if (req.method === "GET"&&req.url === '/'){
+    console.log(`method : ${req.method} url : ${req.url}`)
+    fs.readFile('./doc/index.html', (err,data)=> {
+      if(err) {
+        console.log('readFile error')
+      } else {
+        res.writeHead(200, contenType)
         res.end(data)
       }
     })
-  } 
+  }
 })
 
-// server listen
-serv.listen(port, () => {
+serv.listen(port, ()=> {
   console.log(`
-아래의 링크를 Clt와 함께 누르세요
-http://localhost:${port}  
-  `)
-});
+http://localhost:${port}
+`)
+})
+
