@@ -3,10 +3,6 @@ const http = require('http');
 const fs = require('fs');
 // custom module
 const contenType = require('./mod/contenType')
-let contenTypeHtml = contenType("text/html", 'utf8')
-
-const docMaker = require('./doc/docMaker')
-let maindoc = docMaker('main', "width:100vw; height:100vh" , 'test')
 
 
 // make server
