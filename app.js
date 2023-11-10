@@ -14,9 +14,12 @@ app.use(express.static("public"));
 
 
 app.get('/', (req,res) => {
-  res.sendFile('./doc/index.html')
+  res.sendFile(__dirname +'index.html')
 })
 
+app.post('/data.csv', (req, res)=> {
+  
+})
 
 
 
