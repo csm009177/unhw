@@ -1,17 +1,26 @@
 // import protocol
 import http from 'http';
+import express from 'express'
 import fs from 'fs';
-import { contenType } from './mod/contenType.mjs';
-import { entryPoint } from './routes/rootRoute.mjs';
+const app = express();
 
 // declare port
 let port = 3217;
 
-let serv = http.createServer((req, res)=> {
-  entryPoint(req, res, contenType)
+// setting middle ware for serving static file 
+app.use(express.static("public"));
+// parse
+// app.use(express.urlencoded({ extended: true }));
+
+
+app.get('/', (req,res) => {
+  res.sendFile('./doc/index.html')
 })
 
-serv.listen(port, ()=> {
+
+
+
+app.listen(port, ()=> {
   console.log(`
 http://localhost:${port}
 `)
