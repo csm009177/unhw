@@ -1,31 +1,26 @@
-// import protocol
-import http from 'http';
-import express from 'express'
+import express from 'express';
 import fs from 'fs';
 const app = express();
+const port = 3000;
 
-// declare port
-let port = 3217;
+app.use(express.static('static'));
 
-// setting middle ware for serving static file 
-app.use(express.static("public"));
-// parse
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
+app.post('/recordSearch', (req, res) => {
+    const searchTerm = req.body.searchTerm;
+    const currentDate = new Date().toLocaleString();
 
-app.get('/', (req,res) => {
-  res.sendFile(__dirname +'index.html')
-})
+    // JSON 파일에 검색어 추가
+    const searchData = { term: searchTerm, date: currentDate };
+    const currentData = JSON.parse(fs.readFileSync('searchData.json', 'utf-8') || '[]');
+    currentData.push(searchData);
+    fs.writeFileSync('searchData.json', JSON.stringify(currentData, null, 2));
 
-app.post('/data.csv', (req, res)=> {
-  
-})
+    res.send('Search term recorded successfully.');
+});
 
-
-
-app.listen(port, ()=> {
-  console.log(`
-http://localhost:${port}
-`)
-})
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
 
