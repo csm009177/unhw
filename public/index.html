@@ -1,69 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        #chat-container {
-            border: 1px solid #ccc;
-            padding: 10px;
-            max-height: 300px;
-            overflow-y: scroll;
-        }
-
-        footer {
-            display: flex;
-            padding: 10px;
-            background-color: #eee;
-        }
-
-        #message-input {
-            flex: 1;
-            padding: 5px;
-        }
-
-        #send-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Search Application</title>
 </head>
-
 <body>
-    <header>
-        <h1>Chat App</h1>
-    </header>
-    <main>
-        <div id="chat-container">
-            <!-- 채팅 내용이 여기에 표시됩니다. -->
-        </div>
-    </main>
-    <footer>
-        <input type="text" id="message-input" placeholder="메시지를 입력하세요">
-        <button id="send-button">submit</button>
-    </footer>
-    <script src="index.js"></script>
+    <h1>Search Application</h1>
+    <input type="text" id="searchInput" placeholder="Enter your search term">
+    <button onclick="recordSearch()">Search</button>
 
+    <script>
+        function recordSearch() {
+            const searchTerm = document.getElementById('searchInput').value;
+            // AJAX 또는 fetch를 사용하여 서버에 검색어 전송 및 처리
+            // 예: 서버에서 JSON 파일에 검색어 추가
+        }
+    </script>
 </body>
-
 </html>
