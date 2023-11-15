@@ -14,22 +14,27 @@ document.addEventListener("DOMContentLoaded", () =>{
       // sendDataToServer(message);
     }
   })
-  
-  // function sendDataToServer(message) {
-  // 서버로 데이터를 전송하는 코드
-  //   fetch("/saveData", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ message: message }),
-  //   })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log("Data saved on the server:", data);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error while saving data:", error);
-  //   });
-  // }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    submit.addEventListener("click", async function () {
+      const message = inputBox.value;
+      if (message.trim() !== "") {
+        try {
+          const response = await fetch('/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message }),
+          });
+
+          const data = await response.json();
+          console.log(data.message);
+          inputBox.value = "";
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    });
+  });
 })

@@ -1,3 +1,4 @@
+// cre Li tag with input.value
 const addButton =document.getElementById("addButton")
 const sideCont = document.getElementById("sideCont")
 addButton.addEventListener("click", ()=>{
