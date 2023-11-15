@@ -59,7 +59,7 @@
       display: flex;
       background: #D9D9D9;
     }
-    #modetoggle {
+    #modeToggle {
       width: 5vw;
       height: 5vh;
       flex-shrink: 0;
@@ -67,6 +67,7 @@
       background: #D9D9D9;
       text-align: center;
       font-size: 2vh;
+      cursor: pointer;
     }
     #inputBox { 
       width: 60vw;
@@ -85,6 +86,7 @@
       background: #D9D9D9;
       text-align: center;
       font-size: 2vh;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -104,7 +106,7 @@
       
       <!-- input cont -->
       <div id="inputCont">
-        <button id="modeToggle">mode</button>
+        <button id="modeToggle">normal</button>
         <input  id="inputBox" type="text" placeholder="ask here"></input>
         <button id="submit">Go</button>
       </div>
@@ -112,6 +114,7 @@
     </div>
   </div>
   <script>
+
     // cre liTag in sidebar
     const addButton =document.getElementById("addButton")
     const sideCont = document.getElementById("sideCont")
@@ -120,11 +123,25 @@
       makeLi.innerHTML = "type your title";
       sideCont.appendChild(makeLi)
     })
+
     // mode toggle
+    let toggle = true;
     const modeToggle = document.getElementById("modeToggle")
     modeToggle.addEventListener("click", ()=>{
-      
+      if (toggle === true) {
+        toggle = false;
+        modeToggle.innerHTML = "expert"
+        modeToggle.style.Color = "red";
+        console.log(toggle)
+      } else {
+        toggle = true; 
+        modeToggle.innerHTML = "normal"
+        modeToggle.style.Color = "green";
+        console.log(toggle)
+      }
     })
+
+    // 
 
   </script>
 </body>
