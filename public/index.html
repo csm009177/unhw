@@ -64,7 +64,6 @@
       width: 5vw;
       height: 5vh;
       flex-shrink: 0;
-      display: flex;
       background: #D9D9D9;
       text-align: center;
       font-size: 2vh;
@@ -82,7 +81,6 @@
       width: 5vw;
       height: 5vh;
       flex-shrink: 0;
-      display: flex;
       right:0;
       background: #D9D9D9;
       text-align: center;
@@ -127,6 +125,7 @@
     // mode toggle
     let toggle = true;
     const modeToggle = document.getElementById("modeToggle")
+    modeToggle.style.color = "green"
     modeToggle.addEventListener("click", ()=>{
       if (toggle === true) {
         toggle = false;
@@ -145,13 +144,13 @@
     document.addEventListener("DOMContentLoaded", () =>{
     const submit = document.getElementById("submit")
     const boarding = document.getElementById("boarding")
-    boarding.style.alignContent = "left"
     const inputBox = document.getElementById("inputBox")
+    boarding.style.alignContent = "left"
     submit.addEventListener("click", function () {
     const message = inputBox.value;
       if (message.trim() !== "") {
         const messageElement = document.createElement("div");
-        messageElement.textContent = message;
+        messageElement.textContent = `user:${message}`;
         boarding.appendChild(messageElement);
         inputBox.value = "";
         // 데이터를 서버에 전송
