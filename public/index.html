@@ -87,29 +87,35 @@
       text-align: center;
       font-size: 2vh;
     }
-
   </style>
 </head>
 <body>
   <div id="root">
+
+    <!-- side bar -->
     <div id="sideCont">
-      <div type="button" id="addButton">new estimate</div>
+      <button  id="addButton">new estimate</button>
       <!-- dynamically add li tag -->
     </div>
+
+    <!-- main cont -->
     <div id="mainCont">
       <div id="siteTitle">comtacu</div>
       <div id="boarding">test</div>
+      
+      <!-- input cont -->
       <div id="inputCont">
         <button id="modetoggle">mode</button>
         <input  id="inputBox" type="text" placeholder="ask here"></input>
         <button id="submit">Go</button>
       </div>
+
     </div>
-    <!-- <div id="inputCont"></div> -->
   </div>
   <script>
     const addButton =document.getElementById("addButton")
     const sideCont = document.getElementById("sideCont")
+    // cre 
     addButton.addEventListener("click", ()=>{
       const makeLi = document.createElement("li")
       makeLi.innerHTML = "type your title";
