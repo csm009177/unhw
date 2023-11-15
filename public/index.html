@@ -75,7 +75,6 @@
       display: flex;
       background: #D9D9D9;
       text-align: center;
-      
     }
     #submit {
       width: 5vw;
@@ -105,7 +104,7 @@
       
       <!-- input cont -->
       <div id="inputCont">
-        <button id="modetoggle">mode</button>
+        <button id="modeToggle">mode</button>
         <input  id="inputBox" type="text" placeholder="ask here"></input>
         <button id="submit">Go</button>
       </div>
@@ -113,14 +112,20 @@
     </div>
   </div>
   <script>
+    // cre liTag in sidebar
     const addButton =document.getElementById("addButton")
     const sideCont = document.getElementById("sideCont")
-    // cre 
     addButton.addEventListener("click", ()=>{
       const makeLi = document.createElement("li")
       makeLi.innerHTML = "type your title";
       sideCont.appendChild(makeLi)
     })
+    // mode toggle
+    const modeToggle = document.getElementById("modeToggle")
+    modeToggle.addEventListener("click", ()=>{
+      
+    })
+
   </script>
 </body>
 </html>
