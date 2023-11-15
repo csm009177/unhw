@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title>
+  <title>comdocu</title>
   <style>
     *{margin: 0; padding:0; box-sizing: border-box;}
     #root { 
@@ -14,61 +14,106 @@
       background: #4E4E4E; 
     }
     #sideCont  { 
-      width: 25vw;
+      width: 20vw;
       height: 100vh;
       flex-shrink: 0;
-      fill: #5D5D5D;
+      background-color: #5D5D5D;
       position : absolute;
       left:0;
+      text-align: center;
     }
     #addButton{
-      width: 25vw;
+      width: 20vw;
       font-size: 3vh;
       text-align: center;
     }
 
 
-
     #mainCont  { 
-      width: 75vw;
+      width: 80vw;
       height: 100vh;
       flex-shrink: 0;
       background: #3b3b3b;
       position : absolute;
       right: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-
-
-
-
+    #siteTitle {
+      width: 80vw;
+      height: 10vh;
+      font-size: 6vh;
+    }
+    #boarding {
+      width: 70vw;
+      height: 75vh;
+      font-size: 2vh;
+      background-color: #5D5D5D;
+    }
     #inputCont { 
-      width: 60vw;
-      height: 7vh;
+      width: 70vw;
+      height: 5vh;
       flex-shrink: 0;
       display: flex;
       background: #D9D9D9;
-      position : absolute;
-      left:25vw;
-      top: 80vh;
     }
+    #modetoggle {
+      width: 5vw;
+      height: 5vh;
+      flex-shrink: 0;
+      display: flex;
+      background: #D9D9D9;
+      text-align: center;
+      font-size: 2vh;
+    }
+    #inputBox { 
+      width: 60vw;
+      height: 5vh;
+      flex-shrink: 0;
+      display: flex;
+      background: #D9D9D9;
+      text-align: center;
+      
+    }
+    #submit {
+      width: 5vw;
+      height: 5vh;
+      flex-shrink: 0;
+      display: flex;
+      right:0;
+      background: #D9D9D9;
+      text-align: center;
+      font-size: 2vh;
+    }
+
   </style>
 </head>
 <body>
   <div id="root">
     <div id="sideCont">
-      <div type="button" id="addButton" placeholder="new estimate">new estimate</div>
-      <div id="searchTitle"></div>
+      <div type="button" id="addButton">new estimate</div>
+      <!-- dynamically add li tag -->
     </div>
-    <div id="mainCont"></div>
+    <div id="mainCont">
+      <div id="siteTitle">comtacu</div>
+      <div id="boarding">test</div>
+      <div id="inputCont">
+        <button id="modetoggle">mode</button>
+        <input  id="inputBox" type="text" placeholder="ask here"></input>
+        <button id="submit">Go</button>
+      </div>
+    </div>
     <!-- <div id="inputCont"></div> -->
   </div>
   <script>
     const addButton =document.getElementById("addButton")
     const sideCont = document.getElementById("sideCont")
     addButton.addEventListener("click", ()=>{
-      const makeA = document.createElement("li")
-      makeA.innerHTML = "type title";
-      sideCont.appendChild(makeA)
+      const makeLi = document.createElement("li")
+      makeLi.innerHTML = "type your title";
+      sideCont.appendChild(makeLi)
     })
   </script>
 </body>
