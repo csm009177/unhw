@@ -1,18 +1,13 @@
 // import express
-import express from 'express'
+import express from 'express';
+import rootRoute from './routes/rootRoute.js';
+
 const app = express();
-// declare port
 const port = 3217;
 
+app.use(express.static('public'));
+app.use(rootRoute); // 라우터 추가
 
-app.use(express.static('public')); // 정적 파일 서비스
-
-app.get('/login', (req,res)=> {
-  
-})
-
-app.listen(port, ()=> {
-  console.log(`
-  http://localhost:${port}
-  `)
-})
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
+});
