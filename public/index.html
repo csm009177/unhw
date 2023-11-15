@@ -21,7 +21,12 @@
       position : absolute;
       left:0;
     }
-    #addButton{font-size: 3vh; text-align: center;}
+    #addButton{
+      width: 25vw;
+      font-size: 3vh;
+      text-align: center;
+    }
+
 
 
     #mainCont  { 
@@ -51,11 +56,20 @@
 <body>
   <div id="root">
     <div id="sideCont">
-      <div type="button" id="addButton">new  estimate</div>
+      <div type="button" id="addButton" placeholder="new estimate">new estimate</div>
       <div id="searchTitle"></div>
     </div>
     <div id="mainCont"></div>
     <!-- <div id="inputCont"></div> -->
   </div>
+  <script>
+    const addButton =document.getElementById("addButton")
+    const sideCont = document.getElementById("sideCont")
+    addButton.addEventListener("click", ()=>{
+      const makeA = document.createElement("li")
+      makeA.innerHTML = "type title";
+      sideCont.appendChild(makeA)
+    })
+  </script>
 </body>
 </html>
