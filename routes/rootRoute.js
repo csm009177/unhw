@@ -5,11 +5,12 @@ import fs, { readFile } from 'fs';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  fs.readFile('../public/index.html')
+  fs.readFile('../public/index.html', "utf8")
 });
 
-router.post('/login', (req, res) => {
-  // '/login' 경로에 대한 처리
+router.post('/saveData', (req, res) => {
+  fs.writeFile('../public/index.json')
 });
 
 export default router;
+
