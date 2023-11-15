@@ -22,6 +22,7 @@ process :
     
 5. index.js :
   - boarding search log on board cont of index.html
+  - script Modularization
   - add route control
 
 6. index.json
