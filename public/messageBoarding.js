@@ -14,27 +14,4 @@ document.addEventListener("DOMContentLoaded", () =>{
       // sendDataToServer(message);
     }
   })
-
-  document.addEventListener("DOMContentLoaded", () => {
-    submit.addEventListener("click", async function () {
-      const message = inputBox.value;
-      if (message.trim() !== "") {
-        try {
-          const response = await fetch('/save', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message }),
-          });
-
-          const data = await response.json();
-          console.log(data.message);
-          inputBox.value = "";
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      }
-    });
-  });
 })
