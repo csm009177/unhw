@@ -3,10 +3,12 @@ const addButton =document.getElementById("addButton")
 const sideCont = document.getElementById("sideCont")
 
 // cre Li tag with input.value
-addButton.addEventListener("click", (hashName) => {
+let count=1;
+addButton.addEventListener("click", () => {
   const makeLi = document.createElement("li");
-  makeLi.innerHTML = `<a href = "#${hashName}" >Click me</a>`;
+  makeLi.innerHTML = `<a href = "#newestimate${count}" >new estimate${count}</a>`;
   sideCont.appendChild(makeLi);
+  count=count+1;
 });
 
 
