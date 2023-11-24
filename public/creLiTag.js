@@ -1,17 +1,15 @@
+
 // cre Li tag with input.value
 const addButton =document.getElementById("addButton")
 const sideCont = document.getElementById("sideCont")
-function createElement(type, props, ...children) {
-  return { type, props, children};
-}
-const testState = [
-  { hash: '#home', text: 'Home' }
-]
-addButton.addEventListener("click", ()=>{
-  const makeLi = document.createElement("li")
-  makeLi.innerHTML = "type your title";
-  sideCont.appendChild(makeLi)
-})
+
+
+
+addButton.addEventListener("click", (hashName) => {
+  const makeLi = document.createElement("li");
+  makeLi.innerHTML = `<a href = "#${hashName}" >Click me</a>`;
+  sideCont.appendChild(makeLi);
+});
 
 
 // function component(testState) {
