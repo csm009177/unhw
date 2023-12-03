@@ -1,7 +1,7 @@
-function makecomponent(){
   function createElement(type, props, ...children) {
     return { type, props, children};
   }
+
   function component(stateData) {
     const menuItems = [];
     for (let i=0; i<stateData.length; i++){
@@ -10,8 +10,7 @@ function makecomponent(){
       menuItems.push(menuItem);
     }
     const menu = createElement('ul', {}, ...menuItems);
-    const content = createElement('div', {}, 'Hello React');
-    return createElement('div', {}, menu, content);
+    return createElement('div', {}, menu);
   }
   function render(virtualDom) {
     if(typeof virtualDom === 'string') {
@@ -31,15 +30,17 @@ function makecomponent(){
   }
 
   const stateData = [
-    {hash : '#home', text:'Home'},
-    {hash : '#about', text:'About'},
-    {hash : '#services', text:'Services'},
-    {hash : '#portfolio', text:'Portfolio'},
-    {hash : '#contract', text:'Contract'},
+    {hash : '#home', text:'home'},
+    {hash : '#cpu', text:'cpu'},
+    {hash : '#mainboard', text:'mainboard'},
+    {hash : '#power', text:'power'},
+    {hash : '#ram', text:'ram'},
+    {hash : '#ssd', text:'ssd'},
+    {hash : '#odd', text:'odd'},
+    {hash : '#hdd', text:'hdd'},
+    {hash : '#gpu', text:'gpu'},
   ];
 
   const virtualDom = component(stateData);
-  const container = document.getElementById('root');
-  container.appendChild(render(virtualDom));
-
-}
+  const board = document.getElementById('board');
+  board.appendChild(render(virtualDom));
