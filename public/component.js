@@ -1,8 +1,8 @@
-  function createElement(type, props, ...children) {
+export function createElement(type, props, ...children) {
     return { type, props, children};
   }
 
-  function component(stateData) {
+export function component(stateData) {
     const menuItems = [];
     for (let i=0; i<stateData.length; i++){
       const item = stateData[i];
@@ -12,7 +12,7 @@
     const menu = createElement('ul', {}, ...menuItems);
     return createElement('div', {}, menu);
   }
-  function render(virtualDom) {
+export function render(virtualDom) {
     if(typeof virtualDom === 'string') {
       return document.createTextNode(virtualDom);
     }
