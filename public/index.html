@@ -36,10 +36,7 @@
       background: #3b3b3b;
       position : absolute;
       right: 0;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex;text-align: center;flex-direction: column;align-items: center;
     }
     #siteTitle {
       width: 80vw;
@@ -86,39 +83,33 @@
       text-align: center;
       font-size: 2vh;
       cursor: pointer;
+      
     }
   </style>
 </head>
 <body>
-  <div id="root">
+  <div id="root"></div>
+  <script type="module">
+  import {createElement, component, render} from './index.js'
+  const stateData = [
+    {hash : '#home', text:'home'},
+    {hash : '#cpu', text:'cpu'},
+    {hash : '#mainboard', text:'mainboard'},
+    {hash : '#power', text:'power'},
+    {hash : '#ram', text:'ram'},
+    {hash : '#ssd', text:'ssd'},
+    {hash : '#odd', text:'odd'},
+    {hash : '#hdd', text:'hdd'},
+    {hash : '#gpu', text:'gpu'},
+  ];
+  
+  
+  // 
+  const stateMenu = render(component(stateData));
+  const root = document.getElementById('root');
+  root.appendChild(stateMenu);
 
-    <!-- side bar -->
-    <div id="sideCont">
-      <button  id="addButton">new estimate</button>
-      <!-- dynamically add li tag -->
-    </div>
 
-    <!-- main cont -->
-    <div id="mainCont">
-      <div id="siteTitle">comtacu</div>
-      <div id="boarding"></div>
-      
-      <!-- input cont -->
-      <div id="inputCont">
-        <button id="modeToggle">normal</button>
-        <input  id="inputBox" type="text" placeholder="ask here"></input>
-        <button id="submit">Go</button>
-      </div>
-
-    </div>
-  </div>
-  <script>
   </script>
-  <!-- cre liTag in sidebar -->
-  <script type="module" src="creLiTag.js"></script>
-  <!-- add message to boardings -->
-  <script type="module" src="messageBoarding.js"></script>
-  <script src="toggle.js"></script>
-  <script src="component.js"></script>
 </body>
 </html>
