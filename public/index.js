@@ -34,26 +34,24 @@ export function render(virtualDom) {
   }
 
 
-// path
-const inputJSONPath  = './index.json';
-const outputJSONPath   = './index.json';
-
-export function diffLogic(inputJSONPath, outputJSONPath) {
-  if (!inputJSONPath.endsWith('.json') || !outputJSONPath.endsWith('.json')) {
-    throw new Error(`매개변수 ${inputJSONPath}, ${outputJSONPath}는 json 파일이 아닙니다.`);
+  
+  export function diffLogic(jsonData) {
+    if (!jsonData.endsWith('.json')) {
+      throw new Error(`${jsonData}는 json 파일이 아닙니다.`);
   }
   // * 1. inputJSONdata, outputJSONdata를 읽어서 JSON 객체로 변환
-  const inData = JSON.parse( fs.readFileSync(inputJSONPath, 'utf8') )
-  const outData = JSON.parse( fs.readFileSync(outputJSONPath, 'utf8') )
-  console.log(inData); console.log(outData)
+  const parsedJsonData = JSON.parse( fs.readFileSync(jsonData, 'utf8') )
+  console.log(parsedJsonData);
   // let result = outData;
   /**
    * ? Q. JSON 파일을 아래의 5, 6번에 해당하는 로직 작성 후 JSON으로 저장
    * ? Q. 저장이 완료되면 초기화된 result에 객체를 리턴
-   */
-  // return result;
+  */
+ // return result;
 }
 
+// path
+const JSONPath  = './index.json';
 // json controller
-const resultObject = diffLogic(inputJSONPath, outputJSONPath);
+const resultObject = diffLogic(JSONPath);
 console.log(resultObject);
