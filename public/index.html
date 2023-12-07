@@ -1,114 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>comdocu</title>
-  <style>
-    *{margin: 0; padding:0; box-sizing: border-box;}
-    #root { 
-      width: 100vw; 
-      height: 100vh; 
-      display: flex;
-      flex-wrap: wrap;
-      background: #4E4E4E; 
-    }
-    #sideCont  { 
-      width: 20vw;
-      height: 100vh;
-      flex-shrink: 0;
-      background-color: #5D5D5D;
-      position : absolute;
-      left:0;
-      text-align: center;
-    }
-    #addButton{
-      width: 20vw;
-      font-size: 3vh;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comdocu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #root {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            background: #4E4E4E;
+        }
+
+        #sideCont {
+            width: 20vw;
+            height: 100vh;
+            flex-shrink: 0;
+            background-color: #5D5D5D;
+            position: absolute;
+            left: 0;
+            text-align: center;
+        }
+
+        #addButton {
+            width: 20vw;
+            font-size: 3vh;
+            text-align: center;
+        }
 
 
-    #mainCont  { 
-      width: 80vw;
-      height: 100vh;
-      flex-shrink: 0;
-      background: #3b3b3b;
-      position : absolute;
-      right: 0;
-      display: flex;text-align: center;flex-direction: column;align-items: center;
-    }
-    #siteTitle {
-      width: 80vw;
-      height: 10vh;
-      font-size: 6vh;
-    }
-    #boarding {
-      width: 70vw;
-      height: 75vh;
-      font-size: 2vh;
-      background-color: #5D5D5D;
-      text-align: left;
-    }
-    #inputCont { 
-      width: 70vw;
-      height: 5vh;
-      flex-shrink: 0;
-      display: flex;
-      background: #D9D9D9;
-    }
-    #modeToggle {
-      width: 5vw;
-      height: 5vh;
-      flex-shrink: 0;
-      background: #D9D9D9;
-      text-align: center;
-      font-size: 2vh;
-      cursor: pointer;
-    }
-    #inputBox { 
-      width: 60vw;
-      height: 5vh;
-      flex-shrink: 0;
-      display: flex;
-      background: #D9D9D9;
-      text-align: center;
-    }
-    #submit {
-      width: 5vw;
-      height: 5vh;
-      flex-shrink: 0;
-      right:0;
-      background: #D9D9D9;
-      text-align: center;
-      font-size: 2vh;
-      cursor: pointer;
-      
-    }
-  </style>
+        #mainCont {
+            width: 80vw;
+            height: 100vh;
+            flex-shrink: 0;
+            background: #3b3b3b;
+            position: absolute;
+            right: 0;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #siteTitle {
+            width: 80vw;
+            height: 10vh;
+            font-size: 6vh;
+        }
+
+        #boarding {
+            width: 70vw;
+            height: 75vh;
+            font-size: 2vh;
+            background-color: #5D5D5D;
+            text-align: left;
+        }
+
+        #inputCont {
+            width: 70vw;
+            height: 5vh;
+            flex-shrink: 0;
+            display: flex;
+            background: #D9D9D9;
+        }
+
+        #modeToggle {
+            width: 5vw;
+            height: 5vh;
+            flex-shrink: 0;
+            background: #D9D9D9;
+            text-align: center;
+            font-size: 2vh;
+            cursor: pointer;
+        }
+
+        #inputBox {
+            width: 60vw;
+            height: 5vh;
+            flex-shrink: 0;
+            display: flex;
+            background: #D9D9D9;
+            text-align: center;
+        }
+
+        #submit {
+            width: 5vw;
+            height: 5vh;
+            flex-shrink: 0;
+            right: 0;
+            background: #D9D9D9;
+            text-align: center;
+            font-size: 2vh;
+            cursor: pointer;
+
+        }
+    </style>
 </head>
-<body>
-  <div id="root"></div>
-  <script type="module">
-  import {createElement, component, render} from './index.js'
-  const stateData = [
-    {hash : '#home', text:'home'},
-    {hash : '#cpu', text:'cpu'},
-    {hash : '#mainboard', text:'mainboard'},
-    {hash : '#power', text:'power'},
-    {hash : '#ram', text:'ram'},
-    {hash : '#ssd', text:'ssd'},
-    {hash : '#odd', text:'odd'},
-    {hash : '#hdd', text:'hdd'},
-    {hash : '#gpu', text:'gpu'},
-  ];
-  
-  
-  // 
-  const stateMenu = render(component(stateData, "row"));
-  const root = document.getElementById('root');
-  root.appendChild(stateMenu);
 
-  </script>
+<body>
+    <div id="root"></div>
+    <script type="module">
+        import { createElement, component, render } from './index.js'
+        const stateData = [
+            { hash: '#home', text: 'home' },
+            { hash: '#cpu', text: 'cpu' },
+            { hash: '#m/b', text: 'm/b' },
+            { hash: '#p/w', text: 'p/w'},
+            { hash: '#ram', text: 'ram' },
+            { hash: '#ssd', text: 'ssd' },
+            { hash: '#odd', text: 'odd' },
+            { hash: '#hdd', text: 'hdd' },
+            { hash: '#gpu', text: 'gpu' },
+        ];
+
+
+        // 
+        const stateMenu = render(component(stateData, "row"));
+        const root = document.getElementById('root');
+        root.appendChild(stateMenu);
+
+    </script>
 </body>
+
 </html>
