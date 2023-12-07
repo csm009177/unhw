@@ -12,96 +12,6 @@
             box-sizing: border-box;
         }
 
-        #root {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-wrap: wrap;
-            background: #4E4E4E;
-        }
-
-        #sideCont {
-            width: 20vw;
-            height: 100vh;
-            flex-shrink: 0;
-            background-color: #5D5D5D;
-            position: absolute;
-            left: 0;
-            text-align: center;
-        }
-
-        #addButton {
-            width: 20vw;
-            font-size: 3vh;
-            text-align: center;
-        }
-
-
-        #mainCont {
-            width: 80vw;
-            height: 100vh;
-            flex-shrink: 0;
-            background: #3b3b3b;
-            position: absolute;
-            right: 0;
-            display: flex;
-            text-align: center;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #siteTitle {
-            width: 80vw;
-            height: 10vh;
-            font-size: 6vh;
-        }
-
-        #boarding {
-            width: 70vw;
-            height: 75vh;
-            font-size: 2vh;
-            background-color: #5D5D5D;
-            text-align: left;
-        }
-
-        #inputCont {
-            width: 70vw;
-            height: 5vh;
-            flex-shrink: 0;
-            display: flex;
-            background: #D9D9D9;
-        }
-
-        #modeToggle {
-            width: 5vw;
-            height: 5vh;
-            flex-shrink: 0;
-            background: #D9D9D9;
-            text-align: center;
-            font-size: 2vh;
-            cursor: pointer;
-        }
-
-        #inputBox {
-            width: 60vw;
-            height: 5vh;
-            flex-shrink: 0;
-            display: flex;
-            background: #D9D9D9;
-            text-align: center;
-        }
-
-        #submit {
-            width: 5vw;
-            height: 5vh;
-            flex-shrink: 0;
-            right: 0;
-            background: #D9D9D9;
-            text-align: center;
-            font-size: 2vh;
-            cursor: pointer;
-
-        }
     </style>
 </head>
 
@@ -122,10 +32,21 @@
         ];
 
 
-        // 
-        const stateMenu = render(component(stateData, "row"));
+        
+        
+        // state cont
+        const bigCont = 
+        createElement("div", {id:"bigcont",
+            style:"width:100vw; height:100vh; background: #4A4A4A;"}, 
+            createElement("div", {id:"head", 
+                style:"width:100vw; height:000vh"},component(stateData, "row")),    
+            createElement("div", {id:"body", 
+                style:"width:090vw; height:000vh"},),
+            createElement("div", {id:"foot", 
+                style:"width:000vw; height:000vh"},),    
+        )
         const root = document.getElementById('root');
-        root.appendChild(stateMenu);
+        root.appendChild(render(bigCont));
 
     </script>
 </body>

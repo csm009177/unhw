@@ -10,7 +10,7 @@ export function component(stateData, direction) {
     const menuItem = createElement(
       "li",
       { style: "list-style: none; width:100%;" },
-      createElement("a", { href: item.hash }, item.text)
+      createElement("a", { href: item.hash, }, item.text)
     );
     menuItems.push(menuItem);
   }
