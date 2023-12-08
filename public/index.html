@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
     </style>
 </head>
 
@@ -19,27 +18,12 @@
     <div id="root"></div>
     <script type="module">
         import { createElement, component, render } from './index.js'
-        const stateData = [
-            { hash: '#home', text: 'home' },
-            { hash: '#cpu', text: 'cpu' },
-            { hash: '#m/b', text: 'm/b' },
-            { hash: '#p/w', text: 'p/w'},
-            { hash: '#ram', text: 'ram' },
-            { hash: '#ssd', text: 'ssd' },
-            { hash: '#odd', text: 'odd' },
-            { hash: '#hdd', text: 'hdd' },
-            { hash: '#gpu', text: 'gpu' },
-        ];
-
-
-        
-        
         // state cont
         const bigCont = 
         createElement("div", {id:"bigcont",
             style:"width:100vw; height:100vh; background: #4A4A4A;"}, 
             createElement("div", {id:"head", 
-                style:"width:100vw; height:000vh"},component(stateData, "row")),    
+                style:"width:100vw; height:000vh"},),    
             createElement("div", {id:"body", 
                 style:"width:090vw; height:000vh"},),
             createElement("div", {id:"foot", 
