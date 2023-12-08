@@ -1,39 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>comdocu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
 </head>
-
 <body>
     <div id="root"></div>
-    <script type="module">
-        import { createElement, component, render } from './index.js'
-        // state cont
-        const bigCont = 
-        createElement("div", {id:"bigcont",
-            style:"width:100vw; height:100vh; background: #4A4A4A;"}, 
-            createElement("div", {id:"head", 
-                style:"width:100vw; height:000vh"},),    
-            createElement("div", {id:"body", 
-                style:"width:090vw; height:000vh"},),
-            createElement("div", {id:"foot", 
-                style:"width:000vw; height:000vh"},),    
-        )
-        const root = document.getElementById('root');
-        root.appendChild(render(bigCont));
-
-    </script>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
-
 </html>

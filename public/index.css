@@ -3,3 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+#bigcont {
+  width:100vw; height:100vh; background: #4A4A4A
+}
+
+#head {
+  width:100vw; height:000vh
+}
+
+#body {
+  width:090vw; height:000vh
+}
+
+#foot {
+  width:000vw; height:000vh
+}

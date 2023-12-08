@@ -1,42 +1,19 @@
+import { component, render } from "./module/component.js"; // component.js 에서
+import { hashChanger } from "./module/hashChanger.js";     // hashChanger.js 에서 hashChanger() 가져오기
 
+const stateData = [
+  { hash: '#home', text: 'home'},
+  { hash: '#cpu', text: 'cpu'  },
+  { hash: '#m/b', text: 'm/b'  },
+  { hash: '#p/w', text: 'p/w'  },
+  { hash: '#ram', text: 'ram'  },
+  { hash: '#ssd', text: 'ssd'  },
+  { hash: '#odd', text: 'odd'  },
+  { hash: '#hdd', text: 'hdd'  },
+  { hash: '#gpu', text: 'gpu'  },
+];
 
-export function createElement(type, props, ...children) {
-  return { type, props, children };
-}
-
-export function component(stateData, direction) {
-  const menuItems = [];
-  for (let i = 0; i < stateData.length; i++) {
-    const item = stateData[i];
-    const menuItem = createElement(
-      "li",
-      { style: "list-style: none; width:100%;" },
-      createElement("a", { href: item.hash, }, item.text)
-    );
-    menuItems.push(menuItem);
-  }
-  return createElement(
-    "div",
-    {
-      style: `display: flex; text-align: center; flex-direction: ${direction}; align-items: center;`,
-    },
-    ...menuItems
-  );
-}
-
-export function render(virtualDom) {
-  if (typeof virtualDom === "string") {
-    return document.createTextNode(virtualDom);
-  }
-  const element = document.createElement(virtualDom.type);
-  if (virtualDom.props) {
-    for (const [key, value] of Object.entries(virtualDom.props)) {
-      element.setAttribute(key, value);
-    }
-  }
-  for (let i = 0; i < virtualDom.children.length; i++) {
-    const child = virtualDom.children[i];
-    element.appendChild(render(child));
-  }
-  return element;
-}
+// append
+const headvirtualDom = component(stateData); // 상태데이터로 컴포넌트 만들어서 dom에 넣기
+const root = document.getElementById("root"); // 어펜드할 대상 지정
+root.appendChild(render(headvirtualDom)); // dom을 렌더해서 대상에 어펜드 하기
