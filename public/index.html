@@ -25,14 +25,17 @@
         ];
         // state cont
         const bigCont = 
-        createElement("div", {id:"bigcont",
-            style:"width:100vw; height:100vh; background: #4A4A4A;"}, 
-            createElement("div", {id:"head", 
-                style:"width:100vw; height:000vh"},component(stateData, "row")),    
-            createElement("div", {id:"body", 
-                style:"width:090vw; height:000vh"},),
-            createElement("div", {id:"foot", 
-                style:"width:000vw; height:000vh"},),    
+        createElement("div", {id:"bigcont", style:" width:100vw; height:100vh; background-color: black; color:white; display:flex; flex-direction:row"}, 
+          createElement("div", {id:"leftside",  
+            style:"width:025vw; height:100vh;"},
+              component(stateData, "column")
+            ),
+          createElement("div", {id:"middle",    
+            style:"width:075vw; height:100vh;"}, ""
+            ),
+          createElement("div", {id:"rightside", 
+            style:"width:000vw; height:100vh;"}, ""
+            ),
         )
         const root = document.getElementById('root');
         root.appendChild(render(bigCont));

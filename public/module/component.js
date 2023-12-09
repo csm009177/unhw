@@ -6,13 +6,13 @@ export function component(stateData, direction) {
   const menuItems = [];
   for (let i = 0; i < stateData.length; i++) {
     const item = stateData[i];
-    const menuItem = createElement("li", { 
-      style: "list-style: none; width:100%; text-decoration-line: none;" },
+    const menuItem = createElement("li", {id:`liTag${i}`, 
+      style: `list-style: none; justify-content: space-between;`},
       createElement("a", { href: item.hash, style:"color:white; text-decoration-line: none;" }, item.text ) );
     menuItems.push(menuItem);
   }
-  return createElement("div", {
-      style: `width:100vw; height:10vh; display: flex; text-align: center; flex-direction: ${direction}; align-items: center;`,
+  return createElement("div", {id:"",
+      style: `height:100vh; text-align: center; flex-direction: ${direction}; align-items: center;`,
     },
     ...menuItems
   );
