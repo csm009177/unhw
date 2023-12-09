@@ -7,12 +7,12 @@ export function component(stateData, direction) {
   for (let i = 0; i < stateData.length; i++) {
     const item = stateData[i];
     const menuItem = createElement("li", { 
-      style: "list-style: none; width:100%;" },
-      createElement("a", { href: item.hash }, item.text ) );
+      style: "list-style: none; width:100%; text-decoration-line: none;" },
+      createElement("a", { href: item.hash, style:"color:white; text-decoration-line: none;" }, item.text ) );
     menuItems.push(menuItem);
   }
   return createElement("div", {
-      style: `display: flex; text-align: center; flex-direction: ${direction}; align-items: center;`,
+      style: `width:100vw; height:10vh; display: flex; text-align: center; flex-direction: ${direction}; align-items: center;`,
     },
     ...menuItems
   );
