@@ -6,9 +6,9 @@ export function component(stateData, direction) {
   const menuItems = [];
   for (let i = 0; i < stateData.length; i++) {
     const item = stateData[i];
-    const menuItem = createElement("li", {id:`liTag${i}`, 
+    const menuItem = createElement("li", {id:`LiTag${i}`, 
       style: `list-style: none; `},
-      createElement("a", { href: item.hash, style:"color:white; text-decoration-line: none;" }, item.text ) );
+      createElement("a", { class:"stateDataCalss", href: item.hash }, item.text ) );
     menuItems.push(menuItem);
   }
   return createElement("div", {id:"stateCont" }, ...menuItems );

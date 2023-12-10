@@ -29,10 +29,9 @@
         createElement("div", {id:"bigcont", style:" width:100vw; height:100vh; background-color: black; color:white; display:flex; flex-direction:row"}, 
           createElement("div", {id:"leftside",  
             style:"width:025vw; height:100vh;"},
-              component(stateData, "column")
             ),
           createElement("div", {id:"middle",    
-            style:"width:075vw; height:100vh;"}, ""
+            style:"width:075vw; height:100vh;"}, component(stateData)
             ),
           createElement("div", {id:"rightside", 
             style:"width:000vw; height:100vh;"}, ""
