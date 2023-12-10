@@ -7,15 +7,11 @@ export function component(stateData, direction) {
   for (let i = 0; i < stateData.length; i++) {
     const item = stateData[i];
     const menuItem = createElement("li", {id:`liTag${i}`, 
-      style: `list-style: none; justify-content: space-between;`},
+      style: `list-style: none; `},
       createElement("a", { href: item.hash, style:"color:white; text-decoration-line: none;" }, item.text ) );
     menuItems.push(menuItem);
   }
-  return createElement("div", {id:"",
-      style: `height:100vh; text-align: center; flex-direction: ${direction}; align-items: center;`,
-    },
-    ...menuItems
-  );
+  return createElement("div", {id:"stateCont" }, ...menuItems );
 }
 
 export function render(virtualDom) {

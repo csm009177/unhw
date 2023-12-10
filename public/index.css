@@ -19,3 +19,7 @@
 #foot {
   width:000vw; height:000vh
 }
+
+#stateCont{
+  padding:5vh; justify-content: space-between; height:100vh; text-align: center; display: flex; flex-direction: column; align-items: center;
+}
