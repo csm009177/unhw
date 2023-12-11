@@ -7,7 +7,10 @@
 #bigcont {
   width: 100vw;
   height: 100vh;
-  background: #4A4A4A
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: row
 }
 
 #head {
@@ -36,5 +39,6 @@
 }
 
 .stateDataCalss {
-  color:white; text-decoration-line: none
+  color: white;
+  text-decoration-line: none
 }
