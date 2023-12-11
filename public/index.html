@@ -27,14 +27,12 @@
         // state cont
         const bigCont = 
         createElement("div", {id:"bigcont"}, 
-          createElement("div", {id:"leftside",  
-            style:"width:025vw; height:100vh;"},
+          createElement("div", {id:"leftside" },
             ),
-          createElement("div", {id:"middle",    
-            style:"width:075vw; height:100vh;"}, component(stateData)
+          createElement("div", {id:"middle" }, 
+            component(stateData)
             ),
-          createElement("div", {id:"rightside", 
-            style:"width:000vw; height:100vh;"}, ""
+          createElement("div", {id:"rightside" }, ""
             ),
         )
         const root = document.getElementById('root');

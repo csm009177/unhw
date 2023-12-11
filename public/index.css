@@ -38,7 +38,20 @@
   text-align: center;
 }
 
+#leftside{
+  width:025vw; height:100vh;
+}
+
+#middle{
+  width:075vw; height:100vh;
+}
+
+#rightside{
+  width:000vw; height:100vh;
+}
+
 .stateDataCalss {
   color: white;
   text-decoration-line: none
 }
+
