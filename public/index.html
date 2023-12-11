@@ -24,19 +24,25 @@
             { hash: '#hdd',  text: 'hdd'  },
             { hash: '#gpu',  text: 'gpu'  },
         ];
-        // state cont
-        const bigCont = 
-        createElement("div", {id:"bigcont"}, 
-          createElement("div", {id:"leftside" },
-            ),
-          createElement("div", {id:"middle" }, 
-            component(stateData)
-            ),
-          createElement("div", {id:"rightside" }, ""
-            ),
-        )
-        const root = document.getElementById('root');
-        root.appendChild(render(bigCont));
-    </script>
+      
+    const div = 
+    createElement("div", {}, "test")
+    window.addEventListener('hashchange', () => {
+      const contentDiv = document.getElementById('root');
+      const hash = window.location.hash.substr(1);
+
+
+      switch (hash) {
+        case 'page1' : 
+        
+          break;
+        default : 
+        const headvirtualDom = createElement("div", {}, "test"); // 상태데이터로 컴포넌트 만들어서 dom에 넣기
+          contentDiv.appendChild(render(headvirtualDom)); // dom을 렌더해서 대상에 어펜드 하기
+      }
+    });
+    window.dispatchEvent(new Event('hashchange'));
+
+  </script>
 </body>
 </html>
