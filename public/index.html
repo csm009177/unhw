@@ -36,7 +36,7 @@
             ),
         )
 
-    window.addEventListener('hashchange', () => {
+    window.addEventListener('DOMContentLoaded', () => {
       const contentDiv = document.getElementById('root');
       const hash = window.location.hash.substr(1);
 
@@ -50,7 +50,7 @@
           break
       }
     }); 
-    window.dispatchEvent(new Event(''));
+    window.dispatchEvent(new Event('hashchange'));
 
   </script>
 </body>
