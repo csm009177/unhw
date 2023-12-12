@@ -36,21 +36,42 @@
             ),
         )
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const contentDiv = document.getElementById('root');
-      const hash = window.location.hash.substr(1);
+    const contentDiv = document.getElementById('root');
+    contentDiv.appendChild(render(div)); // dom을 렌더해서 대상에 어펜드 하기
+    
 
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.substr(1);
+      const body = document.getElementById('body')
+      body.innerHTML = ""
+      
       switch (hash) {
-        case 'page1' : 
+        case 'login' : 
+        const loginBody = 
+        createElement("div", {class:"hashBody", }
           
+        )
+        body.appendChild(render(loginBody));
           break;
-        
+        case 'signup' : 
+        const signupBody = 
+        createElement("div", {class:"hashBody", },
+          createElement("form", {id:"signupform"}, 
+            createElement("input",  {}, "email"),
+            createElement("input",  {}, ""),
+            createElement("input",  {}, ""),
+            createElement("input",  {}, ""),
+            createElement("button", {}, "submit"),
+          ),
+        )
+        body.appendChild(render(signupBody));
+          break;
         default : 
-          contentDiv.appendChild(render(div)); // dom을 렌더해서 대상에 어펜드 하기
           break
       }
     }); 
-    window.dispatchEvent(new Event('hashchange'));
+    // window.dispatchEvent(new Event('hashchange'));
+    window.dispatchEvent(new Event('DOMContentLoaded'));
 
   </script>
 </body>
