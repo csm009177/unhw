@@ -25,7 +25,7 @@
             { hash: '#gpu',  text: 'gpu'  },
         ];
       
-    const div = 
+    const bigcont = 
     createElement("div", {id:"bigcont"}, 
           createElement("div", {id:"leftside" },
             ),
@@ -37,7 +37,7 @@
         )
 
     const contentDiv = document.getElementById('root');
-    contentDiv.appendChild(render(div)); // dom을 렌더해서 대상에 어펜드 하기
+    contentDiv.appendChild(render(bigcont)); // dom을 렌더해서 대상에 어펜드 하기
     
 
     window.addEventListener('hashchange', () => {
