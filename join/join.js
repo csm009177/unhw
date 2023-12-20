@@ -32,8 +32,9 @@ let serv = http.createServer((req, res) => {
         fs.readFile(userDataPath, 'utf8', (err, jsonData) => {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(jsonData);
-            
         });
+    } else if (req.method === 'GET' && req.url === '/userData.json'){
+        fs.writeFileSync(xhrPath, JSON.stringify(xhrPath, null, 2));
     } else {
         // Handle other routes or methods (here, just a basic 404 response)
         res.writeHead(404, { 'Content-Type': 'text/plain' });

@@ -13,13 +13,24 @@ document.getElementById('signup-form').addEventListener('submit', function(e) {
       password: password
   };
 
-  // JSON 데이터를 로컬 스토리지에 저장 (여기서는 로컬 스토리지를 사용하지만 실제로는 서버에 전송해야 합니다.)
-  localStorage.setItem('userData', JSON.stringify(userData));
-
-  // 가입 성공 메시지 출력 (여기서는 간단하게 alert를 사용하였습니다.)
-  alert('회원가입이 완료되었습니다.');
-  
-  // 양식 초기화 (선택 사항)
-  document.getElementById('signup-form').reset();
+  // 서버에 POST 요청을 보내기 위한 설정
+  fetch('/userData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    // 응답을 받으면 가입 성공 메시지 출력
+    alert('회원가입이 완료되었습니다.');
+    
+    // 양식 초기화 (선택 사항)
+    document.getElementById('signup-form').reset();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('회원가입에 실패하였습니다. 다시 시도해주세요.');
+  });
 });
-
