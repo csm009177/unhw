@@ -3,84 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNHW</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: rgb(70, 70, 70);
-      color: black;
-    }
-
-    #root {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #head {
-      width: 100vw;
-      height: 10vh;
-      display: flex;
-      background-color: rgb(100, 100, 100);
-      justify-content: space-between; /* 좌우 정렬을 위해 space-between 사용 */
-      align-items: center;
-    }
-
-    #head button {
-      width: 10vw;
-      height: inherit;
-      font-size: 3vw;
-      background-color: rgb(100, 100, 100);
-    }
-    #body {
-      width: 100vw;
-      height: 80vh;
-      /* 여기에 내용 추가 가능 */
-    }
-
-    #tail {
-      width: 100vw;
-      height: 10vh;
-      background-color: rgb(100, 100, 100);
-      /* 여기에 내용 추가 가능 */
-    }
-  </style>
+  <title>JSON 데이터 출력</title>
 </head>
 <body>
-  <div id="root">
-    <div id="head">
-      <button id="mode">Usual</button>
-      <button id="loginButton2">Login</button>
-    </div>
-    <div id="body"></div>
-    <div id="tail"></div>
+  <div>
+    <ul id="ul"></ul>
   </div>
-  <script>
-    const modeButton = document.getElementById("mode");
-
-    // 초기 모드 설정
-    let toggle = true;
-
-    modeButton.addEventListener("click", () => {
-      toggle = !toggle; // 모드 토글
-      modeButton.textContent = toggle ? "Usual" : "Expert"; // 버튼 텍스트 업데이트
-      // 여기에서 모드에 따른 다른 동작을 수행할 수 있습니다
-      if (toggle) {
-        modeButton.textContent = "Usual";
-        
-      } else {
-        modeButton.textContent = "Expert";
-        
-      }
-    });
-  </script>
+  <script src="name.json"></script>
+  <script src="xhr.js"></script>
 </body>
 </html>
