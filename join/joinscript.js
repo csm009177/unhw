@@ -1,5 +1,3 @@
-// script.js
-
 document.getElementById('signup-form').addEventListener('submit', function(e) {
   e.preventDefault(); // 기본 동작(페이지 새로고침) 방지
 
@@ -24,3 +22,4 @@ document.getElementById('signup-form').addEventListener('submit', function(e) {
   // 양식 초기화 (선택 사항)
   document.getElementById('signup-form').reset();
 });
+
