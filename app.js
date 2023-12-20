@@ -1,5 +1,5 @@
 import http from 'http';
-import fs, { appendFileSync } from 'fs';
+import fs, { appendFileSync, writeFileSync } from 'fs';
 const htmlPath = 'index.html'
 const jsonPath = 'name.json'
 const xhrPath = 'xhr.js'
@@ -19,17 +19,20 @@ const serv = http.createServer((req,res) =>{
         res.end(xhrData);    
     })
   } else if (req.method === 'GET' && req.url === '/name.json') {
-    // Read the userData.json file and send its content as a response
-    fs.readFile(jsonPath, 'utf8', (err, jsonData) => {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(jsonData);    
-    })
-  } else if (req.method === 'POST' && req.url === '/name.json') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        const nameData = JSON.parse( fs.readFileSync(jsonPath, 'utf8'))
-        const nameDataKeys =Object.keys(nameData)
-        console.log(nameDataKeys)
-        // res.end(fs.appendFileSync(jsonPath, nameData));    
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    const nameData = JSON.parse( fs.readFileSync(jsonPath, 'utf8'))
+    const nameDataKeys =Object.values(nameData)
+    const strnameData = JSON.stringify(nameData)
+    console.log(strnameData)
+    console.log(nameDataKeys)
+
+  } else if (req.method === 'GET' && req.url === '/name.json') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    const nameData = JSON.parse( fs.readFileSync(jsonPath, 'utf8'))
+    const strnameData = JSON.stringify(nameData)
+    console.log(strnameData)
+    fs.writeFileSync(jsonPath, nameData)
+        
   }
   
 })
