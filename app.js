@@ -1,5 +1,5 @@
 import http from 'http';
-import fs from 'fs';
+import fs, { appendFileSync } from 'fs';
 const htmlPath = 'index.html'
 const jsonPath = 'name.json'
 const xhrPath = 'xhr.js'
@@ -24,7 +24,14 @@ const serv = http.createServer((req,res) =>{
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(jsonData);    
     })
+  } else if (req.method === 'POST' && req.url === '/name.json') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        const nameData = JSON.parse( fs.readFileSync(jsonPath, 'utf8'))
+        const nameDataKeys =Object.keys(nameData)
+        console.log(nameDataKeys)
+        // res.end(fs.appendFileSync(jsonPath, nameData));    
   }
+  
 })
 // Define port number
 const port = 3212;
