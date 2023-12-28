@@ -1,33 +1,24 @@
-// http, fs
-const http = require('http');
-const fs = require('fs');
-// custom module
-const contenType = require('./mod/contenType')
+import http from "http";
+import fs from "fs";
 
+const PORT = 3213;
+const JSONPath = "index.json";
 
-// make server
-let serv = http.createServer((req,res)=> {
-  serv.on('error', (error) => {
-    if (error.code === 'EADDRINUSE') {
-      console.error('포트 ' + port + '은 이미 사용 중입니다. 다른 포트를 시도하세요.');
-    } else {
-      console.error('서버에서 오류 발생: ' + error.message);
-    }
-  });
-  if(req.method === 'GET' && req.url === '/'){
-    checkreq(req.method, req.url);
-    res.writeHead(200, contenTypeHtml); 
-    res.end(maindoc);
-  } 
-})
+const serv = http.createServer((req, res) => {
+  if (req.method === "GET" && req.url === "/") {
+    fs.readFile("index.html", "utf8", (err, data) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(data);
+    });
+  } else if (req.method === "POST" && req.url === "/loadData") {
+    fs.readFile(JSONPath, "utf8", (err, data) => {
+      const jsonData = JSON.parse(data);
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(jsonData));
+    });
+  }
+});
 
-
-// port
-let port =3217;
-// server listen
-serv.listen(port, () => {
-  console.log(`
-아래의 링크를 Clt와 함께 누르세요
-http://localhost:${port}  
-  `)
+serv.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}/`);
 });
