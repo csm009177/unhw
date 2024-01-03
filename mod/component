@@ -1,29 +1,32 @@
-function component(elementNode, attributes, children) {
-  let elementStr = `<${elementNode}`;
-
-  for (let key in attributes) {
-    elementStr += ` ${key}="${attributes[key]}"`;
-  }
-
-  elementStr += '>';
-
-  if (children) {
-    children.forEach(child => {
-      if (typeof child === 'string') {
-        elementStr += child;
-      } else {
-        elementStr += component(child.elementNode, child.attributes, child.children);
-      }
-    });
-  }
-
-  elementStr += `</${elementNode}>`;
-
-  return elementStr;
+export function createElement(type, props, ...children) {
+  return { type, props, children };
 }
 
-let test = component('div', { style: 'color:blue;' }, [
-  component('h1', {}, ['This is Page 1'])
-]);
+export function component(stateData, direction) {
+  const menuItems = [];
+  for (let i = 0; i < stateData.length; i++) {
+    const item = stateData[i];
+    const menuItem = createElement("li", {id:`LiTag${i}`, 
+      style: `list-style: none; `},
+      createElement("a", { class:"stateDataCalss", href: item.hash }, item.text ) );
+    menuItems.push(menuItem);
+  }
+  return createElement("div", {id:"stateCont" }, ...menuItems );
+}
 
-console.log(test);
+export function render(virtualDom) {
+  if (typeof virtualDom === "string") {
+    return document.createTextNode(virtualDom);
+  }
+  const element = document.createElement(virtualDom.type);
+  if (virtualDom.props) {
+    for (const [key, value] of Object.entries(virtualDom.props)) {
+      element.setAttribute(key, value);
+    }
+  }
+  for (let i = 0; i < virtualDom.children.length; i++) {
+    const child = virtualDom.children[i];
+    element.appendChild(render(child));
+  }
+  return element;
+}
