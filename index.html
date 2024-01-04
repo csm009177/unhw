@@ -2,78 +2,33 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
 </head>
 
 <body>
-  <div id="cont"></div>
-  <div id="board"></div>
+<div id="cont"></div>
+<div id="board"></div>
 
-  <script>
-    function createElement(type, props, ...children) {
-      return { type, props, children };
-    }
+<script>
 
-    function component(stateData) {
-      const menuItems = stateData.map((item, i) => {
-        return createElement("li", {
-          id: `LiTag${i}`,
-          style: `list-style: none;`
-        }, createElement("a", { class: "stateDataClass", href: item.hash }, item.text));
-      });
-      return createElement("div", { id: "stateCont" }, ...menuItems);
-    }
 
-    function render(virtualDom) {
-      if (typeof virtualDom === "string") {
-        return document.createTextNode(virtualDom);
+  document.addEventListener('DOMContentLoaded', function () {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/loadData', true);
+      
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+
+        
       }
+    };
 
-      const element = document.createElement(virtualDom.type);
-
-      if (virtualDom.props) {
-        for (const [key, value] of Object.entries(virtualDom.props)) {
-          element.setAttribute(key, value);
-        }
-      }
-
-      for (let i = 0; i < virtualDom.children.length; i++) {
-        const child = virtualDom.children[i];
-        element.appendChild(render(child));
-      }
-      return element;
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/loadData', true);
-
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          const data = JSON.parse(xhr.responseText);
-
-          const keys = Object.keys(data);
-          for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const button = render(createElement('button', { id: `btn${key}` }, key));
-
-            button.addEventListener('click', function () {
-              const dataKey = data[key];
-              const liTag = render(createElement("li", {}, JSON.stringify(data[key])));
-              document.getElementById('board').innerHTML = '';
-              document.getElementById('board').appendChild(liTag);
-            });
-
-            document.getElementById('cont').appendChild(button);
-          }
-        }
-      };
-
-      xhr.send();
-    });
-  </script>
+    xhr.send();
+  });
+</script>
 </body>
 
 </html>
