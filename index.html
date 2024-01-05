@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
-
 <body>
-<div id="cont"></div>
-<div id="board"></div>
-
-<script>
-
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/loadData', true);
+  <div id="root"></div>
+  <script type="module">
+    import { createElement, component, render } from './component.js'
+    const root = document.getElementById("root")
+      const rootCont = createElement("div",{},"")
+      root.appendChild(render(rootCont))
+    // document.addEventListener('DOMContentLoaded', function () {
       
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText);
+    //   console.log(rootCont)
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open('POST', '/loadData', true);
 
-        
-      }
-    };
+    //   xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //       const data = JSON.parse(xhr.responseText);
 
-    xhr.send();
-  });
-</script>
+
+    //     }
+    //   };
+
+    //   xhr.send();
+    // });
+  </script>
 </body>
-
 </html>

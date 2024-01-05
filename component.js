@@ -1,8 +1,8 @@
-function createElement(type, props, ...children) {
+export function createElement(type, props, ...children) {
   return { type, props, children };
 }
 
-function component(stateData) {
+export function component(stateData) {
   const menuItems = stateData.map((item, i) => {
     return createElement("li", {
       id: `LiTag${i}`,
@@ -12,7 +12,7 @@ function component(stateData) {
   return createElement("div", { id: "stateCont" }, ...menuItems);
 }
 
-function render(virtualDom) {
+export function render(virtualDom) {
   if (typeof virtualDom === "string") {
     return document.createTextNode(virtualDom);
   }
