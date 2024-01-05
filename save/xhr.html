@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+</head>
+
+<body>
+
+  <!-- 웹 페이지의 제목 -->
+  <h1>Product List with xhr</h1>
+
+  <!-- 상품 목록을 표시할 테이블 생성 -->
+  <table border="1">
+    <thead>
+      <!-- 테이블 헤더를 정의 -->
+      <tr>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id="productList">
+      <!-- 서버에서 받아온 데이터로 채워질 테이블 본문 -->
+    </tbody>
+  </table>
+
+  <script>
+    // XMLHttpRequest 객체 생성
+    const xhr = new XMLHttpRequest();
+
+    // GET 방식으로 'http://localhost:3218/mariaDB' URL에 요청 설정
+    xhr.open('GET', 'http://localhost:3218/mariaDB', true);
+
+    // 요청이 완료되었을 때의 콜백 함수 설정
+    xhr.onload = function () {
+      // HTTP 상태 코드가 200(성공)일 경우 데이터 처리
+      if (this.status === 200) {
+        // 상품 목록 테이블의 tbody 요소 가져오기
+        const productList = document.getElementById('productList');
+        // 서버에서 받아온 JSON 형식의 데이터 파싱
+        const data = JSON.parse(this.responseText);
+
+        // 데이터를 순회하며 테이블 행으로 추가
+        data.forEach(product => {
+          const row = `
+          <tr>
+            <td>${product.number}</td>  <!-- 상품 번호 -->
+            <td>${product.name}</td>    <!-- 상품 이름 -->
+            <td>${product.price}</td>   <!-- 상품 가격 -->
+          </tr>
+        `;
+          productList.innerHTML += row;  // 테이블에 행 추가
+        });
+      } 
+      // HTTP 상태 코드가 200이 아닌 경우 오류 처리
+      else {
+        console.error('Failed to fetch data');  // 데이터 가져오기 실패
+      }
+    };
+
+    // 요청 중 오류가 발생했을 때의 콜백 함수 설정
+    xhr.onerror = function () {
+      console.error('Error occurred while fetching data.');  // 데이터 가져오기 중 오류 발생
+    };
+
+    // 서버에 요청을 전송
+    xhr.send();
+  </script>
+
+</body>
+</html>
