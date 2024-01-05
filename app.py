@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-import mysql.connector
+import mysql.connector # pip install mysql-connector-python
 import os
 
 PORT = 3213
