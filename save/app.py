@@ -4,7 +4,6 @@ import mysql.connector # pip install mysql-connector-python
 import os
 
 PORT = 3213
-JSON_PATH = "index.json"
 HTML_PATH = "index.html"
 COMP_PATH = "./component.js"
 
@@ -39,19 +38,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps(results).encode())
-
-    def do_POST(self):
-        if self.path == "/loadData":
-            with open(JSON_PATH, "r") as file:
-                data = json.load(file)
-                self.send_response(200)
-                self.send_header("Content-type", "application/json")
-                self.end_headers()
-                self.wfile.write(json.dumps(data).encode())
-        else:
-            self.send_response(404)
-            self.end_headers()
-            self.wfile.write(b"Endpoint not found")
 
 
 def run_server():
