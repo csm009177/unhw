@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       {/* url이 "/"인 경우에만 LoginForm 컴포넌트를 렌더링 */}
-      {url === "/login" && <Lobby />}
+      {url === "/lobby" && <Lobby />}
       {url === "/" && <Main/>}
     </div>
   );

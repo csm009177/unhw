@@ -1,11 +1,11 @@
 import './App.css';
 
-function Main() {
+function Login() {
   return (
-    <div className="Main">
+    <div className="Login">
       Main Page
     </div>
   );
 }
 
-export default Main;
+export default Login;
