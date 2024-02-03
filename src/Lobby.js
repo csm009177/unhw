@@ -21,13 +21,17 @@ function Lobby() {
     return () => clearInterval(interval);
   }, [comments.length]);
 
+  const handleRoutChange = () => {
+    
+  }
+
   return (
     <div className="Lobby">
       <div className="Lobby-LeftCont">{comments[currentCommentIndex]}</div>
       <div className="Lobby-RightCont">
-        <div>Log in</div>
+        <a href="/login">Log in</a>
         <br></br>
-        <div>Sign in</div>
+        <a href="/signup">Sign in</a>
       </div>
     </div>
   );
