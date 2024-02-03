@@ -21,10 +21,6 @@ function Lobby() {
     return () => clearInterval(interval);
   }, [comments.length]);
 
-  const handleRoutChange = () => {
-    
-  }
-
   return (
     <div className="Lobby">
       <div className="Lobby-LeftCont">{comments[currentCommentIndex]}</div>
