@@ -3,6 +3,12 @@ a{
   text-decoration: none;
   color: white;
 }
+li{
+  border: none;
+  text-decoration: none;
+  color: white;
+  list-style: none;
+}
 
 
 .App {
@@ -16,9 +22,6 @@ a{
   justify-content: center;
 }
 
-.App-header {
-    
-}
 
 .App-body {
   color: #61dafb;
@@ -108,14 +111,15 @@ a{
   width: 5%;
   font-size: xx-large;
   background-color: #373737;
+  color: white;
   border-style: none;
   text-align: center;
 }
 
 .Left-var{
   font-size: xx-large;
-  text-size-adjust: inherit;
   margin-bottom:auto;
+  color: white;
   background-color: #373737;
   border-style: none;
   text-align: center;
