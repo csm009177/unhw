@@ -96,3 +96,28 @@ a{
   border-style: none;
   text-align: center;
 }
+
+.Main{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Main button{
+  width: 5%;
+  font-size: xx-large;
+  background-color: #373737;
+  border-style: none;
+  text-align: center;
+}
+
+.Left-var{
+  font-size: xx-large;
+  text-size-adjust: inherit;
+  margin-bottom:auto;
+  background-color: #373737;
+  border-style: none;
+  text-align: center;
+  width: 20%;
+}
