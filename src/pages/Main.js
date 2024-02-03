@@ -3,7 +3,7 @@ import '../App.css';
 
 function Main() {
   const [isOpen, setIsOpen] = useState(true);
-
+  const [,] = useState("")
   const toggleList = () => {
     setIsOpen(!isOpen);
   };
