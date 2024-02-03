@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import LoginPage from './LoginPage';
+import Lobby from './Lobby';
 import Main from './Main';
 
 function App() {
@@ -16,9 +16,8 @@ function App() {
   return (
     <div className="App">
       {/* url이 "/"인 경우에만 LoginForm 컴포넌트를 렌더링 */}
-      {url === "/login" && <LoginPage />}
+      {url === "/login" && <Lobby />}
       {url === "/" && <Main/>}
-      
     </div>
   );
 }
