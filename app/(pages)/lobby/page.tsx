@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import "/app/globals.css";
-import LotationMent from '/app/ui/LotationMent';
 import UrlButton from '../../ui/UrlButton';
+import LotationMent from '../../ui/LotationMent';
 
 export default function Home() {
   
   return (
     <div className="Lobby">
-      <div className="Lobby-LeftCont"><LotationMent/></div>
+      <div className="Lobby-LeftCont">
+        <LotationMent/>
+      </div>
       <div className="Lobby-RightCont">
         <UrlButton url="/lobby/login" title="login"/>
         <br />
