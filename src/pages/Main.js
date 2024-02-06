@@ -5,8 +5,8 @@ function Main() {
   const [items, setItems] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const [inputValue, setInputValue] = useState(""); // 입력한 값 상태 추가
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
-  const [inputValue, setInputValue] = useState(""); // input 값의 상태
 
   const toggleList = () => {
     setIsOpen(!isOpen);
@@ -30,12 +30,18 @@ function Main() {
   };
 
   const handleSubmit = () => {
-    if (!inputValue) return; // 입력값이 없으면 아무 동작도 하지 않음
+    // 입력된 값이 비어있으면 제출하지 않음
+    if (!inputValue.trim()) return;
 
-    const newItem = inputValue; // 입력된 값으로 새로운 아이템 생성
-    setItems([...items, newItem]);
-    setInputValue(""); // 입력값 초기화
+    // 새로운 div 태그 생성하여 입력된 값 기록
+    const newDiv = document.createElement("div");
+    newDiv.textContent = inputValue;
+    document.querySelector(".Right-Cont-board").appendChild(newDiv);
+
+    // 입력된 값을 초기화
+    setInputValue("");
   };
+
 
   return (
     <div className="Main">
@@ -61,22 +67,27 @@ function Main() {
         )}
         {selectedItemIndex !== null && (
           <div className="Right-Cont-board">
-            {items.map((item2, index2) => (
-              <li key={index2}>{item2}</li>
-            ))}
-            <input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
+            <div
               style={{
-                width: "auto",
-                height: "10vh",
+                marginTop: "1%",
+                marginLeft: "1%",
+                display: "flex",
+                flexDirection: "row",
+                width: "99%",
+                height: "99%",
               }}
-            ></input>
+            >
+              <input
+                style={{
+                  width: "79%",
+                  height: "5vh",
+                }}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)} // 입력값을 업데이트
+              ></input>
+              <button onClick={handleSubmit}>Submit</button>{" "}
+              {/* 입력값 제출 버튼 */}
+            </div>
           </div>
         )}
       </div>

@@ -149,5 +149,13 @@ li{
   border-style: none;
   text-align: center;
   box-shadow: 0 0 0 7px #555555 inset;
-  
+  font-size: auto;
+}
+.Right-Cont-board input{
+  border-style: none;
+}
+.Right-Cont-board button{
+  width: 19%;
+  height: 5vh;
+  font-size: auto;
 }
