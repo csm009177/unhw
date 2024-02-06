@@ -8,7 +8,7 @@ export default function Home() {
   
   return (
     <div>
-      {/* <ToggleLeftVar/> */}
+      <ToggleLeftVar/>
     </div>
   );
 }
