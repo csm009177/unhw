@@ -13,7 +13,6 @@ export default function RootLayout({ children }: ChildrenProps) {
   return (
     <html lang='ko'>
       <body className='flex flex-col justify-between h-screen w-screen overflow-hidden'>
-        <LotationMent/>
         {children}
       </body>
     </html>

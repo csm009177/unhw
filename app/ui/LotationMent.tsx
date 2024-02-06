@@ -23,5 +23,5 @@ export default function LotationMent() {
     return () => clearInterval(interval);
   }, [comments.length]);
 
-  return <div className="">{comments[currentCommentIndex]}</div>;
+  return <div className="flex text-wrap">{comments[currentCommentIndex]}</div>;
 }
