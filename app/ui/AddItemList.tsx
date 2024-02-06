@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import "../globals.css";
 
-export default function AddItemList() {
+export default function AddItemList({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: any;
+  setIsOpen: any;
+}) {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
@@ -18,7 +24,7 @@ export default function AddItemList() {
   };
 
   return (
-    <div>
+    <div style={{width:isOpen?"100%":"0%"}}>
       <p onClick={addItem}>unhw</p>
       <ul>
         {items.map((item, index) => (

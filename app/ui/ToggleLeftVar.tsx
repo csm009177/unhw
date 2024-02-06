@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "../globals.css";
 import AddItemList from './AddItemList';
 
-export default function ToggleLeftVar() {
-  const [isOpen, setIsOpen] = useState(true);
+export default function ToggleLeftVar({isOpen, setIsOpen}:{isOpen:any, setIsOpen:any}) {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
@@ -21,14 +20,10 @@ export default function ToggleLeftVar() {
   }, []); // 한 번만 실행되도록 설정
 
   return (
-    <div className="flex flex-row h-screen">
-      <div
-        className={`flex flex-col ${isOpen ? "open" : "closed"}`}
-        style={{ width: isOpen ? "100%" : "0%" , height:"100%" }}
-      >
-        <AddItemList/>
-      </div>
-      <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
+    <div 
+      style={{display:"flex", flexDirection:"row", background:"#434343", height:"100%"}}>
+        <AddItemList isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <button onClick={toggleList} style={{backgroundColor: "#434343", fontSize:"2vw"}}>{isOpen ? "◀" : "▶"}</button>
     </div>
   );
 }
