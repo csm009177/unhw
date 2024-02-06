@@ -23,7 +23,7 @@ export default function ToggleLeftVar() {
   return (
     <div>
       <div
-        className={`Left-var ${isOpen ? "open" : "closed"}`}
+        className={`${isOpen ? "open" : "closed"}`}
         style={{ width: isOpen ? "20vw" : "0" }}
       ></div>
       <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
