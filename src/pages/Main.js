@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import '../App.css';
+import "../App.css";
 
 function Main() {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,7 +9,6 @@ function Main() {
 
   const toggleList = () => {
     setIsOpen(!isOpen);
-    setSelectedItemIndex(null); // 리스트를 토글할 때 선택된 아이템 초기화
   };
 
   useEffect(() => {
@@ -31,19 +30,20 @@ function Main() {
 
   return (
     <div className="Main">
-      {isOpen && (
-        <div className="Left-var">
-          <ul>
-            <p onClick={addItem}>unhw</p>
-            {items.map((item, index) => (
-              <li key={index} onClick={() => handleItemClick(index)}>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <button onClick={toggleList}>{isOpen ? '◀' : '▶'}</button>
+      <div
+        className={`Left-var ${isOpen ? "open" : "closed"}`}
+        style={{ width: isOpen ? "20vw" : "0" }}
+      >
+        <ul>
+          <p onClick={addItem}>unhw</p>
+          {items.map((item, index) => (
+            <li key={index} onClick={() => handleItemClick(index)}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
       <div className="Right-Cont" style={{ width: isOpen ? "80%" : "96%" }}>
         {isOpen && selectedItemIndex !== null && (
           <p>Selected Item Index: {selectedItemIndex}</p>

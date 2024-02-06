@@ -124,6 +124,8 @@ li{
   border-style: none;
   text-align: center;
   width: 20%;
+  overflow: hidden;
+  transition: width 0.5s ease;
 }
 
 .Right-Cont {
