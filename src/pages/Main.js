@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import "../App.css";
 
 function Main() {
-  const [items, setItems] = useState([]); 
+  const [items, setItems] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
+  const [inputValue, setInputValue] = useState(""); // input 값의 상태
 
   const toggleList = () => {
     setIsOpen(!isOpen);
@@ -28,6 +29,14 @@ function Main() {
     setSelectedItemIndex(index);
   };
 
+  const handleSubmit = () => {
+    if (!inputValue) return; // 입력값이 없으면 아무 동작도 하지 않음
+
+    const newItem = inputValue; // 입력된 값으로 새로운 아이템 생성
+    setItems([...items, newItem]);
+    setInputValue(""); // 입력값 초기화
+  };
+
   return (
     <div className="Main">
       <div
@@ -37,7 +46,7 @@ function Main() {
         <ul>
           <p onClick={addItem}>unhw</p>
           {items.map((item, index) => (
-            <li key={index} onClick={() => handleItemClick(index+1)}>
+            <li key={index} onClick={() => handleItemClick(index + 1)}>
               {item}
             </li>
           ))}
@@ -51,7 +60,24 @@ function Main() {
           </div>
         )}
         {selectedItemIndex !== null && (
-        <div className="Right-Cont-board" ></div>
+          <div className="Right-Cont-board">
+            {items.map((item2, index2) => (
+              <li key={index2}>{item2}</li>
+            ))}
+            <input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
+              style={{
+                width: "auto",
+                height: "10vh",
+              }}
+            ></input>
+          </div>
         )}
       </div>
     </div>
