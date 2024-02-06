@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import "../globals.css";
 
-export default function ToggleLeftVar() {
-  const [isOpen, setIsOpen] = useState(true);
+export default function AddItemList() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
@@ -19,13 +18,15 @@ export default function ToggleLeftVar() {
   };
 
   return (
-    <ul>
+    <div>
       <p onClick={addItem}>unhw</p>
-      {items.map((item, index) => (
-        <li key={index} onClick={() => handleItemClick(index)}>
-          {item}
-        </li>
-      ))}
-    </ul>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index} onClick={() => handleItemClick(index)}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

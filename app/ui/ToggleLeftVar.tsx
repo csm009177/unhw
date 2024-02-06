@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../globals.css";
+import AddItemList from "./AddItemList";
 
 export default function ToggleLeftVar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -19,38 +20,13 @@ export default function ToggleLeftVar() {
     }
   }, []); // 한 번만 실행되도록 설정
 
-  const addItem = () => {
-    const newItem = `Item ${items.length + 1}`;
-    setItems([...items, newItem]);
-  };
-
-  const handleItemClick = (index) => {
-    setSelectedItemIndex(index);
-  };
-
   return (
-    <div className="Main">
+    <div>
       <div
         className={`Left-var ${isOpen ? "open" : "closed"}`}
         style={{ width: isOpen ? "20vw" : "0" }}
-      >
-        <ul>
-          <p onClick={addItem}>unhw</p>
-          {items.map((item, index) => (
-            <li key={index} onClick={() => handleItemClick(index)}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      ></div>
       <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
-      <div className="Right-Cont" style={{ width: isOpen ? "80%" : "96%" }}>
-        {isOpen && selectedItemIndex !== null && (
-          <p>Selected Item Index: {selectedItemIndex}</p>
-        )}
-      </div>
     </div>
   );
 }
-
-
