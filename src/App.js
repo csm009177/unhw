@@ -9,11 +9,12 @@ function App() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
 
   useEffect(() => {
-    // URL 경로가 "/lobby"일 때만 setUrl 함수를 호출하여 상태를 변경
-    if (window.location.pathname === "/lobby") {
+    // 로그인 토큰이 없으면 "/lobby"로 URL 경로 설정
+    const token = localStorage.getItem("token");
+    if (!token) {
       setUrl("/lobby");
     }
-  }, []); // 의존성 배열을 비워두어 한 번만 실행되도록 설정
+  }, []); // 한 번만 실행되도록 설정
 
   return (
     <div className="App">
