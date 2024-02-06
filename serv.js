@@ -1,14 +1,15 @@
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
-const jwt = require('jsonwebtoken');
-const express = require("express");
+const jwt = require('jsonwebtoken');  // npm install jsonwebtoken
+const mysql = require('mysql2');      // npm install mysql2
+const express = require("express");   // npm install express
 const next = require('next');
-const mysql = require('mysql2');
 const isDev = process.env.NODE_ENV !== 'development';
 const app = next({ dev: isDev });
 const handle = app.getRequestHandler();
 const multer = require('multer');
 const fs = require('fs')
+
 
 // MariaDB 연결 설정
 const connection = mysql.createConnection({
@@ -102,8 +103,8 @@ app.prepare().then(() => {
   });
 
   // 서버 시작
-  server.listen(3002, (err) => {
+  server.listen(3000, (err) => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3002');
+    console.log('> Ready on http://localhost:3000');
   });
 });
