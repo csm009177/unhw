@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import '../App.css';
 
 function Main() {
   const [isOpen, setIsOpen] = useState(true);
-  const [,] = useState("")
+  const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
+
   const toggleList = () => {
     setIsOpen(!isOpen);
   };
 
-  const createButton = () => {
-    
-  }
+  useEffect(() => {
+    // 로그인 토큰이 없으면 "/lobby"로 URL 경로 설정
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUrl("/lobby");
+    }
+  }, []); // 한 번만 실행되도록 설정
 
   return (
     <div className="Main">
@@ -25,6 +30,9 @@ function Main() {
         </div>
       )}
       <button onClick={toggleList}>{isOpen ? '◀' : '▶'}</button>
+      <div className="Right-Cont" style={{ width: isOpen ? "80%" : "96%" }}>
+        {isOpen ? "open" : "close"}
+      </div>
     </div>
   );
 }

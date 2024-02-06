@@ -8,7 +8,8 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* BrowserRouter로 App을 감싸면 라우팅 처리가 가능하다*/}
+    <BrowserRouter> 
     <App />
     </BrowserRouter>
   </React.StrictMode>

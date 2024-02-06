@@ -108,9 +108,9 @@ li{
 }
 
 .Main button{
-  width: 5%;
+  width: 4%;
   font-size: xx-large;
-  background-color: #373737;
+  background-color: #3f3f3f;
   color: white;
   border-style: none;
   text-align: center;
@@ -124,4 +124,14 @@ li{
   border-style: none;
   text-align: center;
   width: 20%;
+}
+
+.Right-Cont {
+  width: 80%;
+  font-size: xx-large;
+  margin-bottom:auto;
+  color: white;
+  background-color: #373737;
+  border-style: none;
+  text-align: center;
 }
