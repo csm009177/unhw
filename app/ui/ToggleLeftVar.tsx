@@ -12,7 +12,7 @@ export default function ToggleLeftVar() {
   const toggleList = () => {
     setIsOpen(!isOpen);
   };
-
+s
   useEffect(() => {
     // 로그인 토큰이 없으면 "/lobby"로 URL 경로 설정
     const token = localStorage.getItem("token");
