@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import "../App.css";
 
 function Main() {
+  const [items, setItems] = useState([]); 
   const [isOpen, setIsOpen] = useState(true);
-  const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
-  const [items, setItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
 
   const toggleList = () => {
     setIsOpen(!isOpen);
@@ -32,21 +32,26 @@ function Main() {
     <div className="Main">
       <div
         className={`Left-var ${isOpen ? "open" : "closed"}`}
-        style={{ width: isOpen ? "20vw" : "0" }}
+        style={{ width: isOpen ? "20%" : "0%" }}
       >
         <ul>
           <p onClick={addItem}>unhw</p>
           {items.map((item, index) => (
-            <li key={index} onClick={() => handleItemClick(index)}>
+            <li key={index} onClick={() => handleItemClick(index+1)}>
               {item}
             </li>
           ))}
         </ul>
       </div>
       <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
-      <div className="Right-Cont" style={{ width: isOpen ? "80%" : "96%" }}>
-        {isOpen && selectedItemIndex !== null && (
-          <p>Selected Item Index: {selectedItemIndex}</p>
+      <div className="Right-Cont" style={{ width: isOpen ? "80%" : "100%" }}>
+        {selectedItemIndex !== null && (
+          <div>
+            <p>Selected Item : {selectedItemIndex}</p>
+          </div>
+        )}
+        {selectedItemIndex !== null && (
+        <div className="Right-Cont-board" ></div>
         )}
       </div>
     </div>
