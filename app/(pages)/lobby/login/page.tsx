@@ -6,7 +6,7 @@ import "/app/globals.css";
 export default function Login() {
   
   return (
-    <div className="Lobby">
+    <div className="Login">
       <div className="Lobby-RightCont">login page</div>
     </div>
   );

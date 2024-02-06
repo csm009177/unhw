@@ -2,3 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+.Main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #373737;
+  flex-direction: row;
+  text-align: center;
+}
+.Main-LeftVar {
+  width: 20%;
+  height: 100%;
+  background-color: #434343;
+}
+
+.Main-LeftVar button{
+
+} 
+
+.Main-RightCont {
+  width: 80%;
+  height: 100%;
+}
+
+
+
+.Lobby {
+    
+}
+.SignUp {
+
+}
+.Login {
+
+}

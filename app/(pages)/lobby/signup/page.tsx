@@ -6,7 +6,7 @@ import "/app/globals.css";
 export default function SignUp() {
   
   return (
-    <div className="Lobby">
+    <div className="SignUp">
       <div className="Lobby-RightCont">SignUp page</div>
     </div>
   );

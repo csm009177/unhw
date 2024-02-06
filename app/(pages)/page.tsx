@@ -1,14 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import "../globals.css";
 import ToggleLeftVar from '../ui/ToggleLeftVar';
 
-export default function Home() {
-  
+export default function Main() {
+  createContext()
   return (
-    <div>
+    <div className="Main">
+      <div className="Main-LeftVar">
       <ToggleLeftVar/>
+      </div>
+      <div className="Main-RightCont"></div>
     </div>
   );
 }

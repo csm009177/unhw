@@ -56,11 +56,11 @@ app.prepare().then(() => {
 
   // 회원가입 API 엔드포인트
   server.post("/signup", (req, res) => {
-    const { id, pw } = req.body;
+    const { Identification, pw } = req.body;
 
     // 회원가입 정보를 DB에 삽입
     const query = "INSERT INTO users (id, pw) VALUES (?, ?)";
-    connection.query(query, [id, pw], (err, results, fields) => {
+    connection.query(query, [Identification, pw], (err, results, fields) => {
       if (err) {
         console.error("Error signing up:", err);
         res.status(500).json({ message: "회원가입에 실패했습니다." });
@@ -72,11 +72,11 @@ app.prepare().then(() => {
 
   // 로그인 API 엔드포인트
   server.post("/login", (req, res) => {
-    const { username, password } = req.body;
+    const { Identification, password } = req.body;
 
     // 해당 사용자가 존재하는지 확인하는 쿼리
-    const query = "SELECT * FROM users WHERE username = ? AND password = ? AND admin = 1";
-    connection.query(query, [username, password], (err, results, fields) => {
+    const query = "SELECT * FROM users WHERE id = ? AND password = ? AND admin = 1";
+    connection.query(query, [Identification, password], (err, results, fields) => {
       if (err) {
         console.error("Error logging in:", err);
         res.status(500).json({ message: "로그인에 실패했습니다." });

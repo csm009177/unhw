@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../globals.css";
-import AddItemList from "./AddItemList";
+import AddItemList from './AddItemList';
 
 export default function ToggleLeftVar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -21,11 +21,13 @@ export default function ToggleLeftVar() {
   }, []); // 한 번만 실행되도록 설정
 
   return (
-    <div>
+    <div className="flex flex-row h-screen">
       <div
-        className={`${isOpen ? "open" : "closed"}`}
-        style={{ width: isOpen ? "20vw" : "0" }}
-      ></div>
+        className={`flex flex-col ${isOpen ? "open" : "closed"}`}
+        style={{ width: isOpen ? "100%" : "0%" , height:"100%" }}
+      >
+        <AddItemList/>
+      </div>
       <button onClick={toggleList}>{isOpen ? "◀" : "▶"}</button>
     </div>
   );
