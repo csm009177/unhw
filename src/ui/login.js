@@ -9,7 +9,7 @@ export default function Login() {
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       try {
-        const response = await fetch("/login", {
+        const response = await fetch("/loginFrom", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

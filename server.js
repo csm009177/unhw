@@ -1,6 +1,6 @@
 const express = require("express");
-const jwt = require('jsonwebtoken');
-const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');  // npm install jsonwebtoken
+const mysql = require('mysql2');      // npm install mysql2
 
 // MariaDB 연결 설정
 const connection = mysql.createConnection({
@@ -32,7 +32,7 @@ server.post("/signup", (req, res) => {
 });
 
 // 로그인 API 엔드포인트
-server.post("/login", (req, res) => {
+server.post("/loginFrom", (req, res) => {
   const { id, pw } = req.body;
 
   // 해당 사용자가 존재하는지 확인하는 쿼리
@@ -56,7 +56,8 @@ server.post("/login", (req, res) => {
 });
 
 // 서버 시작
-server.listen(3001, (err) => {
+const port = 3000
+server.listen(port, (err) => {
   if (err) throw err;
-  console.log('> Ready on http://localhost:3001');
+  console.log(`> Ready on http://localhost:${port}`);
 });
