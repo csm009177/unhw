@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ChildrenProps } from "./(pages)/ChildrenProps";
 import LotationMent from './ui/LotationMent';
+import TokkenCheck from "./ui/TokkenCheck";
 
 
 export const metadata: Metadata = {

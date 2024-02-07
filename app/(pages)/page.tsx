@@ -12,7 +12,7 @@ import TokkenCheck from "../ui/TokkenCheck";
 export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-  TokkenCheck()
+  // TokkenCheck()
   return (
     <selectContext.Provider value={{ selectedItemIndex, setSelectedItemIndex }}>
       <openContext.Provider value={{ isOpen, setIsOpen }}>
