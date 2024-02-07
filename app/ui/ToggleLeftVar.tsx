@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
 import { useContext, useEffect, useState } from "react";
 import "../globals.css";
-import AddItemList from './AddItemList';
-import {openContext,selectContext } from "../context/styleContext";
+import AddItemList from "./AddItemList";
+import { openContext, selectContext } from "../context/styleContext";
 
 export default function ToggleLeftVar() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
   const { isOpen, setIsOpen } = useContext(openContext);
-  const {selectedItemIndex, setSelectedItemIndex } = useContext(selectContext)
+  const { selectedItemIndex, setSelectedItemIndex } = useContext(selectContext);
 
   const toggleList = () => {
     setIsOpen(!isOpen);
@@ -24,10 +24,31 @@ export default function ToggleLeftVar() {
   }, []); // 한 번만 실행되도록 설정
 
   return (
-    <div 
-      style={{display:"flex", flexDirection:"row", background:"#434343", height:"100%"}}>
-        <AddItemList isOpen={isOpen} setIsOpen={setIsOpen}/>
-      <button onClick={toggleList} style={{backgroundColor: "#434343", fontSize:"2vw"}}>{isOpen ? "◀" : "▶"}</button>
+    <div
+      className="Main-LeftVar"
+      style={{
+        width: isOpen ? "20%" : "2%",
+        height: "100%",
+        backgroundColor: "#434343",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          background: "#434343",
+          height: "100%",
+        }}
+      >
+        <AddItemList isOpen={isOpen} setIsOpen={setIsOpen} />
+        <button
+          onClick={toggleList}
+          style={{ backgroundColor: "#434343", fontSize: "2vw" }}
+        >
+          {isOpen ? "◀" : "▶"}
+        </button>
+      </div>
     </div>
   );
 }
