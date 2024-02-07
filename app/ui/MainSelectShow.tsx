@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 // import { useRouter } from "next/router";
 import { openContext, selectContext } from "../context/styleContext";
 import { useContext, useEffect } from "react";
@@ -9,11 +10,19 @@ import ItemPage from '../(pages)/[id]/page';
 
 export default function MainSelectShow() {
   const router = useRouter();
+  const pathname = usePathname();
   // const { id } = router.query;
   const { selectedItemIndex } = useContext(selectContext);
   const { isOpen, setIsOpen } = useContext(openContext);
+  const href = `/item${selectedItemIndex}`; // 동적 URL 생성
 
-
+  if(selectedItemIndex){
+    useEffect(() => {
+      // 페이지가 렌더링될 때마다 id를 출력하여 확인합니다.
+      console.log(pathname);
+      router.push(href); // 해당 동적 URL로 페이지를 라우팅합니다.
+    }, []);
+  }
 
 
 
@@ -30,7 +39,7 @@ export default function MainSelectShow() {
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedItemIndex !== null && (
         <div>
-          <p>Selected Item : {selectedItemIndex + 1}</p>
+          <p>Selected Item : {selectedItemIndex}</p>
           <form action={{ }}>
             <input type="text" />
           </form>

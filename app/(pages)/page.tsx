@@ -7,11 +7,12 @@ import ToggleLeftVar from "../ui/ToggleLeftVar";
 import { openContext, selectContext } from "../context/styleContext";
 import MainSelectShow from "../ui/MainSelectShow";
 import ItemPage from './[id]/page';
+import TokkenCheck from "../ui/TokkenCheck";
 
 export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-
+  TokkenCheck()
   return (
     <selectContext.Provider value={{ selectedItemIndex, setSelectedItemIndex }}>
       <openContext.Provider value={{ isOpen, setIsOpen }}>
