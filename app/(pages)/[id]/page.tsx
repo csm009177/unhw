@@ -1,22 +1,24 @@
 'use client'
+import { useRouter } from "next/router";
 // item/[id].tsx
 
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import MainSelectShow from '../../ui/MainSelectShow';
+import { openContext, selectContext } from "@/app/context/styleContext";
+
 
 export default function ItemPage() {
-  const router = useRouter();
-  const { id } = router.query;
-  
+  const { isOpen, setIsOpen } = useContext(openContext);
+  const { selectedItemIndex, setSelectedItemIndex } = useContext(selectContext);
+  const href = window.location.href
   useEffect(() => {
     // 페이지가 렌더링될 때마다 id를 출력하여 확인합니다.
-    console.log("Item ID:", id);
-  }, [id]);
+    console.log(href);
+  }, []);
 
   return (
     <div>
-      <h1>Item Page</h1>
-      <p>Item ID: {id}</p>
+      <MainSelectShow/>
     </div>
   );
 }

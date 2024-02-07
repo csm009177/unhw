@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import "../globals.css";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
 import { openContext, selectContext } from "../context/styleContext";
-import MainSelectShow from '../ui/MainSelectShow';
+import MainSelectShow from "../ui/MainSelectShow";
+import ItemPage from './[id]/page';
 
 export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
@@ -15,8 +16,8 @@ export default function Main() {
     <selectContext.Provider value={{ selectedItemIndex, setSelectedItemIndex }}>
       <openContext.Provider value={{ isOpen, setIsOpen }}>
         <div className="Main">
-            <ToggleLeftVar />
-            <MainSelectShow/>
+          <ToggleLeftVar />
+          <ItemPage/>
         </div>
       </openContext.Provider>
     </selectContext.Provider>

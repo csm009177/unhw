@@ -5,7 +5,7 @@ import "/app/globals.css";
 import UrlButton from '../../ui/UrlButton';
 import LotationMent from '../../ui/LotationMent';
 
-export default function Home() {
+export default function Lobby() {
   
   return (
     <div className="Lobby">
