@@ -20,32 +20,32 @@ const connection = mysql.createConnection({
   port: 3306,
 });
 
-// multer 설정
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../user/public'); // 이미지를 저장할 경로 설정
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${req.body.productName}.png`);
-  },
-});
+// // multer 설정
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, '../user/public'); // 이미지를 저장할 경로 설정
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, `${req.body.productName}.png`);
+//   },
+// });
 
-const upload = multer({
-  storage: storage,
-});
+// const upload = multer({
+//   storage: storage,
+// });
 
-// 카테고리 이미지추가 multer설정
-const cateStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../user/public'); // 카테고리 이미지 저장 경로
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${req.body.category}.png`);
-  },
-});
-const uploadCate = multer({
-  storage : cateStorage
-});
+// // 카테고리 이미지추가 multer설정
+// const cateStorage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, '../user/public'); // 카테고리 이미지 저장 경로
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, `${req.body.category}.png`);
+//   },
+// });
+// const uploadCate = multer({
+//   storage : cateStorage
+// });
 
 
 app.prepare().then(() => {

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import "../globals.css";
 import AddItemList from './AddItemList';
-import {openContext } from "../context/styleContext";
+import {openContext,selectContext } from "../context/styleContext";
 
 export default function ToggleLeftVar() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const { isOpen, setIsOpen } = useContext(openContext);
+  const {selectedItemIndex, setSelectedItemIndex } = useContext(selectContext)
 
   const toggleList = () => {
     setIsOpen(!isOpen);

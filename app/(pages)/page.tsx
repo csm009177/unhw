@@ -3,14 +3,21 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import "../globals.css";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
-import { openContext } from '../context/styleContext';
-
+import { openContext, selectContext } from "../context/styleContext";
 
 export default function Main() {
-  const [ isOpen, setIsOpen ] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
+  const [selectedItemIndex, setSelectedItemIndex ] = useState(selectContext)
+
+  const handleItemClick = (index) => {
+    setSelectedItemIndex(index);
+    // console.log(selectedItemIndex);
+  };
 
   return (
-    <div className="Main">
+    <selectContext.Provider value={{selectedItemIndex,setSelectedItemIndex }}>
+    <openContext.Provider value={{ isOpen, setIsOpen }}>
+      <div className="Main">
         <div
           className="Main-LeftVar"
           style={{
@@ -20,9 +27,7 @@ export default function Main() {
             overflow: "hidden",
           }}
         >
-          <openContext.Provider value={{ isOpen, setIsOpen }}>
           <ToggleLeftVar />
-        </openContext.Provider>
         </div>
         <div
           className="Main-RightCont"
@@ -32,7 +37,15 @@ export default function Main() {
             backgroundColor: "#373737",
             overflow: "hidden",
           }}
-        ></div>
+        >
+          {selectedItemIndex !== null && (
+            <div>
+              <p>Selected Item : {selectedItemIndex}</p>
+            </div>
+          )}
+        </div>
       </div>
+    </openContext.Provider>
+    </selectContext.Provider>
   );
 }
