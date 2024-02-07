@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import "../globals.css";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
 import { openContext, selectContext } from "../context/styleContext";
+import MainSelectShow from '../ui/MainSelectShow';
 
 export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedItemIndex, setSelectedItemIndex ] = useState(null);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   return (
-    <selectContext.Provider value={{selectedItemIndex,setSelectedItemIndex }}>
+    <selectContext.Provider value={{ selectedItemIndex, setSelectedItemIndex }}>
       <openContext.Provider value={{ isOpen, setIsOpen }}>
         <div className="Main">
           <div
@@ -34,11 +35,7 @@ export default function Main() {
               overflow: "hidden",
             }}
           >
-            {selectedItemIndex !== null && (
-              <div>
-                <p>Selected Item : {selectedItemIndex}</p>
-              </div>
-            )}
+            <MainSelectShow/>
           </div>
         </div>
       </openContext.Provider>
