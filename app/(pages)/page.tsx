@@ -7,7 +7,7 @@ import { styleContext } from "../context/styleContext";
 
 
 export default function Main() {
-  const { isOpen, setIsOpen } = useContext(styleContext);
+  const [ isOpen, setIsOpen ] = useState(true);
 
   return (
     <div className="Main">
