@@ -1,17 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import "../globals.css";
+import { openContext } from "../context/styleContext";
 
-export default function AddItemList({
-  isOpen,
-  setIsOpen,
-}: {
-  isOpen: any;
-  setIsOpen: any;
-}) {
+export default function AddItemList() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
   const [items, setItems] = useState([]);
+  const { isOpen, setIsOpen } = useContext(openContext);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   const addItem = () => {
@@ -24,7 +20,7 @@ export default function AddItemList({
   };
 
   return (
-    <div style={{width:isOpen?"100%":"0%"}}>
+    <div style={{ width: isOpen ? "100%" : "0%", color:"#FFFFFF" }}>
       <p onClick={addItem}>unhw</p>
       <ul>
         {items.map((item, index) => (

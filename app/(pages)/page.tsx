@@ -3,7 +3,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import "../globals.css";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
-import { styleContext } from "../context/styleContext";
+import { openContext } from '../context/styleContext';
 
 
 export default function Main() {
@@ -20,9 +20,9 @@ export default function Main() {
             overflow: "hidden",
           }}
         >
-          <styleContext.Provider value={{ isOpen, setIsOpen }}>
+          <openContext.Provider value={{ isOpen, setIsOpen }}>
           <ToggleLeftVar />
-        </styleContext.Provider>
+        </openContext.Provider>
         </div>
         <div
           className="Main-RightCont"
