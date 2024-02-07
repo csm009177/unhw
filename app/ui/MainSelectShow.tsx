@@ -36,7 +36,6 @@ export default function MainSelectShow() {
           </form>
         </div>
       )}
-      {/* <ItemPage/> */}
     </div>
   );
 }
