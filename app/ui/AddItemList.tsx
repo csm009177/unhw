@@ -21,8 +21,9 @@ export default function AddItemList() {
 
   return (
     <div style={{ width: isOpen ? "100%" : "0%", color:"#FFFFFF" }}>
-      <p onClick={addItem}>unhw</p>
+      <p onClick={addItem} style={{fontSize:"5vh"}}>unhw</p>
       <ul>
+        <br />
         {items.map((item, index) => (
           <li key={index} onClick={() => handleItemClick(index)}>
             {item}
