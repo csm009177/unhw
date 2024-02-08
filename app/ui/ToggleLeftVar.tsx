@@ -4,12 +4,16 @@ import { useContext, useEffect, useState } from "react";
 import "../globals.css";
 import AddItemList from "./AddItemList";
 import { openContext, selectContext } from "../context/styleContext";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function ToggleLeftVar() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
+  const router = useRouter();
+  const pathname = usePathname();
   const [items, setItems] = useState([]);
   const { isOpen, setIsOpen } = useContext(openContext);
   const { selectedItemIndex, setSelectedItemIndex } = useContext(selectContext);
+  const href = `/item${selectedItemIndex}`; // 동적 URL 생성
 
   const toggleList = () => {
     setIsOpen(!isOpen);

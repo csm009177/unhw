@@ -16,14 +16,6 @@ export default function MainSelectShow() {
   const { isOpen, setIsOpen } = useContext(openContext);
   const href = `/item${selectedItemIndex}`; // 동적 URL 생성
 
-  if(selectedItemIndex){
-    useEffect(() => {
-      // 페이지가 렌더링될 때마다 id를 출력하여 확인합니다.
-      console.log(pathname);
-      router.push(href); // 해당 동적 URL로 페이지를 라우팅합니다.
-    }, []);
-  }
-
 
 
   return (
