@@ -15,7 +15,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (pathname === "/lobby" || pathname === "/signin") {
+    if (pathname === "/lobby") {
       setShowLobby(false);
     } else {
       setShowLobby(true);
