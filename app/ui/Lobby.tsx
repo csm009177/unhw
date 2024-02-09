@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import "/app/globals.css";
-import UrlButton from '../../ui/UrlButton';
-import LotationMent from '../../ui/LotationMent';
+import UrlButton from './UrlButton';
+import LotationMent from './LotationMent';
 
 export default function Lobby() {
   
@@ -13,9 +13,9 @@ export default function Lobby() {
         <LotationMent/>
       </div>
       <div className="Lobby-RightCont">
-        <UrlButton url="/lobby/login" title="login"/>
+        <UrlButton url="/login" title="login"/>
         <br />
-        <UrlButton url="/lobby/signup" title="signUp"/>
+        <UrlButton url="/signup" title="signUp"/>
       </div>
     </div>
   );

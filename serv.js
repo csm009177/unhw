@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
   user: "root",
   password: "0177",
   database: "unhw",
-  port: 3306,
+  port: 3307,
 });
 
 // // multer 설정

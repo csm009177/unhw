@@ -28,7 +28,12 @@
 
 
 .Lobby {
-    
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #373737;
+  flex-direction: row;
+  text-align: center;
 }
 .SignUp {
 
