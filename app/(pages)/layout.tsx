@@ -7,15 +7,18 @@ import {
   useSearchParams,
 } from "next/navigation";
 import Lobby from "../ui/Lobby";
+import { useRouter } from "next/navigation";
 
 
 export default function MainLayout({ children }: ChildrenProps) {
   const [showLobby, setShowLobby] = useState(true); // 변수명 수정
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  const router = useRouter()
+  
   useEffect(() => {
-    if (pathname === "/lobby") {
+    const token = localStorage.getItem("jwtToken");
+    if (!token || pathname === "/") {
       setShowLobby(false);
     } else {
       setShowLobby(true);
