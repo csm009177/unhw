@@ -20,6 +20,7 @@ export default function MainSelectShow() {
   }, [selectedItemIndex, router]);
 
   const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       await fetch('/pmpForm', {
         method: "POST",

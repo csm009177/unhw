@@ -7,5 +7,7 @@ import { selectContext } from "@/app/context/styleContext";
 
 export default function ItemPage() {
 
-  return <MainSelectShow />;
+  return ( 
+    <div></div>
+  );
 }

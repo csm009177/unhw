@@ -8,12 +8,9 @@ import { useRouter } from "next/navigation";
 import ToggleLeftVar from "../../ui/ToggleLeftVar";
 import { selectContext, openContext } from "../../context/styleContext";
 import { devNull } from "os";
+import MainSelectShow from '../../ui/MainSelectShow';
 
 export default function MainLayout({ children }: ChildrenProps) {
-  const [showLobby, setShowLobby] = useState(true); // 변수명 수정
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(true);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   // useEffect(() => {
   //   const token = localStorage.getItem("jwtToken");
@@ -25,6 +22,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   // }, [pathname]);
 
   return ( <div style={{width:"100%"}}>
+    <MainSelectShow/>
     { children }
   </div>);
 }
