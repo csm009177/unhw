@@ -7,6 +7,7 @@ import Lobby from "../ui/Lobby";
 import { useRouter } from "next/navigation";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
 import { selectContext, openContext } from "../context/styleContext";
+import { devNull } from "os";
 
 export default function MainLayout({ children }: ChildrenProps) {
   const [showLobby, setShowLobby] = useState(true); // 변수명 수정

@@ -13,7 +13,7 @@ export default function MainSelectShow() {
 
   useEffect(() => {
     if (selectedItemIndex !== null) {
-      const href = `/item/${selectedItemIndex}`; // 동적 URL 생성
+      const href = `/item${selectedItemIndex}`; // 동적 URL 생성
       router.push(href); // 해당 동적 URL로 페이지를 라우팅합니다.
     }
   }, [selectedItemIndex, router]);
