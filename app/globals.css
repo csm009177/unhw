@@ -23,8 +23,14 @@
 .Main-RightCont {
   width: 80%;
   height: 100%;
+  padding:5%;
 }
 
+.Main-RightCont-Cont {
+  width: 80%;
+  height: 100%;
+  background-color: #434343;
+}
 
 
 .Lobby {

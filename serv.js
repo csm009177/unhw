@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
   user: "root",
   password: "0177",
   database: "unhw",
-  port: 3307,
+  port: 3306,
 });
 
 // // multer 설정
@@ -55,7 +55,7 @@ app.prepare().then(() => {
 
 
   // 회원가입 API 엔드포인트
-  server.post("/signup", (req, res) => {
+  server.post("/signupForm", (req, res) => {
     const { Identification, pw } = req.body;
 
     // 회원가입 정보를 DB에 삽입
@@ -71,7 +71,7 @@ app.prepare().then(() => {
   });
 
   // 로그인 API 엔드포인트
-  server.post("/login", (req, res) => {
+  server.post("/loginForm", (req, res) => {
     const { Identification, password } = req.body;
 
     // 해당 사용자가 존재하는지 확인하는 쿼리
