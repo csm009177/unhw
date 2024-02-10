@@ -22,18 +22,20 @@ export default function MainSelectShow() {
   const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // 선택된 아이템의 인덱스와 채팅 내용을 함께 전송
       await fetch('/pmpForm', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ pmpContents }),
+        body: JSON.stringify({ selectedItemIndex, pmpContents }),
       });
       console.log("Chat submitted successfully!");
     } catch (error) {
       console.error("Error submitting chat:", error);
     }
   };
+  
 
   return (
     <div
