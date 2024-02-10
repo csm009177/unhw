@@ -30,7 +30,7 @@ export default function MainLayout({ children }: ChildrenProps) {
         value={{ selectedItemIndex, setSelectedItemIndex }}
       >
         <openContext.Provider value={{ isOpen, setIsOpen }}>
-          <ToggleLeftVar />
+          {showLobby ? <ToggleLeftVar /> : null}
           {showLobby ? children : <Lobby />} {/* 조건부 렌더링 */}
         </openContext.Provider>
       </selectContext.Provider>
