@@ -97,6 +97,19 @@ app.prepare().then(() => {
     });
   });
 
+  server.post("/pmpForm", (req, res) => {
+    const { pmpContents } = req.body;
+    const query = "INSERT INTO prompt (pmpContents, pmpDate) VALUES (?, NOW())"; // chatDate를 추가하여 현재 날짜 저장
+    connection.query(query, [pmpContents], (err, results, fields) => {
+      if (err) {
+        console.error("Error chatlog Form :", err);
+        res.status(500).json({ message: "채팅 입력에 실패했습니다." });
+        return;
+      }
+      res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
+    });
+  });
+
 
   // Next.js 서버에 라우팅 위임
   server.all('*', (req,res) =>{

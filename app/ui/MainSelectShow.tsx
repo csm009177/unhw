@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 
 export default function MainSelectShow() {
@@ -10,6 +10,7 @@ export default function MainSelectShow() {
   const pathname = usePathname();
   const { selectedItemIndex } = useContext(selectContext);
   const { isOpen, setIsOpen } = useContext(openContext);
+  const [pmpContents, setPmpContents] = useState("");
 
   useEffect(() => {
     if (selectedItemIndex !== null) {
@@ -17,6 +18,21 @@ export default function MainSelectShow() {
       router.push(href); // 해당 동적 URL로 페이지를 라우팅합니다.
     }
   }, [selectedItemIndex, router]);
+
+  const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      await fetch('/pmpForm', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pmpContents }),
+      });
+      console.log("Chat submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting chat:", error);
+    }
+  };
 
   return (
     <div
@@ -36,19 +52,14 @@ export default function MainSelectShow() {
       {selectedItemIndex !== null && (
         <div style={{ width:"100%",  height: "100%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
-          <form
-            action=""
-            method="post"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "100%",
-              height: "50%",
-            }}
-          >
-            <input type="text" placeholder="search here" style={{color:"black"}} />
-            <button>search</button>
-          </form>
+          <form onSubmit={handleChatSubmit}>
+        <input
+          type="text"
+          value={pmpContents}
+          onChange={(e) => setPmpContents(e.target.value)}
+        />
+        <button type="submit">submit</button>
+      </form>
 
           <div
             style={{
@@ -57,7 +68,9 @@ export default function MainSelectShow() {
               width: "100%",
               height: "50%",
             }}
-          ></div>
+          >
+            
+          </div>
         </div>
       )}
     </div>
