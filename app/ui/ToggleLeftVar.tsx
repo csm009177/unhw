@@ -7,7 +7,7 @@ import { openContext, selectContext } from "../context/styleContext";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function ToggleLeftVar() {
-  const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
+  const [url, setUrl] = useState(window.location.href); // 현재 URL 경로를 가져옴
   const router = useRouter();
   const pathname = usePathname();
   const [items, setItems] = useState([]);

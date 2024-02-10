@@ -97,14 +97,16 @@ app.prepare().then(() => {
     });
   });
 
+
   // Next.js 서버에 라우팅 위임
   server.all('*', (req,res) =>{
     return handle(req,res)
   });
 
   // 서버 시작
-  server.listen(3000, (err) => {
+  const port = 3001
+  server.listen(port, (err) => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3000');
+    console.log(`> Ready on http://localhost:${port}`);
   });
 });
