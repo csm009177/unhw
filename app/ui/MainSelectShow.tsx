@@ -2,21 +2,21 @@
 
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
-// import { useRouter } from "next/router";
-import { openContext, selectContext } from "../context/styleContext";
 import { useContext, useEffect } from "react";
-import ItemPage from '../(pages)/[id]/page';
-
+import { openContext, selectContext } from "../context/styleContext";
 
 export default function MainSelectShow() {
   const router = useRouter();
   const pathname = usePathname();
-  // const { id } = router.query;
   const { selectedItemIndex } = useContext(selectContext);
   const { isOpen, setIsOpen } = useContext(openContext);
-  const href = `/item${selectedItemIndex}`; // 동적 URL 생성
 
-
+  useEffect(() => {
+    if (selectedItemIndex !== null) {
+      const href = `/item/${selectedItemIndex}`; // 동적 URL 생성
+      router.push(href); // 해당 동적 URL로 페이지를 라우팅합니다.
+    }
+  }, [selectedItemIndex, router]);
 
   return (
     <div
@@ -26,13 +26,16 @@ export default function MainSelectShow() {
         height: "100%",
         backgroundColor: "#373737",
         overflow: "hidden",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedItemIndex !== null && (
-        <div style={{display:"flex", width:"80%", height:"100%", justifyContent:"center", alignItems:"center"}}>
+        <div>
           <p>Selected Item : {selectedItemIndex}</p>
-          <form action={{ }}>
+          <form action={{}}>
             <input type="text" />
           </form>
         </div>

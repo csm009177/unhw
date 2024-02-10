@@ -24,7 +24,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   }, [pathname]);
 
   return (
-    <div className="flex flex-row justify-between h-screen w-screen overflow-hidden">
+    <div className="flex flex-row justify-between h-screen overflow-hidden">
       <selectContext.Provider
         value={{ selectedItemIndex, setSelectedItemIndex }}
       >

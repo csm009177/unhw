@@ -33,7 +33,7 @@ export default function ToggleLeftVar() {
       style={{
         width: isOpen ? "20%" : "2%",
         display:"flex",
-        justifyContent:"center",
+        // justifyContent:"center",
         height: "100%",
         backgroundColor: "#434343",
         overflow: "hidden",
@@ -44,6 +44,7 @@ export default function ToggleLeftVar() {
           display: "flex",
           flexDirection: "row",
           background: "#434343",
+          width:"100%",
           height: "100%",
         }}
       >
