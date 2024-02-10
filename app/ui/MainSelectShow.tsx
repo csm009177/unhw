@@ -29,15 +29,35 @@ export default function MainSelectShow() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        color: "white",
       }}
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedItemIndex !== null && (
-        <div>
+        <div style={{ width:"100%",  height: "100%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
-          <form action={{}}>
-            <input type="text" />
+          <form
+            action=""
+            method="post"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              height: "50%",
+            }}
+          >
+            <input type="text" placeholder="search here" style={{color:"black"}} />
+            <button>search</button>
           </form>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              height: "50%",
+            }}
+          ></div>
         </div>
       )}
     </div>
