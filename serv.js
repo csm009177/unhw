@@ -110,7 +110,19 @@ app.prepare().then(() => {
     });
   });
   
-
+  server.get("/pmpForm/:itemIndex", (req, res) => {
+    const itemIndex = req.params.itemIndex;
+    // 해당 아이템에 대한 채팅 내용을 DB에서 가져오는 쿼리
+    const query = "SELECT pmpContents FROM prompt WHERE itemNum = ?";
+    connection.query(query, [itemIndex], (err, results, fields) => {
+      if (err) {
+        console.error("Error fetching chat logs:", err);
+        res.status(500).json({ message: "채팅 내용을 가져오는 중 오류가 발생했습니다." });
+        return;
+      }
+      res.status(200).json({ chatLogs: results });
+    });
+  });
 
   // Next.js 서버에 라우팅 위임
   server.all('*', (req,res) =>{

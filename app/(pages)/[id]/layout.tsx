@@ -22,7 +22,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   // }, [pathname]);
 
   return ( <div style={{width:"100%"}}>
-    <MainSelectShow/>
+    
     { children }
   </div>);
 }
