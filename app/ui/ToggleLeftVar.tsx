@@ -32,6 +32,8 @@ export default function ToggleLeftVar() {
       className="Main-LeftVar"
       style={{
         width: isOpen ? "20%" : "2%",
+        display:"flex",
+        justifyContent:"center",
         height: "100%",
         backgroundColor: "#434343",
         overflow: "hidden",

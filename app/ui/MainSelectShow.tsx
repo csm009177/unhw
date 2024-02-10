@@ -30,7 +30,7 @@ export default function MainSelectShow() {
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedItemIndex !== null && (
-        <div>
+        <div style={{display:"flex", width:"80%", height:"100%", justifyContent:"center", alignItems:"center"}}>
           <p>Selected Item : {selectedItemIndex}</p>
           <form action={{ }}>
             <input type="text" />

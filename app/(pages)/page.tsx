@@ -13,9 +13,5 @@ export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   // TokkenCheck()
-  return (
-
-        <ItemPage />
-
-  );
+  return <ItemPage />;
 }
