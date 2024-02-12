@@ -40,7 +40,7 @@ export default function MainSelectShow() {
   const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await fetch('/pmpForm', {
+      await fetch("/pmpForm", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,11 +76,6 @@ export default function MainSelectShow() {
         <div style={{ width: "100%", height: "100%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
           {/* 채팅 내용 출력 */}
-          <div>
-            {chatLogs.map((log, index) => (
-              <p key={index}>{log.pmpContents}</p>
-            ))}
-          </div>
           {/* 채팅 입력 폼 */}
           <form onSubmit={handleChatSubmit}>
             <input
@@ -90,6 +85,12 @@ export default function MainSelectShow() {
             />
             <button type="submit">submit</button>
           </form>
+          {/* 채팅 내용 출력 */}
+          <div style={{ width: "100%", height: "100%" }}>
+            {chatLogs.map((log, index) => (
+              <p key={index}>{log.pmpContents}</p>
+            ))}
+          </div>
         </div>
       )}
     </div>
