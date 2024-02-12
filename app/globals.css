@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #373737;
+  flex-direction: row;
+  text-align: center;
+}
+.Main-LeftVar {
+  width: 20%;
+  height: 100%;
+}
+
+.Main-LeftVar button{
+  background-color: #434343;
+  font-size: 10%
+} 
+
+.Main-RightCont {
+  width: 80%;
+  height: 100%;
+  padding:5%;
+}
+
+.Main-RightCont form {
+  width: 80%;
+  height: 100%;
+  background-color: #434343;
+}
+
+
+.Lobby {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #373737;
+  flex-direction: row;
+  text-align: center;
+  
+}
+
+.Lobby-LeftCont{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #434343;
+  justify-content: center;
+  align-items: center;
+}
+
+.Lobby-RightCont{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #373737;
+  justify-content: center;
+}
+
+
+
+.SignUp {
+
+}
+.Login {
+
+}
