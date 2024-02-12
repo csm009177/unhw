@@ -13,9 +13,9 @@ const fs = require('fs')
 
 // MariaDB 연결 설정
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0177",
+  host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
+  user: "admin",
+  password: "gerrard177!",
   database: "unhw",
   port: 3306,
 });
