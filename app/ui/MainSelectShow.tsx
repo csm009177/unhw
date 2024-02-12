@@ -73,12 +73,12 @@ export default function MainSelectShow() {
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedItemIndex !== null && (
-        <div style={{ width: "100%", height: "auto" }}>
+        <div style={{ width: "100%", height: "50%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
-          {/* 채팅 내용 출력 */}
           {/* 채팅 입력 폼 */}
           <form onSubmit={handleChatSubmit}>
             <input
+              style={{ width: "90%", color: "black" }}
               type="text"
               value={pmpContents}
               onChange={(e) => setPmpContents(e.target.value)}
