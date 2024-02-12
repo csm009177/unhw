@@ -11,14 +11,24 @@ const handle = app.getRequestHandler();
 const fs = require('fs')
 
 
-// MariaDB 연결 설정
+// MariaDB, RDS 연결 설정
+// const connection = mysql.createConnection({
+//   host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
+//   user: "admin",
+//   password: "gerrard177!",
+//   database: "unhw",
+//   port: 3306,
+// });
+
+// MariaDB, localhost 연결 설정
 const connection = mysql.createConnection({
-  host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
-  user: "admin",
-  password: "gerrard177!",
+  host: "localhost",
+  user: "root",
+  password: "0177",
   database: "unhw",
   port: 3306,
 });
+
 
 // // multer 설정
 // const storage = multer.diskStorage({
