@@ -2,13 +2,15 @@
 import "../globals.css";
 import { ChildrenProps } from "./ChildrenProps";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import Lobby from "../ui/Lobby";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Lobby from "./lobby/Lobby";
 import ToggleLeftVar from "../ui/ToggleLeftVar";
 import { selectContext, openContext } from "../context/styleContext";
+import TokkenCheck from "../ui/TokkenCheck";
 
 export default function MainLayout({ children }: ChildrenProps) {
   const pathname = usePathname();
+  const param = useSearchParams()
   const router = useRouter();
   const [showLeft, setShowLeft] = useState(true);
   const [showChild, setshowChild] = useState(true);
@@ -26,18 +28,14 @@ export default function MainLayout({ children }: ChildrenProps) {
       setShowLeft(false);
       setShowLobby(true);
       setshowChild(false);
-      if (!token && pathname !== "/lobby" && pathname !== "/login" && pathname !== "/signup") {
-        router.replace("/lobby"); // push 대신 replace 사용하여 이동
-      } 
+      TokkenCheck()
     } else if ((!token && pathname === "/login") || pathname === "/signup") {
       setShowLeft(false);
       setShowLobby(false);
       setshowChild(true);
-      if (!token && pathname !== "/lobby" && pathname !== "/login" && pathname !== "/signup") {
-        router.replace("/lobby"); // push 대신 replace 사용하여 이동
-      } 
+      TokkenCheck()
     }
-  }, [pathname]);
+  }, [pathname, param]);
 
   return (
     <div className="flex flex-row justify-between h-screen overflow-hidden">
