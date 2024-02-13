@@ -61,7 +61,7 @@ export default function MainSelectShow() {
     <div
       className="Main-RightCont"
       style={{
-        width: isOpen ? "80%" : "98%",
+        width: "100%",
         height: "100%",
         backgroundColor: "#373737",
         overflow: "hidden",
@@ -76,14 +76,14 @@ export default function MainSelectShow() {
         <div style={{ width: "100%", height: "50%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
           {/* 채팅 입력 폼 */}
-          <form onSubmit={handleChatSubmit}>
+          <form onSubmit={handleChatSubmit} style={{width:"100%"}}>
             <input
               style={{ width: "90%", color: "black" }}
               type="text"
               value={pmpContents}
               onChange={(e) => setPmpContents(e.target.value)}
             />
-            <button type="submit">submit</button>
+            <button type="submit" style={{width:"10%", textAlign:"center"}}>submit</button>
           </form>
           {/* 채팅 내용 출력 */}
           <div style={{ width: "100%", height: "100%" }}>
