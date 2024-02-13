@@ -85,7 +85,7 @@ app.prepare().then(() => {
     const { Identification, password } = req.body;
 
     // 해당 사용자가 존재하는지 확인하는 쿼리
-    const query = "SELECT * FROM users WHERE id = ? AND password = ? AND admin = 1";
+    const query = "SELECT * FROM users WHERE id = ? AND pw = ? ";
     connection.query(query, [Identification, password], (err, results, fields) => {
       if (err) {
         console.error("Error logging in:", err);
