@@ -140,7 +140,7 @@ app.prepare().then(() => {
   });
 
   // 서버 시작
-  const port = 3001
+  const port = 3000
   server.listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
