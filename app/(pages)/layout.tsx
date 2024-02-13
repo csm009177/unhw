@@ -26,13 +26,17 @@ export default function MainLayout({ children }: ChildrenProps) {
       setShowLeft(false);
       setShowLobby(true);
       setshowChild(false);
+      if (!token && pathname !== "/lobby" && pathname !== "/login" && pathname !== "/signup") {
+        router.replace("/lobby"); // push 대신 replace 사용하여 이동
+      } 
     } else if ((!token && pathname === "/login") || pathname === "/signup") {
       setShowLeft(false);
       setShowLobby(false);
       setshowChild(true);
-    } else if (!token && pathname !== "/lobby" && pathname !== "/login" && pathname !== "/signup") {
-      router.replace("/lobby"); // push 대신 replace 사용하여 이동
-    } 
+      if (!token && pathname !== "/lobby" && pathname !== "/login" && pathname !== "/signup") {
+        router.replace("/lobby"); // push 대신 replace 사용하여 이동
+      } 
+    }
   }, [pathname]);
 
   return (
