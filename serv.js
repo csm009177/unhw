@@ -99,23 +99,31 @@ app.prepare().then(() => {
     });
   });
 
-    // CSV 파일 읽어오는 엔드포인트
-    server.get("/data.csv", (req, res) => {
-      // CSV 파일을 읽어 클라이언트에게 텍스트로 전송합니다.
-      fs.readFile('./csvFiles/CPU_UserBenchmarks.csv', "utf8", (err, csvData) => {
-        if (err) {
-          res.status(500).send("Internal Server Error");
-          return;
-        }
-        // CSV 데이터를 줄 단위로 분할하여 JSON 배열로 전송합니다.
-        const lines = csvData.split("\n");
-        const data = lines.map((line) => line.split(","));
-  
-        res.header("Content-Type", "application/json");
-        res.status(200).json(data);
-      });
+  server.post("/searchItems", (req, res) => {
+    const { keyword } = req.body; // 클라이언트가 전달한 검색어
+    
+    // 검색어를 이용하여 데이터베이스에서 항목을 검색하는 쿼리
+    const query = `
+      SELECT * 
+      FROM item 
+      WHERE type LIKE '%${keyword}%' 
+         OR part_number LIKE '%${keyword}%' 
+         OR brand LIKE '%${keyword}%' 
+         OR model LIKE '%${keyword}%' 
+         OR url LIKE '%${keyword}%';
+    `;
+    
+    // 데이터베이스에서 쿼리 실행
+    connection.query(query, (err, results, fields) => {
+      if (err) {
+        console.error("searchItems error:", err);
+        res.status(500).json({ message: "검색 중 문제가 발생했습니다." });
+        return;
+      }
+      res.status(200).json({ items: results });
     });
-
+  });
+  
 
   server.all("*", (req, res) => {
     return handle(req, res);

@@ -1,64 +1,51 @@
 'use client'
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const DisplayItems = () => {
-  // 상태 변수들을 정의합니다.
-  const [items, setItems] = useState([]); // 아이템 목록을 저장하는 상태
-  const [categories, setCategories] = useState([]); // 카테고리 목록을 저장하는 상태
-  const [selectedCategory, setSelectedCategory] = useState(null); // 선택된 카테고리를 저장하는 상태
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  // CSV 파일에서 데이터를 읽어와 상태에 저장하는 함수
-  const fetchData = async () => {
+  const handleSearch = async () => {
     try {
-      // CSV 파일을 fetch하여 응답을 받습니다.
-      const response = await fetch('/data.csv');
-      // JSON 형태로 변환합니다.
+      const response = await fetch('/searchItems', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ keyword: searchTerm })
+      });
       const data = await response.json();
-      console.log(data)
-      // 데이터에서 유일한 카테고리 목록을 추출합니다.
-      const categories = [...new Set(data.map(item => item[2]))];
-      // 상태를 업데이트하여 카테고리 목록을 저장합니다.
-      setCategories(categories);
-      // 상태를 업데이트하여 전체 아이템 목록을 저장합니다.
-      setItems(data);
+      setSearchResults(data.items);
     } catch (error) {
-      console.error('Error fetching data:', error); // 오류가 발생하면 콘솔에 오류 메시지를 출력합니다.
+      console.error('Error searching items:', error);
     }
   };
 
-  // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 데이터를 불러옵니다.
-  useEffect(() => {
-    fetchData();
-  }, [selectedCategory]); // 의존성 배열이 빈 배열이므로 컴포넌트가 처음 렌더링될 때만 실행됩니다.
-
-  // 선택된 카테고리에 해당하는 아이템만 필터링하는 함수
-  const filteredItems = items.filter(item => item[2] === selectedCategory);
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
-    <div style={{ maxWidth: "100%", overflowY:"scroll", maxHeight:"95%"}}>
-      {/* 카테고리 목록을 표시합니다. */}
-      <h1>카테고리 목록 <h2>선택된 model: {selectedCategory}</h2></h1>
-      <ul style={{ maxWidth: "80vh", overflowY:"scroll", maxHeight:"50%", display:"flex", flexDirection:"row"}}>
-        {/* 각 카테고리에 대한 버튼을 생성합니다. */}
-        {categories.map(category => (
-          <li key={category}>
-            <button onClick={() => setSelectedCategory(category)}>{category}</button>
-          </li>
-      ))}
-      </ul>
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="검색어를 입력하세요..."
+      />
+      <button onClick={handleSearch}>검색</button>
       
-      {/* 필터링된 아이템 목록을 표시합니다. */}
-      <h3>아이템 목록</h3>
       <ul>
-        {filteredItems.map(item => (
-          <li key={item[1]}>
-            <p>Part Number: {item[1]}</p>
-            <p>Brand: {item[2]}</p>
-            <p>Model: {item[3]}</p>
-            <p>Rank: {item[4]}</p>
-            <p>Benchmark: {item[5]}</p>
-            <p>Samples: {item[6]}</p>
-            <p>URL: <a href={item[7]}>{item[7]}</a></p>
+        {searchResults.map(item => (
+          <li key={item.id}>
+            <p>Type: {item.type}</p>
+            <p>Part Number: {item.part_number}</p>
+            <p>Brand: {item.brand}</p>
+            <p>Model: {item.model}</p>
+            <p>Rank: {item.rank}</p>
+            <p>Benchmark: {item.benchmark}</p>
+            <p>Samples: {item.samples}</p>
+            <p>URL: <a href={item.url}>{item.url}</a></p>
           </li>
         ))}
       </ul>
