@@ -11,7 +11,7 @@ const DisplayItems = () => {
     try {
       const response = await fetch('/data.csv');
       const data = await response.json();
-      const categories = [...new Set(data.map(item => item[2]))]; // 세 번째 열이 카테고리 이름
+      const categories = [...new Set(data.map(item => item[1]))]; // 세 번째 열이 카테고리 이름
       setCategories(categories);
       setItems(data);
     } catch (error) {
