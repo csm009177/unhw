@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DisplayItems = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,13 +29,14 @@ const DisplayItems = () => {
     <div>
       <input
         type="text"
+        style={{color:"black"}}
         value={searchTerm}
         onChange={handleChange}
         placeholder="검색어를 입력하세요..."
       />
       <button onClick={handleSearch}>검색</button>
       
-      <ul>
+      <ul style={{width:"100%", maxHeight:"37vh", overflowY:"scroll"}}>
         {searchResults.map(item => (
           <li key={item.id}>
             <p>Type: {item.type}</p>
