@@ -137,8 +137,32 @@ app.prepare().then(() => {
     });
   });
   
-  
+  server.get("/fetchBrands", (req, res) => {
+    const query = `SELECT DISTINCT brand FROM item;`; // 중복되지 않는 brand 값들을 가져오는 쿼리
+    connection.query(query, (err, results, fields) => {
+      if (err) {
+        console.error("fetchBrands error:", err);
+        res.status(500).json({ message: "브랜드를 가져오는 중 문제가 발생했습니다." });
+        return;
+      }
+      const brands = results.map(result => result.brand); // 결과에서 brand 값들만 추출하여 배열로 반환
+      res.status(200).json({ brands });
+    });
+  });
 
+  server.get("/fetchModels", (req, res) => {
+    const query = `SELECT DISTINCT model FROM item;`; // 중복되지 않는 model 값들을 가져오는 쿼리
+    connection.query(query, (err, results, fields) => {
+      if (err) {
+        console.error("fetchModels error:", err);
+        res.status(500).json({ message: "모델을 가져오는 중 문제가 발생했습니다." });
+        return;
+      }
+      const models = results.map(result => result.model); // 결과에서 model 값들만 추출하여 배열로 반환
+      res.status(200).json({ models });
+    });
+  });
+  
 
 
   server.all("*", (req, res) => {
