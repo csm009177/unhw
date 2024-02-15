@@ -124,6 +124,22 @@ app.prepare().then(() => {
     });
   });
   
+  server.get("/fetchTypes", (req, res) => {
+    const query = `SELECT DISTINCT type FROM item;`; // 중복되지 않는 type 값들을 가져오는 쿼리
+    connection.query(query, (err, results, fields) => {
+      if (err) {
+        console.error("fetchTypes error:", err);
+        res.status(500).json({ message: "타입을 가져오는 중 문제가 발생했습니다." });
+        return;
+      }
+      const types = results.map(result => result.type); // 결과에서 type 값들만 추출하여 배열로 반환
+      res.status(200).json({ types });
+    });
+  });
+  
+  
+
+
 
   server.all("*", (req, res) => {
     return handle(req, res);
