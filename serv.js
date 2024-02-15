@@ -148,17 +148,6 @@ app.prepare().then(() => {
     });
   });
 
-  server.post("/newEndpoint", (req, res) => {
-    // 새로운 엔드포인트에 대한 로직을 작성하세요
-    res.status(200).json({ message: "새로운 엔드포인트 동작 확인" });
-  });
-  
-  // 기존의 라우팅을 변경하거나 추가할 때는 필요한 만큼 라우터를 정의합니다.
-  // 예를 들어, GET 요청에 대한 새로운 핸들러를 추가할 수 있습니다.
-  server.get("/someNewRoute", (req, res) => {
-    res.status(200).json({ message: "새로운 라우트 동작 확인" });
-  });
-  
   // Next.js 서버에 라우팅 위임
   server.all('*', (req,res) =>{
     return handle(req,res)

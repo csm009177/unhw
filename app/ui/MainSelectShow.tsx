@@ -86,7 +86,7 @@ export default function MainSelectShow() {
             <button type="submit" style={{width:"10%", textAlign:"center"}}>submit</button>
           </form>
           {/* 채팅 내용 출력 */}
-          <div style={{ width: "100%", height: "100%" }}>
+          <div style={{ width: "100%", overflowY:"scroll", maxHeight:"30%" }}>
             {chatLogs.map((log, index) => (
               <p key={index}>{log.pmpContents}</p>
             ))}
