@@ -118,6 +118,20 @@ app.prepare().then(() => {
       }
       res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
     });
+
+      // CSV 파일에 추가할 데이터 준비
+  // const csvData = `${selectedItemIndex},${pmpContents}\n`;
+
+  // CSV 파일에 데이터 추가
+  // fs.appendFile('data.csv', csvData, 'utf8', (err) => {
+  //   if (err) {
+  //     console.error("Error adding chat to CSV:", err);
+  //     res.status(500).json({ message: "채팅 입력에 실패했습니다." });
+  //     return;
+  //   }
+  //   console.log("Chat added to CSV successfully!");
+  //   res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
+  // });
   });
   
   server.get("/pmpForm/:itemIndex", (req, res) => {
