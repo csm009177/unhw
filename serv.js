@@ -119,19 +119,6 @@ app.prepare().then(() => {
       res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
     });
 
-      // CSV 파일에 추가할 데이터 준비
-  // const csvData = `${selectedItemIndex},${pmpContents}\n`;
-
-  // CSV 파일에 데이터 추가
-  // fs.appendFile('data.csv', csvData, 'utf8', (err) => {
-  //   if (err) {
-  //     console.error("Error adding chat to CSV:", err);
-  //     res.status(500).json({ message: "채팅 입력에 실패했습니다." });
-  //     return;
-  //   }
-  //   console.log("Chat added to CSV successfully!");
-  //   res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
-  // });
   });
   
   server.get("/pmpForm/:itemIndex", (req, res) => {
@@ -147,6 +134,57 @@ app.prepare().then(() => {
       res.status(200).json({ chatLogs: results });
     });
   });
+
+
+  // CSV 파일 읽어오는 엔드포인트
+  server.get('/data.csv', (req, res) => {
+  // CSV 파일을 읽어 클라이언트에게 텍스트로 전송합니다.
+  fs.readFile('CPU_UserBenchmarks.csv', 'utf8', (err, csvData) => {
+    if (err) {
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    // CSV 데이터를 줄 단위로 분할하여 JSON 배열로 전송합니다.
+    const lines = csvData.split('\n');
+    const data = lines.map(line => line.split(','));
+
+    res.header('Content-Type', 'application/json');
+    res.status(200).json(data);
+  });
+});
+
+// 검색 기능을 포함한 엔드포인트
+app.get("/search", (req, res) => {
+  const searchTerm = req.query.q;
+
+  // 검색어가 없는 경우
+  if (!searchTerm) {
+    return res.status(400).json({ message: "검색어를 입력하세요." });
+  }
+
+  const results = [];
+
+  // CSV 파일에서 검색어를 포함하는 데이터를 찾아서 결과 배열에 추가
+  fs.createReadStream(CSV_FILE_PATH)
+    .pipe(csv())
+    .on("data", (row) => {
+      for (const key in row) {
+        if (row[key].toLowerCase().includes(searchTerm.toLowerCase())) {
+          results.push(row);
+          break;
+        }
+      }
+    })
+    .on("end", () => {
+      res.status(200).json(results);
+    })
+    .on("error", (err) => {
+      console.error("Error reading CSV file:", err);
+      res.status(500).json({ message: "서버 오류가 발생했습니다." });
+    });
+});
+
+
 
   // Next.js 서버에 라우팅 위임
   server.all('*', (req,res) =>{

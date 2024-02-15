@@ -9,7 +9,7 @@ const DisplayItems = () => {
   // CSV 파일에서 데이터를 읽어와 상태에 저장하는 함수
   const fetchData = async () => {
     try {
-      const response = await fetch('/CPU_UserBenchmarks.csv');
+      const response = await fetch('/data.csv');
       const data = await response.json();
       const categories = [...new Set(data.map(item => item[2]))]; // 세 번째 열이 카테고리 이름
       setCategories(categories);
@@ -27,8 +27,8 @@ const DisplayItems = () => {
   const filteredItems = items.filter(item => item[2] === selectedCategory);
 
   return (
-    <div>
-      <h1>카테고리 목록</h1>
+    <div style={{ width: "100%", overflowY:"scroll", maxHeight:"95%" }}>
+      <h1>카테고리 목록 <h2>선택된 카테고리: {selectedCategory}</h2></h1>
       <ul>
         {categories.map(category => (
           <li key={category}>
@@ -36,7 +36,7 @@ const DisplayItems = () => {
           </li>
         ))}
       </ul>
-      <h2>선택된 카테고리: {selectedCategory}</h2>
+      
       <h3>아이템 목록</h3>
       <ul>
         {filteredItems.map(item => (
