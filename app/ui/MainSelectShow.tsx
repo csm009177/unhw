@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
+import DisplayItems from "./DisplayItems";
 
 export default function MainSelectShow() {
   const router = useRouter();
@@ -84,6 +85,7 @@ export default function MainSelectShow() {
               onChange={(e) => setPmpContents(e.target.value)}
             />
             <button type="submit" style={{width:"10%", textAlign:"center"}}>submit</button>
+            <DisplayItems/>
           </form>
           {/* 채팅 내용 출력 */}
           <div style={{ width: "100%", overflowY:"scroll", maxHeight:"30%" }}>
