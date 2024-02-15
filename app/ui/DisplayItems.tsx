@@ -1,128 +1,136 @@
 'use client';
 
-import { useState, useEffect, useContext } from "react";
-import { selectContext } from "../context/styleContext";
+import { useState, useEffect } from "react";
+import csv from "csv-parser";
+import { Readable } from "stream";
 
-export default function MainSelectShow() {
-  const { selectedItemIndex } = useContext(selectContext);
-  const [pmpContents, setPmpContents] = useState("");
-  const [chatLogs, setChatLogs] = useState([]);
+const MainSelectShow = () => {
   const [cpuData, setCpuData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [filters, setFilters] = useState({
-    type: false,
-    brand: false,
-    model: false,
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const [filterOptions, setFilterOptions] = useState({
+    type: [],
+    brand: [],
+    model: [],
   });
-
-  // CPU 데이터를 불러오는 함수
-  const fetchCpuData = async () => {
-    try {
-      const response = await fetch("/data.csv");
-      const csvData = await response.text();
-      const rows = csvData.split("\n").map(row => row.split(","));
-      const headers = rows[0];
-      const data = rows.slice(1).map(row => {
-        return headers.reduce((obj, key, index) => {
-          obj[key.trim()] = row[index].trim();
-          return obj;
-        }, {});
-      });
-      setCpuData(data);
-      setFilteredData(data);
-    } catch (error) {
-      console.error("Error fetching CPU data:", error);
-    }
-  };
-
-  // 아이템 선택 핸들러
-  const handleItemClick = (index) => {
-    if (selectedItemIndex === index) {
-      setSelectedItemIndex(null);
-    } else {
-      setSelectedItemIndex(index);
-    }
-  };
-
-  // 필터링 함수
-  const applyFilters = () => {
-    let filtered = cpuData;
-    if (filters.type) {
-      filtered = filtered.filter(item => item.Type === "CPU");
-    }
-    if (filters.brand) {
-      filtered = filtered.filter(item => item.Brand === "Intel");
-    }
-    if (filters.model) {
-      filtered = filtered.filter(item => item.Model === "Core i9-14900KF");
-    }
-    setFilteredData(filtered);
-  };
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
-    // CPU 데이터를 불러옴
-    fetchCpuData();
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/data.csv");
+        const csvData = await response.json();
+        if (!csvData || csvData.length === 0) {
+          console.error("CSV data is empty or invalid");
+          return;
+        }
+        const headers = csvData[0];
+        const data = csvData.slice(1).map(row => {
+          if (row.length !== headers.length) {
+            console.error("Invalid CSV row:", row);
+            return null;
+          }
+          return headers.reduce((obj, key, index) => {
+            obj[key.trim()] = row[index].trim();
+            return obj;
+          }, {});
+        }).filter(item => item !== null); // Filter out invalid items
+        setCpuData(data);
+      } catch (error) {
+        console.error("Error fetching CPU data:", error);
+      }
+    };
+    
+
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    // 필터링 적용
-    applyFilters();
-  }, [filters]);
+  const handleCheckboxChange = (optionType, optionValue) => {
+    const updatedOptions = { ...filterOptions, [optionType]: [...filterOptions[optionType]] };
 
-  // 체크박스 변경 핸들러
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setFilters(prevFilters => ({
-      ...prevFilters,
-      [name]: checked,
-    }));
+    if (updatedOptions[optionType].includes(optionValue)) {
+      updatedOptions[optionType] = updatedOptions[optionType].filter((value) => value !== optionValue);
+    } else {
+      updatedOptions[optionType].push(optionValue);
+    }
+
+    setFilterOptions(updatedOptions);
+    applyFilters(updatedOptions);
   };
 
-  // 채팅 입력 제출 함수
-  const handleChatSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await fetch("/pmpForm", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ selectedItemIndex, pmpContents }),
-      });
-      console.log("Chat submitted successfully!");
-      // 제출 후 채팅 내용 다시 불러오기
-      fetchChatLogs();
-      // 입력창 초기화
-      setPmpContents("");
-    } catch (error) {
-      console.error("Error submitting chat:", error);
-    }
+  const applyFilters = (options) => {
+    let filtered = [...cpuData];
+
+    Object.entries(options).forEach(([optionType, selectedValues]) => {
+      if (selectedValues.length > 0) {
+        filtered = filtered.filter((item) => selectedValues.includes(item[optionType]));
+      }
+    });
+
+    setFilteredItems(filtered);
   };
 
   return (
-    <div className="Main-RightCont" style={{ width: "100%", height: "100%", backgroundColor: "#373737", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center", color: "white" }}>
-      {/* 선택된 아이템이 있을 경우 메시지 표시 */}
-      {/* CPU 데이터 필터링을 위한 체크박스 */}
-      <div style={{ marginTop: 20 }}>
-        <label>
-          <input type="checkbox" name="type" checked={filters.type} onChange={handleCheckboxChange} />
-          CPU
-        </label>
-        <label style={{ marginLeft: 10 }}>
-          <input type="checkbox" name="brand" checked={filters.brand} onChange={handleCheckboxChange} />
-          Intel
-        </label>
-        <label style={{ marginLeft: 10 }}>
-          <input type="checkbox" name="model" checked={filters.model} onChange={handleCheckboxChange} />
-          Core i9-14900KF
-        </label>
+    <div>
+      {/* Type, Brand, Model에 대한 체크박스 생성 */}
+      <div>
+        <h3>Type</h3>
+        {Array.from(new Set(cpuData.map((item) => item.Type))).map((type) => (
+          <label key={type}>
+            <input
+              type="checkbox"
+              checked={filterOptions.type.includes(type)}
+              onChange={() => handleCheckboxChange("type", type)}
+            />
+            {type}
+          </label>
+        ))}
       </div>
-      {/* 필터링된 CPU 데이터 출력 */}
-      {filteredData.map((item, index) => (
-        <div key={index} onClick={() => handleItemClick(index)} style={{ cursor: "pointer", marginBottom: 10 }}>
-          {selectedItemIndex === index ? "▼ " : "► "} {item.Brand} {item.Model}
-        </div>
-      ))}
+
+      <div>
+        <h3>Brand</h3>
+        {Array.from(new Set(cpuData.map((item) => item.Brand))).map((brand) => (
+          <label key={brand}>
+            <input
+              type="checkbox"
+              checked={filterOptions.brand.includes(brand)}
+              onChange={() => handleCheckboxChange("brand", brand)}
+            />
+            {brand}
+          </label>
+        ))}
+      </div>
+
+      <div className="flex flex-row overflow-x-scroll">
+        <h3>Model</h3>
+        {Array.from(new Set(cpuData.map((item) => item.Model))).map((model) => (
+          <label key={model}>
+            <input
+              type="checkbox"
+              checked={filterOptions.model.includes(model)}
+              onChange={() => handleCheckboxChange("model", model)}
+            />
+            {model}
+          </label>
+        ))}
+      </div>
+
+      {/* 필터링된 아이템들 표시 */}
+      <div>
+        {filteredItems.map((item, index) => (
+          <div key={index}>
+            <p>Type: {item.Type}</p>
+            <p>Part Number: {item["Part Number"]}</p>
+            <p>Brand: {item.Brand}</p>
+            <p>Model: {item.Model}</p>
+            <p>Rank: {item.Rank}</p>
+            <p>Benchmark: {item.Benchmark}</p>
+            <p>Samples: {item.Samples}</p>
+            <p>URL: <a href={item.URL} target="_blank" rel="noopener noreferrer">{item.URL}</a></p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default MainSelectShow;
