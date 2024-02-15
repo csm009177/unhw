@@ -1,136 +1,69 @@
-'use client';
+'use client'
+import { useState, useEffect } from 'react';
 
-import { useState, useEffect } from "react";
-import csv from "csv-parser";
-import { Readable } from "stream";
+const DisplayItems = () => {
+  // 상태 변수들을 정의합니다.
+  const [items, setItems] = useState([]); // 아이템 목록을 저장하는 상태
+  const [categories, setCategories] = useState([]); // 카테고리 목록을 저장하는 상태
+  const [selectedCategory, setSelectedCategory] = useState(null); // 선택된 카테고리를 저장하는 상태
 
-const MainSelectShow = () => {
-  const [cpuData, setCpuData] = useState([]);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-  const [filterOptions, setFilterOptions] = useState({
-    type: [],
-    brand: [],
-    model: [],
-  });
-  const [filteredItems, setFilteredItems] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/data.csv");
-        const csvData = await response.json();
-        if (!csvData || csvData.length === 0) {
-          console.error("CSV data is empty or invalid");
-          return;
-        }
-        const headers = csvData[0];
-        const data = csvData.slice(1).map(row => {
-          if (row.length !== headers.length) {
-            console.error("Invalid CSV row:", row);
-            return null;
-          }
-          return headers.reduce((obj, key, index) => {
-            obj[key.trim()] = row[index].trim();
-            return obj;
-          }, {});
-        }).filter(item => item !== null); // Filter out invalid items
-        setCpuData(data);
-      } catch (error) {
-        console.error("Error fetching CPU data:", error);
-      }
-    };
-    
-
-    fetchData();
-  }, []);
-
-  const handleCheckboxChange = (optionType, optionValue) => {
-    const updatedOptions = { ...filterOptions, [optionType]: [...filterOptions[optionType]] };
-
-    if (updatedOptions[optionType].includes(optionValue)) {
-      updatedOptions[optionType] = updatedOptions[optionType].filter((value) => value !== optionValue);
-    } else {
-      updatedOptions[optionType].push(optionValue);
+  // CSV 파일에서 데이터를 읽어와 상태에 저장하는 함수
+  const fetchData = async () => {
+    try {
+      // CSV 파일을 fetch하여 응답을 받습니다.
+      const response = await fetch('/data.csv');
+      // JSON 형태로 변환합니다.
+      const data = await response.json();
+      console.log(data)
+      // 데이터에서 유일한 카테고리 목록을 추출합니다.
+      const categories = [...new Set(data.map(item => item[2]))];
+      // 상태를 업데이트하여 카테고리 목록을 저장합니다.
+      setCategories(categories);
+      // 상태를 업데이트하여 전체 아이템 목록을 저장합니다.
+      setItems(data);
+    } catch (error) {
+      console.error('Error fetching data:', error); // 오류가 발생하면 콘솔에 오류 메시지를 출력합니다.
     }
-
-    setFilterOptions(updatedOptions);
-    applyFilters(updatedOptions);
   };
 
-  const applyFilters = (options) => {
-    let filtered = [...cpuData];
+  // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 데이터를 불러옵니다.
+  useEffect(() => {
+    fetchData();
+  }, [selectedCategory]); // 의존성 배열이 빈 배열이므로 컴포넌트가 처음 렌더링될 때만 실행됩니다.
 
-    Object.entries(options).forEach(([optionType, selectedValues]) => {
-      if (selectedValues.length > 0) {
-        filtered = filtered.filter((item) => selectedValues.includes(item[optionType]));
-      }
-    });
-
-    setFilteredItems(filtered);
-  };
+  // 선택된 카테고리에 해당하는 아이템만 필터링하는 함수
+  const filteredItems = items.filter(item => item[2] === selectedCategory);
 
   return (
-    <div style={{maxWidth:"80vh", overflow:"hidden"}}>
-      {/* Type, Brand, Model에 대한 체크박스 생성 */}
-      <div>
-        <h3>Type</h3>
-        {Array.from(new Set(cpuData.map((item) => item.Type))).map((type) => (
-          <label key={type}>
-            <input
-              type="checkbox"
-              checked={filterOptions.type.includes(type)}
-              onChange={() => handleCheckboxChange("type", type)}
-            />
-            {type}
-          </label>
+    <div style={{ maxWidth: "100%", overflowY:"scroll", maxHeight:"95%"}}>
+      {/* 카테고리 목록을 표시합니다. */}
+      <h1>카테고리 목록 <h2>선택된 model: {selectedCategory}</h2></h1>
+      <ul style={{ maxWidth: "80vh", overflowY:"scroll", maxHeight:"50%", display:"flex", flexDirection:"row"}}>
+        {/* 각 카테고리에 대한 버튼을 생성합니다. */}
+        {categories.map(category => (
+          <li key={category}>
+            <button onClick={() => setSelectedCategory(category)}>{category}</button>
+          </li>
+      ))}
+      </ul>
+      
+      {/* 필터링된 아이템 목록을 표시합니다. */}
+      <h3>아이템 목록</h3>
+      <ul>
+        {filteredItems.map(item => (
+          <li key={item[1]}>
+            <p>Part Number: {item[1]}</p>
+            <p>Brand: {item[2]}</p>
+            <p>Model: {item[3]}</p>
+            <p>Rank: {item[4]}</p>
+            <p>Benchmark: {item[5]}</p>
+            <p>Samples: {item[6]}</p>
+            <p>URL: <a href={item[7]}>{item[7]}</a></p>
+          </li>
         ))}
-      </div>
-
-      <div>
-        <h3>Brand</h3>
-        {Array.from(new Set(cpuData.map((item) => item.Brand))).map((brand) => (
-          <label key={brand}>
-            <input
-              type="checkbox"
-              checked={filterOptions.brand.includes(brand)}
-              onChange={() => handleCheckboxChange("brand", brand)}
-            />
-            {brand}
-          </label>
-        ))}
-      </div>
-
-      <div className="flex flex-row overflow-x-scroll">
-        <h3>Model</h3>
-        {Array.from(new Set(cpuData.map((item) => item.Model))).map((model) => (
-          <label key={model}>
-            <input
-              type="checkbox"
-              checked={filterOptions.model.includes(model)}
-              onChange={() => handleCheckboxChange("model", model)}
-            />
-            {model}
-          </label>
-        ))}
-      </div>
-
-      {/* 필터링된 아이템들 표시 */}
-      <div>
-        {filteredItems.map((item, index) => (
-          <div key={index}>
-            <p>Type: {item.Type}</p>
-            <p>Part Number: {item["Part Number"]}</p>
-            <p>Brand: {item.Brand}</p>
-            <p>Model: {item.Model}</p>
-            <p>Rank: {item.Rank}</p>
-            <p>Benchmark: {item.Benchmark}</p>
-            <p>Samples: {item.Samples}</p>
-            <p>URL: <a href={item.URL} target="_blank" rel="noopener noreferrer">{item.URL}</a></p>
-          </div>
-        ))}
-      </div>
+      </ul>
     </div>
   );
 };
 
-export default MainSelectShow;
+export default DisplayItems;
