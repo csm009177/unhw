@@ -70,7 +70,7 @@ const MainSelectShow = () => {
   };
 
   return (
-    <div>
+    <div style={{maxWidth:"80vh", overflow:"hidden"}}>
       {/* Type, Brand, Model에 대한 체크박스 생성 */}
       <div>
         <h3>Type</h3>
