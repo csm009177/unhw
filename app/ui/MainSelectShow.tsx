@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
-import DisplayItems from "./DisplayItems";
+import DisplayItems from "../../practiceSave/DisplayItems";
+import DisplayItems2 from "./DisplayItems2";
 
 export default function MainSelectShow() {
   const router = useRouter();
@@ -85,13 +86,13 @@ export default function MainSelectShow() {
               onChange={(e) => setPmpContents(e.target.value)}
             />
             <button type="submit" style={{width:"10%", textAlign:"center"}}>submit</button>
-            <DisplayItems/>
+            <DisplayItems2/>
           </form>
           {/* 채팅 내용 출력 */}
           <div style={{ width: "100%", overflowY:"scroll", maxHeight:"30%" }}>
             {chatLogs.map((log, index) => (
               <p key={index}>{log.pmpContents}</p>
-            ))}
+              ))}
           </div>
         </div>
       )}
