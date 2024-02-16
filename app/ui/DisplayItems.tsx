@@ -7,6 +7,19 @@ const DisplayItems = () => {
   const [types, setTypes] = useState([]);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedModels, setSelectedModels] = useState([]);
+  
+  const addSearchTerm = (value) => {
+    setSearchTerm(prevSearchTerm => {
+      // 이미 존재하는 검색어인지 확인하고 중복되지 않게 처리
+      if (!prevSearchTerm.includes(value)) {
+        return prevSearchTerm + ' ' + value;
+      }
+      return prevSearchTerm;
+    });
+  };
 
   useEffect(() => {
     fetchTypes();
@@ -43,21 +56,30 @@ const DisplayItems = () => {
   };
 
   const handleTypeFilter = async (type) => {
-    setSearchTerm('');
-    setSearchResults([]);
-    fetchBrands(type);
+    setSelectedTypes([type]); // 선택된 type 초기화
+    setSearchTerm(type); // 검색어도 선택한 type으로 초기화
+    setSearchResults([]); // 검색 결과 초기화
+    fetchBrands(type); // 선택한 type에 맞는 브랜드 가져오기
   };
 
-  const handleBrandFilter = async (brand) => {
-    setSearchTerm('');
+const handleBrandFilter = async (brand) => {
+  if (!selectedBrands.includes(brand)) {
+    setSelectedBrands(prevBrands => [...prevBrands, brand]);
+    addSearchTerm(brand);
     setSearchResults([]);
     fetchModels('CPU', brand);
-  };
+  }
+};
 
-  const handleModelFilter = async (model) => {
-    setSearchTerm(model);
+const handleModelFilter = async (model) => {
+  if (!selectedModels.includes(model)) {
+    setSelectedModels(prevModels => [...prevModels, model]);
+    addSearchTerm(model);
+    setSearchResults([]);
     handleSearch();
-  };
+  }
+};
+
 
   const handleSearch = async () => {
     try {
@@ -75,7 +97,7 @@ const DisplayItems = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) => { 
     setSearchTerm(e.target.value);
   };
 
