@@ -101,13 +101,13 @@ const DisplayItems = () => {
           <button key={brand} onClick={() => handleBrandFilter(brand)}>{brand}</button>
         ))}
       </div>
-      <div style={{display:"flex", flexDirection:"row",  maxHeight:"5vh", overflowX:"scroll", maxWidth:"80vw"}}>
+      <div style={{display:"flex", flexDirection:"row", overflowX:"scroll", maxWidth:"80vw"}}>
         {/* model 필드의 값들로 버튼 생성 */}
         {models.map(model => (
           <button key={model} onClick={() => handleModelFilter(model)}>{model}</button>
         ))}
       </div>
-      <ul >
+      <ul style={{ maxHeight:"30vh", overflow:"scroll"}}>
         {searchResults.map(item => (
           <li key={item.id}>
             <p>Type: {item.type}</p>

@@ -83,7 +83,7 @@ export default function MainSelectShow() {
               type="text"
               value={pmpContents}
               onChange={(e) => setPmpContents(e.target.value)}
-            />
+              />
             <button type="submit" style={{width:"10%", textAlign:"center"}}>submit</button>
           {/* 채팅 내용 출력 */}
           <div style={{ width: "100%", overflowY:"scroll", maxHeight:"5%" }}>
@@ -91,9 +91,10 @@ export default function MainSelectShow() {
               <p key={index}>{log.pmpContents}</p>
               ))}
           </div>
-              <DisplayItems/>
+          <DisplayItems/>
           </form>
         </div>
+          
       )}
     </div>
   );
