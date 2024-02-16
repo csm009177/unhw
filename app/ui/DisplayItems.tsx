@@ -5,12 +5,11 @@ const DisplayItems = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [types, setTypes] = useState([]);
-  const [brands, setBrands] = useState([]); // brand 필드의 값들을 저장할 상태 추가
+  const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+
   useEffect(() => {
     fetchTypes();
-    fetchBrands();
-    fetchModels(); // 컴포넌트가 마운트될 때 model 필드의 값들을 가져오는 함수 호출
   }, []);
 
   const fetchTypes = async () => {
@@ -23,24 +22,41 @@ const DisplayItems = () => {
     }
   };
 
-  const fetchBrands = async () => {
+  const fetchBrands = async (selectedType) => {
     try {
-      const response = await fetch('/fetchBrands'); // 서버에 brand 필드의 값들을 가져오는 요청
+      const response = await fetch(`/fetchBrands?type=${selectedType}`);
       const data = await response.json();
-      setBrands(data.brands); // 가져온 brand 값들을 상태에 저장
+      setBrands(data.brands);
     } catch (error) {
       console.error('Error fetching brands:', error);
     }
   };
 
-  const fetchModels = async () => {
+  const fetchModels = async (selectedType, selectedBrand) => {
     try {
-      const response = await fetch('/fetchModels'); // 서버에 model 필드의 값들을 가져오는 요청
+      const response = await fetch(`/fetchModels?type=${selectedType}&brand=${selectedBrand}`);
       const data = await response.json();
-      setModels(data.models); // 가져온 model 값들을 상태에 저장
+      setModels(data.models);
     } catch (error) {
       console.error('Error fetching models:', error);
     }
+  };
+
+  const handleTypeFilter = async (type) => {
+    setSearchTerm('');
+    setSearchResults([]);
+    fetchBrands(type);
+  };
+
+  const handleBrandFilter = async (brand) => {
+    setSearchTerm('');
+    setSearchResults([]);
+    fetchModels('CPU', brand);
+  };
+
+  const handleModelFilter = async (model) => {
+    setSearchTerm(model);
+    handleSearch();
   };
 
   const handleSearch = async () => {
@@ -63,51 +79,34 @@ const DisplayItems = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleTypeFilter = async (type) => {
-    setSearchTerm(type);
-    handleSearch();
-  };
-
-  const handleBrandFilter = async (brand) => {
-    setSearchTerm(brand); // brand 버튼을 클릭하면 해당 brand를 검색어로 설정하여 검색 수행
-    handleSearch(); // 검색 수행
-  };
-
-  const handleModelFilter = async (model) => {
-    setSearchTerm(model); // model 버튼을 클릭하면 해당 model을 검색어로 설정하여 검색 수행
-    handleSearch(); // 검색 수행
-  };
-
   return (
-    <div style={{display:"flex", flexDirection:"column"}}>
-      <div style={{display:"flex"}}>
-      <input
-        type="text"
-        style={{color:"black"}}
-        value={searchTerm}
-        onChange={handleChange}
-        placeholder="검색어를 입력하세요..."
-      />
-      <button onClick={handleSearch}>검색</button>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex" }}>
+        <input
+          type="text"
+          style={{ color: "black" }}
+          value={searchTerm}
+          onChange={handleChange}
+          placeholder="검색어를 입력하세요..."
+        />
+        <button onClick={handleSearch}>검색</button>
       </div>
-      <div style={{width:"80%", display:"flex", flexDirection:"row", justifyContent:"space-between" }}>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
         {types.map(type => (
           <button key={type} onClick={() => handleTypeFilter(type)}>{type}</button>
         ))}
       </div>
-      <div style={{display:"flex", flexDirection:"row",  maxHeight:"5vh", overflowX:"scroll", maxWidth:"80vw"}}>
-        {/* brand 필드의 값들로 버튼 생성 */}
+      <div style={{ display: "flex", flexDirection: "row", maxHeight: "5vh", overflowX: "scroll", maxWidth: "80vw" }}>
         {brands.map(brand => (
           <button key={brand} onClick={() => handleBrandFilter(brand)}>{brand}</button>
         ))}
       </div>
-      <div style={{display:"flex", flexDirection:"row", overflowX:"scroll", maxWidth:"80vw"}}>
-        {/* model 필드의 값들로 버튼 생성 */}
+      <div style={{ display: "flex", flexDirection: "row", overflowX: "scroll", maxWidth: "80vw" }}>
         {models.map(model => (
           <button key={model} onClick={() => handleModelFilter(model)}>{model}</button>
         ))}
       </div>
-      <ul style={{ maxHeight:"30vh", overflow:"scroll"}}>
+      <ul style={{ maxHeight: "30vh", overflow: "scroll" }}>
         {searchResults.map(item => (
           <li key={item.id}>
             <p>Type: {item.type}</p>
