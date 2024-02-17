@@ -3,7 +3,7 @@ import "../../globals.css";
 import { ChildrenProps } from "../ChildrenProps";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import Lobby from "../../ui/Lobby";
+import Lobby from "../lobby/Lobby";
 import { useRouter } from "next/navigation";
 import ToggleLeftVar from "../../ui/ToggleLeftVar";
 import { selectContext, openContext } from "../../context/styleContext";
