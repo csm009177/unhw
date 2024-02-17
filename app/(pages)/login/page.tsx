@@ -3,11 +3,13 @@
 // Login 컴포넌트
 import React, { useState } from "react";
 import "/app/globals.css";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ export default function Login() {
       if (response.status === 200) {
         localStorage.setItem("token", data.token);
         // 로그인 후 리다이렉션 또는 다른 작업을 수행할 수 있습니다.
+        router.push('/')
       }
     } catch (error) {
       console.error("Error logging in:", error);

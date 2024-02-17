@@ -7,7 +7,7 @@ import { openContext, selectContext } from "../context/styleContext";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function ToggleLeftVar() {
-  const [url, setUrl] = useState(window.location.href); // 현재 URL 경로를 가져옴
+  const [url, setUrl] = useState(""); // 현재 URL 경로를 가져오는 상태
   const router = useRouter();
   const pathname = usePathname();
   const [items, setItems] = useState([]);
@@ -20,10 +20,9 @@ export default function ToggleLeftVar() {
   };
 
   useEffect(() => {
-    // 로그인 토큰이 없으면 "/lobby"로 URL 경로 설정
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setUrl("/lobby");
+    // 클라이언트 환경에서만 window 객체를 참조하도록 설정
+    if (typeof window !== "undefined") {
+      setUrl(window.location.href);
     }
   }, []); // 한 번만 실행되도록 설정
 
@@ -32,8 +31,7 @@ export default function ToggleLeftVar() {
       className="Main-LeftVar"
       style={{
         width: isOpen ? "20%" : "2%",
-        display:"flex",
-        // justifyContent:"center",
+        display: "flex",
         height: "100%",
         backgroundColor: "#434343",
         overflow: "hidden",
@@ -44,7 +42,7 @@ export default function ToggleLeftVar() {
           display: "flex",
           flexDirection: "row",
           background: "#434343",
-          width:"100%",
+          width: "100%",
           height: "100%",
         }}
       >

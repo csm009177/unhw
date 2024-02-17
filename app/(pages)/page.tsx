@@ -12,6 +12,5 @@ import TokkenCheck from "../ui/TokkenCheck";
 export default function Main() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-  // TokkenCheck()
   return <ItemPage />;
 }
