@@ -1,19 +1,26 @@
-'use client'
+'use client' // 무엇을 뜻하는지 불분명한 표현입니다. 클라이언트 측 코드를 사용한다는 것을 나타내려면 주석을 적절히 수정하세요.
+
 import React, { useEffect, useState } from 'react';
 
 const DisplayItems = () => {
+  // 검색어와 검색 결과를 관리하는 상태들입니다.
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
+  // 아이템 유형, 브랜드, 모델을 관리하는 상태들입니다.
   const [types, setTypes] = useState([]);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+
+  // 선택된 아이템 유형, 브랜드, 모델을 관리하는 상태들입니다.
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedModels, setSelectedModels] = useState([]);
   
+  // 검색어에 새로운 단어를 추가하는 함수입니다.
   const addSearchTerm = (value) => {
     setSearchTerm(prevSearchTerm => {
-      // 이미 존재하는 검색어인지 확인하고 중복되지 않게 처리
+      // 이미 존재하는 검색어인지 확인하고 중복되지 않게 처리합니다.
       if (!prevSearchTerm.includes(value)) {
         return prevSearchTerm + ' ' + value;
       }
@@ -22,9 +29,11 @@ const DisplayItems = () => {
   };
 
   useEffect(() => {
+    // 컴포넌트가 처음 마운트될 때 아이템 유형을 가져오는 함수를 호출합니다.
     fetchTypes();
   }, []);
 
+  // 아이템 유형을 가져오는 비동기 함수입니다.
   const fetchTypes = async () => {
     try {
       const response = await fetch('/fetchTypes');
@@ -35,6 +44,7 @@ const DisplayItems = () => {
     }
   };
 
+  // 선택된 아이템 유형에 따라 브랜드를 가져오는 비동기 함수입니다.
   const fetchBrands = async (selectedType) => {
     try {
       const response = await fetch(`/fetchBrands?type=${selectedType}`);
@@ -45,6 +55,7 @@ const DisplayItems = () => {
     }
   };
 
+  // 선택된 아이템 유형과 브랜드에 따라 모델을 가져오는 비동기 함수입니다.
   const fetchModels = async (selectedType, selectedBrand) => {
     try {
       const response = await fetch(`/fetchModels?type=${selectedType}&brand=${selectedBrand}`);
@@ -55,6 +66,7 @@ const DisplayItems = () => {
     }
   };
 
+  // 아이템 유형 필터링을 처리하는 함수입니다.
   const handleTypeFilter = async (type) => {
     setSelectedTypes([type]); // 선택된 type 초기화
     setSearchTerm(type); // 검색어도 선택한 type으로 초기화
@@ -62,25 +74,27 @@ const DisplayItems = () => {
     fetchBrands(type); // 선택한 type에 맞는 브랜드 가져오기
   };
 
-const handleBrandFilter = async (brand) => {
-  if (!selectedBrands.includes(brand)) {
-    setSelectedBrands(prevBrands => [...prevBrands, brand]);
-    addSearchTerm(brand);
-    setSearchResults([]);
-    fetchModels('CPU', brand);
-  }
-};
+  // 브랜드 필터링을 처리하는 함수입니다.
+  const handleBrandFilter = async (brand) => {
+    if (!selectedBrands.includes(brand)) {
+      setSelectedBrands(prevBrands => [...prevBrands, brand]);
+      addSearchTerm(brand);
+      setSearchResults([]);
+      fetchModels('CPU', brand);
+    }
+  };
 
-const handleModelFilter = async (model) => {
-  if (!selectedModels.includes(model)) {
-    setSelectedModels(prevModels => [...prevModels, model]);
-    addSearchTerm(model);
-    setSearchResults([]);
-    handleSearch();
-  }
-};
+  // 모델 필터링을 처리하는 함수입니다.
+  const handleModelFilter = async (model) => {
+    if (!selectedModels.includes(model)) {
+      setSelectedModels(prevModels => [...prevModels, model]);
+      addSearchTerm(model);
+      setSearchResults([]);
+      handleSearch();
+    }
+  };
 
-
+  // 검색을 처리하는 함수입니다.
   const handleSearch = async () => {
     try {
       const response = await fetch('/searchItems', {
@@ -97,6 +111,7 @@ const handleModelFilter = async (model) => {
     }
   };
 
+  // 입력값 변경을 처리하는 함수입니다.
   const handleChange = (e) => { 
     setSearchTerm(e.target.value);
   };
