@@ -54,7 +54,7 @@ export default function DisplayItems() {
         {searchResults.map((item) => (
           <li key={item.id}>
             <p>type : {item.type}</p>
-            <p>URL: <a href={item.url}>{item.url}</a></p>
+            <a href={item.url}>model : {item.model}</a>
           </li>
         ))}
       </div>
