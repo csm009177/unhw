@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 import DisplayItems from "./DisplayItems";
+import DisplayItems2 from "./DisplayItems2";
 
 export default function MainSelectShow() {
   const router = useRouter();
@@ -91,7 +92,8 @@ export default function MainSelectShow() {
               <p key={index}>{log.pmpContents}</p>
               ))}
           </div>
-          <DisplayItems/>
+          {/* <DisplayItems/> */}
+          <DisplayItems2/>
           </form>
         </div>
           
