@@ -11,7 +11,6 @@ export default function DisplayItems() {
   const [types, setTypes] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
 
-  
   // 아이템 유형을 가져오는 비동기 함수입니다.
   const fetchTypes = async () => {
     try {
@@ -55,21 +54,34 @@ export default function DisplayItems() {
     fetchTypes();
     handleInputChange;
     handleResultChange;
-    handleSearch
+    handleSearch;
   }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <input type="text" style={{ color: "black" }} value={inputValue} onChange={handleInputChange} />
-        {/* 검색 제출 버튼 */}
+      <input
+        type="text"
+        style={{ color: "black" }}
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      {/* 검색 제출 버튼 */}
       <button onClick={() => handleSearch(inputValue)}>검색</button>
-        {/* 타입 검색 버튼 */}
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+      {/* 타입 검색 버튼 */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         {types.map((type) => (
-          <button key={type} onClick={()=> setSelectedTypes(type)}>{type}</button>
+          <button key={type} onClick={() => setSelectedTypes(type)}>
+            {type}
+          </button>
         ))}
-        </div>
-        {/* 검색 결과 출력 */}
+      </div>
+      {/* 검색 결과 출력 */}
       <div onChange={handleResultChange}>
         {searchResults.map((item) => (
           <li key={item.id}>
