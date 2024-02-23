@@ -1,7 +1,9 @@
 "use client";
 // 클라이언트 측 코드입니다. 사용자가 입력한 검색어로 아이템을 검색하고 표시합니다.
 
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { openContext, selectContext } from "../context/styleContext";
 
 export default function DisplayItems() {
   // 검색어와 검색 결과를 관리하는 상태들입니다.
@@ -10,6 +12,19 @@ export default function DisplayItems() {
 
   const [types, setTypes] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
+
+  // 선택된 아이템을
+  const { selectedItemIndex } = useContext(selectContext);
+
+  const fetchChatLogs = async () => {
+    try {
+      const response = await fetch(`/pmpForm/${selectedItemIndex}`);
+      const data = await response.json();
+      setChatLogs(data.chatLogs);
+    } catch (error) {
+      console.error("Error fetching chat logs:", error);
+    }
+  };
 
   // 아이템 유형을 가져오는 비동기 함수입니다.
   const fetchTypes = async () => {

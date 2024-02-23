@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 
-export default function MainSelectShow() {
+export default function ChatLog() {
   const router = useRouter();
   const { selectedItemIndex } = useContext(selectContext);
   const [pmpContents, setPmpContents] = useState("");

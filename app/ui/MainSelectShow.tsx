@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 import DisplayItems from "./DisplayItems";
 import DisplayItems2 from "./DisplayItems2";
+import ChatLog from "./ChatLog";
 
 export default function MainSelectShow() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function MainSelectShow() {
           <p>Selected Item : {selectedItemIndex}</p>
           {/* <DisplayItems /> */}
           <DisplayItems2 />
+          {/* <ChatLog/> */}
         </div>
       )}
     </div>
