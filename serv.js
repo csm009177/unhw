@@ -1,3 +1,4 @@
+// 시크릿
 const crypto = require("crypto");
 const secretKey = crypto.randomBytes(32).toString("hex");
 const jwt = require("jsonwebtoken"); // npm install jsonwebtoken
