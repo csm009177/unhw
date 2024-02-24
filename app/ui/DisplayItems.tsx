@@ -6,8 +6,8 @@ export default function DisplayItems() {
   const [types, setTypes] = useState([]);
   const [selectedType, setSelectedType] = useState([]);
 
-  // const [brands, setBrands] = useState([]);
-  // const [selectedType, setSelectedType] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
 
   const [result, setResult] = useState("");
 
