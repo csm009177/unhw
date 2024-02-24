@@ -5,7 +5,7 @@ import React, {useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { openContext, selectContext } from "../context/styleContext";
 
-export default function DisplayItems() {
+export default function DisplayItems2() {
   // 검색어와 검색 결과를 관리하는 상태들입니다.
   const [inputValue, setInputValue] = useState(""); // 검색어 상태
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
@@ -70,7 +70,7 @@ export default function DisplayItems() {
     handleInputChange;
     handleResultChange;
     handleSearch;
-  }, []);
+  });
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

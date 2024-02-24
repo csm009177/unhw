@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 import DisplayItems from "./DisplayItems";
-import DisplayItems2 from "./DisplayItems2";
 import ChatLog from "./ChatLog";
 
 export default function MainSelectShow() {
@@ -36,8 +35,8 @@ export default function MainSelectShow() {
       {selectedItemIndex !== null && (
         <div style={{ width: "100%", height: "50%" }}>
           <p>Selected Item : {selectedItemIndex}</p>
-          {/* <DisplayItems /> */}
-          <DisplayItems2 />
+          <DisplayItems />
+          {/* <DisplayItems2 /> */}
           {/* <ChatLog/> */}
         </div>
       )}
