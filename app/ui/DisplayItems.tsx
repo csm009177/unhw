@@ -32,11 +32,11 @@ export default function DisplayItems() {
       console.error("Error fetching brands:", error);
     }
   };
-
   // 컴포넌트가 처음 마운트될 때 아이템 유형을 가져오는 함수를 호출합니다.
   useEffect(() => {
     fetchTypes();
-  }, []);
+    console.log(selectedType)
+  }, [selectedType]);
 
   return (
     <>
