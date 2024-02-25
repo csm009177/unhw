@@ -165,20 +165,6 @@ app.prepare().then(() => {
       res.status(200).json({ models });
     });
   });
-  
-  server.get("/fetchModelDetail", (req, res) => {
-    const { type, brand, model } = req.query;
-    const query = `SELECT * FROM item WHERE type = ? AND brand = ? AND model = ?;`;
-    connection.query(query, [type, brand, model], (err, results, fields) => {
-      if (err) {
-        console.error("searchItems error:", err);
-        res.status(500).json({ message: "검색 중 문제가 발생했습니다." });
-        return;
-      }
-        const modelInfos = results.map(result => result.modelInfo);
-        res.status(200).json({ modelInfos });
-    });
-  });
 
   
 

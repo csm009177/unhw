@@ -12,10 +12,6 @@ export default function DisplayItems() {
   const [model, setModel] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
 
-  const [modelInfo, setModelInfo] = useState([]);
-  const [selectedModelInfo, setSelectedModelInfo] = useState("");
-
-
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -95,29 +91,6 @@ export default function DisplayItems() {
     }
   }, [selectedType, selectedBrand]);
 
-  // 선택된 아이템 유형과 브랜드에 따라 모델을 가져오는 비동기 함수입니다.
-  const fetchmodelInfo = async (
-    selectedType,
-    selectedBrand,
-    setSelectedModel
-  ) => {
-    try {
-      const response = await fetch(
-        `/fetchModelDetail?type=${selectedType}&brand=${selectedBrand}&model=${setSelectedModel}`
-      );
-      const data = await response.json();
-      setSelectedModelInfo(data.modelInfo);
-    } catch (error) {
-      console.error("Error fetching models:", error);
-    }
-  };
-
-  // 선택된 브랜드가 변경될 때마다 해당 브랜드에 대한 모델의 정보를 가져오도록 합니다.
-  useEffect(() => {
-    if (selectedModel !== "") {
-      fetchmodelInfo(selectedType, selectedBrand, selectedModel);
-    }
-  }, [selectedType, selectedBrand, selectedModel, selectedModelInfo]);
 
   return (
     <>
@@ -169,22 +142,6 @@ export default function DisplayItems() {
           </button>
         ))}
       </div>
-      {/* MODEL 정보 */}
-        <ul style={{ maxHeight: "30vh", overflow: "scroll" }}>
-        model info
-        {searchResults.map(item => (
-          <li key={item.id}>
-            <p>Type: {item.type}</p>
-            <p>Part Number: {item.part_number}</p>
-            <p>Brand: {item.brand}</p>
-            <p>Model: {item.model}</p>
-            <p>Rank: {item.rank}</p>
-            <p>Benchmark: {item.benchmark}</p>
-            <p>Samples: {item.samples}</p>
-            <p>URL: <a href={item.url}>{item.url}</a></p>
-          </li>
-        ))}
-      </ul>
     </>
   );
 }
