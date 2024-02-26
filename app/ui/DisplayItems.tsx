@@ -102,16 +102,15 @@ export default function DisplayItems() {
     fetchModelInfos(selectedType, selectedBrand, selectedModel);
   }, [selectedType, selectedBrand, selectedModel]);
 
-
   const [selectedModels, setSelectedModels] = useState([]);
   // 모델을 선택하는 버튼 클릭 시 해당 모델을 배열에 추가하는 함수
   const handleClickModel = async (model) => {
-    setSelectedModels(prevState => [...prevState, model]);
+    setSelectedModels((prevState) => [...prevState, model]);
   };
 
   // 선택된 모델들을 제거하는 함수
   const handleRemoveModel = (index) => {
-    setSelectedModels(prevState => prevState.filter((_, i) => i !== index));
+    setSelectedModels((prevState) => prevState.filter((_, i) => i !== index));
   };
 
   return (
@@ -153,20 +152,20 @@ export default function DisplayItems() {
       <div>
         {modelInfo ? (
           modelInfo.map((info, index) => (
-            <ul key={index}>
-              <li>Type: {info.type}</li>
-              <li>Part Number: {info.part_number}</li>
-              <li>Brand: {info.brand}</li>
-              <li onClick={()=> handleClickModel(info.model)}>
-                Model: <button>{info.model} </button>
-              </li>
-              <li>Rank: {info.rank}</li>
-              <li>Benchmark: {info.benchmark}</li>
-              <li>Samples: {info.samples}</li>
-              <li>
-                URL: <a href={info.url}>{info.url}</a>
-              </li>
-            </ul>
+            <button key={index} onClick={() => handleClickModel(info.model)}>
+              <ul>
+                <li>Type: {info.type}</li>
+                <li>Part Number: {info.part_number}</li>
+                <li>Brand: {info.brand}</li>
+                <li>Model: {info.model}</li>
+                <li>Rank: {info.rank}</li>
+                <li>Benchmark: {info.benchmark}</li>
+                <li>Samples: {info.samples}</li>
+                <li>
+                  URL: <a href={info.url}>{info.url}</a>
+                </li>
+              </ul>
+            </button>
           ))
         ) : (
           <p>No model information available.</p>
@@ -176,10 +175,13 @@ export default function DisplayItems() {
         {/* 선택된 모델들을 나타내는 표시 칸 */}
         {selectedModels.map((model, index) => (
           <div key={index}>
-            {model}
-            <button 
-            style={{backgroundColor:"white", color:"black"}}
-            onClick={() => handleRemoveModel(index)}>Remove</button>
+            
+            <button
+              style={{ backgroundColor: "white", color: "black" }}
+              onClick={() => handleRemoveModel(index)}
+            >
+              {model}
+            </button>
           </div>
         ))}
       </div>
