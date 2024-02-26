@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState, useContext } from "react";
+import { openContext, selectContext } from "../context/styleContext";
 
 export default function DisplayItems() {
   // 타입의 상태정보
@@ -113,19 +115,38 @@ export default function DisplayItems() {
     setSelectedModels((prevState) => prevState.filter((_, i) => i !== index));
   };
 
-  const [projectSubmit, setProjectSubmit] = useState([]);
-  const fetchProject = async (projectSubmit) => {
+
+
+  // 선택된 프로젝트의 상태값을 가져오기
+  const router = useRouter();
+  const { selectedPjtIndex } = useContext(selectContext);
+  const [pjtContents, setPjtContents] = useState("");
+  const [pjtLogs, setPjtLogs] = useState([]);
+
+  useEffect(() => {
+    if (selectedPjtIndex !== null) {
+      const href = `/pjt${selectedPjtIndex}`;
+      router.push(href);
+    }
+  }, [selectedPjtIndex, router]);
+
+  useEffect(() => {
+    // selectedItemIndex가 변경될 때마다 채팅 내용을 불러옴
+    if (selectedPjtIndex !== null) {
+      fetchLogs();
+    }
+  }, [selectedPjtIndex]);
+
+  // 채팅 내용 불러오기 함수
+  const fetchLogs = async () => {
     try {
-      const response = await fetch(
-        `/fetchModels?type=${selectedType}&brand=${selectedBrand}`
-      );
+      const response = await fetch(`/pjtForm/${selectedPjtIndex}`);
       const data = await response.json();
-      setModel(data.models);
+      setPjtLogs(data.chatLogs);
     } catch (error) {
-      console.error("Error fetching models:", error);
+      console.error("Error fetching chat logs:", error);
     }
   };
-  const handleRecordSelectedModels = () => {};
 
   return (
     <>
@@ -195,11 +216,16 @@ export default function DisplayItems() {
             >
               {model}
             </button>
-            {/* 선택된 모델들을 기록하는 버튼 */}
-            <button>담아두기</button>
           </div>
         ))}
       </div>
+      {/* 선택된 모델들을 기록하는 버튼 */}
+      {/* <button onClick={handleRecordSelected}>담아두기</button> */}
+      {selectedPjtIndex !== null && (
+        <div style={{ width: "100%", height: "50%" }}>
+          <p>Selected Projects : {selectedPjtIndex}</p>
+        </div>
+      )}
     </>
   );
 }
