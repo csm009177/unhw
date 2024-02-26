@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import React, { useEffect, useState } from "react";
 
 export default function DisplayItems() {
@@ -75,6 +74,9 @@ export default function DisplayItems() {
   // 모델 정보 상태를 초기화합니다.
   const [modelInfo, setModelInfo] = useState([]);
 
+  // 선택된 모델들을 저장하는 상태 데이터
+  const [selectedModels, setSelectedModels] = useState([]);
+
   // 모델 정보를 가져오는 함수에서 API 응답 데이터를 배열로 설정합니다.
   const fetchModelInfos = async (
     selectedType,
@@ -102,8 +104,6 @@ export default function DisplayItems() {
     fetchModelInfos(selectedType, selectedBrand, selectedModel);
   }, [selectedType, selectedBrand, selectedModel]);
 
-
-  const [selectedModels, setSelectedModels] = useState([]);
   // 모델을 선택하는 버튼 클릭 시 해당 모델을 배열에 추가하는 함수
   const handleClickModel = async (model) => {
     setSelectedModels(prevState => [...prevState, model]);
@@ -119,7 +119,7 @@ export default function DisplayItems() {
       <div>
         <div>type : {selectedType}</div>
         <div>brand : {selectedBrand}</div>
-        <div>model : {selectedModel}</div>
+        <div>model : {selectedModels.join(', ')}</div>
       </div>
       <div>
         {types.map((type) => (
@@ -145,7 +145,7 @@ export default function DisplayItems() {
         }}
       >
         {models.map((model) => (
-          <button key={model} onClick={() => setSelectedModel(model)}>
+          <button key={model} onClick={() => handleClickModel(model)}>
             {model}
           </button>
         ))}
@@ -157,7 +157,7 @@ export default function DisplayItems() {
               <li>Type: {info.type}</li>
               <li>Part Number: {info.part_number}</li>
               <li>Brand: {info.brand}</li>
-              <li onClick={()=> handleClickModel(info.model)}>
+              <li onClick={() => handleClickModel(info.model)}>
                 Model: <button>{info.model} </button>
               </li>
               <li>Rank: {info.rank}</li>
@@ -177,9 +177,7 @@ export default function DisplayItems() {
         {selectedModels.map((model, index) => (
           <div key={index}>
             {model}
-            <button 
-            style={{backgroundColor:"white", color:"black"}}
-            onClick={() => handleRemoveModel(index)}>Remove</button>
+            <button onClick={() => handleRemoveModel(index)}>Remove</button>
           </div>
         ))}
       </div>
