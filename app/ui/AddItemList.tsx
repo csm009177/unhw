@@ -6,17 +6,17 @@ import { openContext,selectContext } from "../context/styleContext";
 
 export default function AddItemList() {
   const [url, setUrl] = useState(window.location.pathname); // 현재 URL 경로를 가져옴
-  const [items, setItems] = useState([]);
+  const [pjts, setPjts] = useState([]);
   const { isOpen, setIsOpen } = useContext(openContext);
-  const {selectedItemIndex, setSelectedItemIndex } = useContext(selectContext)
+  const { selectedPjtIndex, setSelectedPjtIndex } = useContext(selectContext);
 
   const addItem = () => {
-    const newItem = `Item ${items.length}`;
-    setItems([...items, newItem]);
+    const newPjts = `Item ${pjts.length}`;
+    setPjts([...pjts, newPjts]);
   };
 
   const handleItemClick = (index) => {
-    setSelectedItemIndex(index);
+    setSelectedPjtIndex(index);
   };
 
   return (
@@ -24,7 +24,7 @@ export default function AddItemList() {
       <p onClick={addItem} style={{fontSize:"5vh"}}>unhw</p>
       <ul>
         <br />
-        {items.map((item, index) => (
+        {pjts.map((item, index) => (
           <li key={index} onClick={() => handleItemClick(index)}>
             {item}
           </li>

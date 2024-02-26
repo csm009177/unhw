@@ -67,13 +67,13 @@ app.prepare().then(() => {
     );
   });
 
-  server.post("/pmpForm", (req, res) => {
-    const { selectedItemIndex, pmpContents } = req.body;
+  server.post("/pjtForm", (req, res) => {
+    const { selectedPjtIndex, pjtContents } = req.body;
     const query =
-      "INSERT INTO prompt (pmpContents, itemNum, pmpDate) VALUES (?, ?, NOW())";
+      "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
     connection.query(
       query,
-      [pmpContents, selectedItemIndex],
+      [pjtContents, selectedPjtIndex],
       (err, results, fields) => {
         if (err) {
           console.error("Error chatlog Form :", err);
@@ -85,10 +85,10 @@ app.prepare().then(() => {
     );
   });
 
-  server.get("/pmpForm/:itemIndex", (req, res) => {
-    const itemIndex = req.params.itemIndex;
-    const query = "SELECT pmpContents FROM prompt WHERE itemNum = ?";
-    connection.query(query, [itemIndex], (err, results, fields) => {
+  server.get("/pjtForm/:pjtIndex", (req, res) => {
+    const pjtIndex = req.params.pjtIndex;
+    const query = "SELECT pmpContents FROM project WHERE itemNum = ?";
+    connection.query(query, [pjtIndex], (err, results, fields) => {
       if (err) {
         console.error("Error fetching chat logs:", err);
         res
