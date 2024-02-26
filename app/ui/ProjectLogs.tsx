@@ -12,7 +12,7 @@ export default function ProjectLogs() {
 
   useEffect(() => {
     if (selectedPjtIndex !== null) {
-      const href = `/item${selectedPjtIndex}`;
+      const href = `/pjt${selectedPjtIndex}`;
       router.push(href);
     }
   }, [selectedPjtIndex, router]);

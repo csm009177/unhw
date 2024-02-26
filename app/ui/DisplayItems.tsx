@@ -113,6 +113,20 @@ export default function DisplayItems() {
     setSelectedModels((prevState) => prevState.filter((_, i) => i !== index));
   };
 
+  const [projectSubmit, setProjectSubmit] = useState([]);
+  const fetchProject = async (projectSubmit) => {
+    try {
+      const response = await fetch(
+        `/fetchModels?type=${selectedType}&brand=${selectedBrand}`
+      );
+      const data = await response.json();
+      setModel(data.models);
+    } catch (error) {
+      console.error("Error fetching models:", error);
+    }
+  };
+  const handleRecordSelectedModels = () => {};
+
   return (
     <>
       <div>
@@ -175,13 +189,14 @@ export default function DisplayItems() {
         {/* 선택된 모델들을 나타내는 표시 칸 */}
         {selectedModels.map((model, index) => (
           <div key={index}>
-            
             <button
               style={{ backgroundColor: "white", color: "black" }}
               onClick={() => handleRemoveModel(index)}
             >
               {model}
             </button>
+            {/* 선택된 모델들을 기록하는 버튼 */}
+            <button>담아두기</button>
           </div>
         ))}
       </div>
