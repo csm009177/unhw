@@ -43,7 +43,8 @@ export default function DisplayItems() {
   };
   // 컴포넌트가 처음 마운트시 브랜드를 가져오는 함수를 호출
   useEffect(() => {
-    setBrand([])
+    setBrand([]);
+    setModel([]);
     setModelInfo([]);
     fetchBrands(selectedType);
     console.log(selectedType);
@@ -66,6 +67,8 @@ export default function DisplayItems() {
   };
   // 컴포넌트가 처음 마운트시 model을 가져오는 함수를 호출
   useEffect(() => {
+    setModel([]);
+    setModelInfo([]);
     fetchModels(selectedType, selectedBrand);
     console.log(selectedType, selectedBrand);
   }, [selectedType, selectedBrand]);
