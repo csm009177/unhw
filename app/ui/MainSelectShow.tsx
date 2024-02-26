@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 import DisplayItems from "./DisplayItems";
-import ChatLog from "./ChatLog";
+import ChatLog from "./ProjectLogs";
 
 export default function MainSelectShow() {
   const router = useRouter();
