@@ -11,7 +11,7 @@ export default function AddItemList() {
   const { selectedPjtIndex, setSelectedPjtIndex } = useContext(selectContext);
 
   const addItem = () => {
-    const newPjts = `Item ${pjts.length}`;
+    const newPjts = `project ${pjts.length}`;
     setPjts([...pjts, newPjts]);
   };
 

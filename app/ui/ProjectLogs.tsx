@@ -4,32 +4,32 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 
-export default function ChatLog() {
+export default function ProjectLogs() {
   const router = useRouter();
-  const { selectedItemIndex } = useContext(selectContext);
-  const [pmpContents, setPmpContents] = useState("");
-  const [chatLogs, setChatLogs] = useState([]);
+  const { selectedPjtIndex } = useContext(selectContext);
+  const [pjtContents, setPjtContents] = useState("");
+  const [pjtLogs, setPjtLogs] = useState([]);
 
   useEffect(() => {
-    if (selectedItemIndex !== null) {
-      const href = `/item${selectedItemIndex}`;
+    if (selectedPjtIndex !== null) {
+      const href = `/item${selectedPjtIndex}`;
       router.push(href);
     }
-  }, [selectedItemIndex, router]);
+  }, [selectedPjtIndex, router]);
 
   useEffect(() => {
     // selectedItemIndex가 변경될 때마다 채팅 내용을 불러옴
-    if (selectedItemIndex !== null) {
+    if (selectedPjtIndex !== null) {
       fetchChatLogs();
     }
-  }, [selectedItemIndex]);
+  }, [selectedPjtIndex]);
 
   // 채팅 내용 불러오기 함수
   const fetchChatLogs = async () => {
     try {
-      const response = await fetch(`/pmpForm/${selectedItemIndex}`);
+      const response = await fetch(`/pjtForm/${selectedPjtIndex}`);
       const data = await response.json();
-      setChatLogs(data.chatLogs);
+      setPjtLogs(data.chatLogs);
     } catch (error) {
       console.error("Error fetching chat logs:", error);
     }
@@ -44,13 +44,13 @@ export default function ChatLog() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedItemIndex, pmpContents }),
+        body: JSON.stringify({ selectedPjtIndex, pjtContents }),
       });
       console.log("Chat submitted successfully!");
       // 제출 후 채팅 내용 다시 불러오기
       fetchChatLogs();
       // 입력창 초기화
-      setPmpContents("");
+      setPjtContents("");
     } catch (error) {
       console.error("Error submitting chat:", error);
     }
@@ -63,16 +63,16 @@ export default function ChatLog() {
         <input
           style={{ width: "90%", color: "black" }}
           type="text"
-          value={pmpContents}
-          onChange={(e) => setPmpContents(e.target.value)}
+          value={pjtContents}
+          onChange={(e) => setPjtContents(e.target.value)}
         />
         <button type="submit" style={{ width: "10%", textAlign: "center" }}>
           submit
         </button>
         {/* 채팅 내용 출력 */}
         <div style={{ width: "100%", overflowY: "scroll", maxHeight: "5%" }}>
-          {chatLogs.map((log, index) => (
-            <p key={index}>{log.pmpContents}</p>
+          {pjtLogs.map((log, index) => (
+            <p key={index}>{log.pjtContents}</p>
           ))}
         </div>
         {/* <DisplayItems/> */}

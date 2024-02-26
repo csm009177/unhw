@@ -8,7 +8,7 @@ import ChatLog from "./ChatLog";
 
 export default function MainSelectShow() {
   const router = useRouter();
-  const { selectedPjtIndex, setSelectedPjtIndex } = useContext(selectContext);
+  const { selectedPjtIndex } = useContext(selectContext);
 
   useEffect(() => {
     if (selectedPjtIndex !== null) {

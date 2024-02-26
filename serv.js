@@ -87,7 +87,7 @@ app.prepare().then(() => {
 
   server.get("/pjtForm/:pjtIndex", (req, res) => {
     const pjtIndex = req.params.pjtIndex;
-    const query = "SELECT pmpContents FROM project WHERE itemNum = ?";
+    const query = "SELECT pjtContents FROM project WHERE pjtNum = ?";
     connection.query(query, [pjtIndex], (err, results, fields) => {
       if (err) {
         console.error("Error fetching chat logs:", err);
