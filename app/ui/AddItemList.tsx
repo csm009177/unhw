@@ -11,7 +11,7 @@ export default function AddItemList() {
   const {selectedItemIndex, setSelectedItemIndex } = useContext(selectContext)
 
   const addItem = () => {
-    const newItem = `Item ${items.length + 1}`;
+    const newItem = `Item ${items.length}`;
     setItems([...items, newItem]);
   };
 
