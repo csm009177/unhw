@@ -3,41 +3,11 @@
 import React, { useEffect, useState } from "react";
 
 export default function DisplayItems() {
+
+  // 타입의 상태정보
   const [types, setType] = useState([]);
   const [selectedType, setSelectedType] = useState("");
-
-  const [brands, setBrand] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState("");
-
-  const [model, setModel] = useState([]);
-  const [selectedModel, setSelectedModel] = useState("");
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-
-  // 검색을 처리하는 함수입니다.
-  const handleSearch = async () => {
-    try {
-      const response = await fetch("/searchItems", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ keyword: searchTerm }),
-      });
-      const data = await response.json();
-      setSearchResults(data.items);
-    } catch (error) {
-      console.error("Error searching items:", error);
-    }
-  };
-
-  // 입력값 변경을 처리하는 함수입니다.
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  // 처음 랜더링될때 아이템 유형을 가져오는 비동기 함수입니다.
+  // 처음 렌더링시 타입을 가져오는 비동기함수
   const fetchTypes = async () => {
     try {
       const response = await fetch("/fetchTypes");
@@ -47,14 +17,22 @@ export default function DisplayItems() {
       console.error("Error fetching types:", error);
     }
   };
-
-  // 컴포넌트가 처음 마운트될 때 아이템 유형을 가져오는 함수를 호출합니다.
+  // 컴포넌트가 처음 마운트시 타입을 가져오는 함수호출
   useEffect(() => {
+    setType([])
+    setBrand([]);
+    setModel([]);
+    setModelInfo([]);
     fetchTypes();
-  }, []);
+    fetchBrands(selectedType);
+    console.log(selectedType);
+  }, [selectedType]);
 
-  // 선택된 아이템 유형에 따라 브랜드를 가져오는 비동기 함수입니다.
-  const fetchBrand = async (selectedType) => {
+  // 브랜드의 상태정보
+  const [brands, setBrand] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  // 선택된 타입의 브랜드들을 가져오는 함수
+  const fetchBrands = async (selectedType) => {
     try {
       const response = await fetch(`/fetchBrands?type=${selectedType}`);
       const data = await response.json();
@@ -63,16 +41,20 @@ export default function DisplayItems() {
       console.error("Error fetching brands:", error);
     }
   };
-
-  // 선택된 아이템 유형이 변경될 때마다 해당 유형에 대한 브랜드를 가져오도록 합니다.
+  // 컴포넌트가 처음 마운트시 브랜드를 가져오는 함수를 호출
   useEffect(() => {
-    if (selectedType !== "") {
-      fetchBrand(selectedType);
-    }
+    setBrand([]);
+    setModel([]);
+    setModelInfo([]);
+    fetchBrands(selectedType);
+    console.log(selectedType);
   }, [selectedType]);
 
-  // 선택된 아이템 유형과 브랜드에 따라 모델을 가져오는 비동기 함수입니다.
-  const fetchModel = async (selectedType, selectedBrand) => {
+  // model의 상태정보
+  const [models, setModel] = useState([]);
+  const [selectedModel, setSelectedModel] = useState("");
+  // 선택된 브랜드의 모델들을 가져오는 비동기 함수입니다.
+  const fetchModels = async (selectedType, selectedBrand) => {
     try {
       const response = await fetch(
         `/fetchModels?type=${selectedType}&brand=${selectedBrand}`
@@ -83,35 +65,51 @@ export default function DisplayItems() {
       console.error("Error fetching models:", error);
     }
   };
-
-  // 선택된 브랜드가 변경될 때마다 해당 브랜드에 대한 모델을 가져오도록 합니다.
+  // 컴포넌트가 처음 마운트시 model을 가져오는 함수를 호출
   useEffect(() => {
-    if (selectedBrand !== "") {
-      fetchModel(selectedType, selectedBrand);
-    }
+    setModel([]);
+    setModelInfo([]);
+    fetchModels(selectedType, selectedBrand);
+    console.log(selectedType, selectedBrand);
   }, [selectedType, selectedBrand]);
 
+  // 모델 정보 상태를 초기화합니다.
+  const [modelInfo, setModelInfo] = useState([]);
 
+// 모델 정보를 가져오는 함수에서 API 응답 데이터를 배열로 설정합니다.
+const fetchModelInfos = async (
+  selectedType,
+  selectedBrand,
+  selectedModel
+) => {
+  try {
+    // 데이터를 가져오기 전에 상태를 초기화합니다.
+    setModelInfo([]);
+    
+    const response = await fetch(
+      `/fetchModelInfos?type=${selectedType}&brand=${selectedBrand}&model=${selectedModel}`
+    );
+    const data = await response.json();
+    setModelInfo(data.modelInfo); // 배열로 설정
+  } catch (error) {
+    console.error("Error fetching modelInfo :", error);
+    // 에러 발생 시 빈 배열로 초기화합니다.
+    setModelInfo([]);
+  }
+};
+
+  // 컴포넌트가 처음 마운트시 model을 가져오는 함수를 호출
+  useEffect(() => {
+    fetchModelInfos(selectedType, selectedBrand, selectedModel);
+  }, [selectedType, selectedBrand, selectedModel]);
+  
   return (
     <>
-      {/* 검색창 */}
-      <div style={{ display: "flex" }}>
-        <input
-          type="text"
-          style={{ color: "black" }}
-          value={searchTerm}
-          onChange={handleChange}
-          placeholder="검색어를 입력하세요..."
-        />
-        <button onClick={handleSearch}>검색</button>
+      <div>
+        <div>type : {selectedType}</div>
+        <div>brand : {selectedBrand}</div>
+        <div>model : {selectedModel}</div>
       </div>
-      {/* 선택된 상태 데이터 */}
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "10%" }}>selectedType : {selectedType}</div>
-        <div style={{ width: "10%" }}>selectedBrand : {selectedBrand}</div>
-        <div style={{ width: "10%" }}>selectedModel : {selectedModel}</div>
-      </div>
-      {/* TYPE 버튼들 */}
       <div>
         {types.map((type) => (
           <button key={type} onClick={() => setSelectedType(type)}>
@@ -119,28 +117,47 @@ export default function DisplayItems() {
           </button>
         ))}
       </div>
-      {/* BRAND 버튼들 */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          maxHeight: "10vh",
-          overflow: "scroll",
-        }}
-      >
+      <div>
         {brands.map((brand) => (
           <button key={brand} onClick={() => setSelectedBrand(brand)}>
             {brand}
           </button>
         ))}
       </div>
-      {/* MODEL 버튼들 */}
-      <div>
-        {model.map((model) => (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          overflow: "scroll",
+          overflowY: "hidden",
+          maxWidth: "80vh",
+        }}
+      >
+        {models.map((model) => (
           <button key={model} onClick={() => setSelectedModel(model)}>
             {model}
           </button>
         ))}
+      </div>
+      <div>
+        {modelInfo ? (
+          modelInfo.map((info, index) => (
+            <ul key={index}>
+              <li>Type: {info.type}</li>
+              <li>Part Number: {info.part_number}</li>
+              <li>Brand: {info.brand}</li>
+              <li>Model: {info.model}</li>
+              <li>Rank: {info.rank}</li>
+              <li>Benchmark: {info.benchmark}</li>
+              <li>Samples: {info.samples}</li>
+              <li>
+                URL: <a href={info.url}>{info.url}</a>
+              </li>
+            </ul>
+          ))
+        ) : (
+          <p>No model information available.</p>
+        )}
       </div>
     </>
   );
