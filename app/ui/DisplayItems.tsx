@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function DisplayItems() {
   const [result, setResult] = useState("");
@@ -13,7 +13,7 @@ export default function DisplayItems() {
     try {
       const response = await fetch("/fetchTypes");
       const data = await response.json();
-      setTypes(data.types);
+      setType(data.types);
     } catch (error) {
       console.error("Error fetching types:", error);
     }
@@ -32,7 +32,7 @@ export default function DisplayItems() {
     try {
       const response = await fetch(`/fetchBrands?type=${selectedType}`);
       const data = await response.json();
-      setBrands(data.brands);
+      setBrand(data.brands);
     } catch (error) {
       console.error("Error fetching brands:", error);
     }
