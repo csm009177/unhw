@@ -179,10 +179,11 @@ app.prepare().then(() => {
         res.status(500).json({ message: "모델 정보를 가져오는 중 문제가 발생했습니다." });
         return;
       }
-      const models = results.map(result => result.model);
-      res.status(200).json({ models });
+      const modelInfo = results.map(result => result);
+      res.status(200).json({ modelInfo }); // "modelInfo"로 수정
     });
   });
+  
   
 
 

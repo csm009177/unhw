@@ -6,7 +6,7 @@ export default function DisplayItems() {
   const [result, setResult] = useState("");
 
   // 타입의 상태정보
-  const [types, setTypes] = useState([]);
+  const [types, setType] = useState([]);
   const [selectedType, setSelectedType] = useState("");
   // 처음 렌더링시 타입을 가져오는 비동기함수
   const fetchTypes = async () => {
@@ -25,7 +25,7 @@ export default function DisplayItems() {
   }, [selectedType]);
 
   // 브랜드의 상태정보
-  const [brands, setBrands] = useState([]);
+  const [brands, setBrand] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   // 선택된 타입의 브랜드들을 가져오는 함수
   const fetchBrands = async (selectedType) => {
@@ -44,7 +44,7 @@ export default function DisplayItems() {
   }, [selectedType]);
 
   // model의 상태정보
-  const [models, setModels] = useState([]);
+  const [models, setModel] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
   // 선택된 브랜드의 모델들을 가져오는 비동기 함수입니다.
   const fetchModels = async (selectedType, selectedBrand) => {
@@ -53,7 +53,7 @@ export default function DisplayItems() {
         `/fetchModels?type=${selectedType}&brand=${selectedBrand}`
       );
       const data = await response.json();
-      setModels(data.models);
+      setModel(data.models);
     } catch (error) {
       console.error("Error fetching models:", error);
     }
@@ -64,25 +64,43 @@ export default function DisplayItems() {
     console.log(selectedType, selectedBrand);
   }, [selectedType, selectedBrand]);
 
-  // 선택된 
-  const fetchModelInfos = async (    selectedType,    selectedBrand,    selectedModel  ) => {
-    try {
-      const response = await fetch( `/fetchModelInfos?type=${selectedType}&brand=${selectedBrand}&model=${selectedModel}`
-      );
-      const data = await response.json();
-    } catch (error) {
-      console.error("Error fetching modelInfo :", error);
-    }
-  };
+  // 모델 정보 상태를 초기화합니다.
+  const [modelInfo, setModelInfo] = useState([]);
+
+// 모델 정보를 가져오는 함수에서 API 응답 데이터를 배열로 설정합니다.
+const fetchModelInfos = async (
+  selectedType,
+  selectedBrand,
+  selectedModel
+) => {
+  try {
+    // 데이터를 가져오기 전에 상태를 초기화합니다.
+    setModelInfo([]);
+    
+    const response = await fetch(
+      `/fetchModelInfos?type=${selectedType}&brand=${selectedBrand}&model=${selectedModel}`
+    );
+    const data = await response.json();
+    setModelInfo(data.modelInfo); // 배열로 설정
+  } catch (error) {
+    console.error("Error fetching modelInfo :", error);
+    // 에러 발생 시 빈 배열로 초기화합니다.
+    setModelInfo([]);
+  }
+};
 
   // 컴포넌트가 처음 마운트시 model을 가져오는 함수를 호출
   useEffect(() => {
-    fetchModelInfos(selectedType, selectedBrand,selectedModel);
-    console.log(selectedType, selectedBrand,selectedModel);
-  }, [selectedType, selectedBrand,selectedModel]);
-
+    fetchModelInfos(selectedType, selectedBrand, selectedModel);
+  }, [selectedType, selectedBrand, selectedModel]);
+  
   return (
     <>
+      <div>
+        <div>type : {selectedType}</div>
+        <div>brand : {selectedBrand}</div>
+        <div>model : {selectedModel}</div>
+      </div>
       <div>
         {types.map((type) => (
           <button key={type} onClick={() => setSelectedType(type)}>
@@ -97,12 +115,40 @@ export default function DisplayItems() {
           </button>
         ))}
       </div>
-      <div style={{display:"flex", flexDirection:"row", overflow:"scroll", overflowY:"hidden", maxWidth:"80vh"}}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          overflow: "scroll",
+          overflowY: "hidden",
+          maxWidth: "80vh",
+        }}
+      >
         {models.map((model) => (
           <button key={model} onClick={() => setSelectedModel(model)}>
             {model}
           </button>
         ))}
+      </div>
+      <div>
+        {modelInfo ? (
+          modelInfo.map((info, index) => (
+            <ul key={index}>
+              <li>Type: {info.type}</li>
+              <li>Part Number: {info.part_number}</li>
+              <li>Brand: {info.brand}</li>
+              <li>Model: {info.model}</li>
+              <li>Rank: {info.rank}</li>
+              <li>Benchmark: {info.benchmark}</li>
+              <li>Samples: {info.samples}</li>
+              <li>
+                URL: <a href={info.url}>{info.url}</a>
+              </li>
+            </ul>
+          ))
+        ) : (
+          <p>No model information available.</p>
+        )}
       </div>
     </>
   );
