@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 
 export default function DisplayItems() {
-  const [result, setResult] = useState("");
 
   // 타입의 상태정보
   const [types, setType] = useState([]);
@@ -20,7 +19,12 @@ export default function DisplayItems() {
   };
   // 컴포넌트가 처음 마운트시 타입을 가져오는 함수호출
   useEffect(() => {
+    setType([])
+    setBrand([]);
+    setModel([]);
+    setModelInfo([]);
     fetchTypes();
+    fetchBrands(selectedType);
     console.log(selectedType);
   }, [selectedType]);
 
@@ -39,6 +43,8 @@ export default function DisplayItems() {
   };
   // 컴포넌트가 처음 마운트시 브랜드를 가져오는 함수를 호출
   useEffect(() => {
+    setBrand([])
+    setModelInfo([]);
     fetchBrands(selectedType);
     console.log(selectedType);
   }, [selectedType]);
