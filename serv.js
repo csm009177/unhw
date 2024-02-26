@@ -125,6 +125,7 @@ app.prepare().then(() => {
     });
   });
   
+  // item에 있는 type들을 가져오는 엔드포인트
   server.get("/fetchTypes", (req, res) => {
     const query = `SELECT DISTINCT type FROM item;`; // 중복되지 않는 type 값들을 가져오는 쿼리
     connection.query(query, (err, results, fields) => {
@@ -138,6 +139,7 @@ app.prepare().then(() => {
     });
   });
   
+  // item에 있는 선택된 타입에서 브랜드를 가져오는 엔드포인트
   server.get("/fetchBrands", (req, res) => {
     const { type } = req.query;
     const query = `SELECT DISTINCT brand FROM item WHERE type = ?;`;
@@ -152,13 +154,29 @@ app.prepare().then(() => {
     });
   });
 
+  // item에 있는 선택된 브랜드에서 모델을 가져오는 엔드포인트
   server.get("/fetchModels", (req, res) => {
     const { type, brand } = req.query;
-    const query = `SELECT DISTINCT model FROM item WHERE type = ? AND brand = ?;`;
+    const query = `SELECT * FROM item WHERE type = ? AND brand = ?;`;
     connection.query(query, [type, brand], (err, results, fields) => {
       if (err) {
         console.error("fetchModels error:", err);
         res.status(500).json({ message: "모델을 가져오는 중 문제가 발생했습니다." });
+        return;
+      }
+      const models = results.map(result => result.model);
+      res.status(200).json({ models });
+    });
+  });
+
+  // item에 있는 선택된 모델의 정보를 가져오는 엔드포인트
+  server.get("/fetchModelInfos", (req, res) => {
+    const { type, brand, model } = req.query;
+    const query = `SELECT * FROM item WHERE type = ? AND brand = ? AND model = ?;`;
+    connection.query(query, [type, brand, model], (err, results, fields) => {
+      if (err) {
+        console.error("fetchModelInfos error:", err);
+        res.status(500).json({ message: "모델 정보를 가져오는 중 문제가 발생했습니다." });
         return;
       }
       const models = results.map(result => result.model);
