@@ -251,7 +251,8 @@ export default function DisplayItems() {
       <div>
         {modelInfo ? (
           modelInfo.map((info, index) => (
-            <button key={index} onClick={() => handleClickModel(info.model)}>
+            <button 
+            key={index} onClick={() => handleClickModel(info.model)}>
               <ul>
                 <li>Type: {info.type}</li>
                 <li>Part Number: {info.part_number}</li>
