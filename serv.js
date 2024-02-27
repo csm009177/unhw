@@ -67,38 +67,50 @@ app.prepare().then(() => {
     );
   });
 
-  server.post("/pjtForm", (req, res) => {
-    const { selectedPjtIndex, pjtContents } = req.body;
-    const query =
-      "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
-    connection.query(
-      query,
-      [pjtContents, selectedPjtIndex],
-      (err, results, fields) => {
-        if (err) {
-          console.error("Error chatlog Form :", err);
-          res.status(500).json({ message: "채팅 입력에 실패했습니다." });
-          return;
-        }
-        res.status(200).json({ message: "채팅 입력이 완료되었습니다." });
-      }
-    );
-  });
-
-  server.get("/pjtForm/:pjtIndex", (req, res) => {
-    const pjtIndex = req.params.pjtIndex;
-    const query = "SELECT pjtContents FROM project WHERE pjtNum = ?";
-    connection.query(query, [pjtIndex], (err, results, fields) => {
+// POST 요청을 처리하는 핸들러
+server.post("/pjtForm", (req, res) => {
+  // 요청 본문에서 selectedPjtIndex와 pjtContents를 추출
+  const { selectedPjtIndex, pjtContents } = req.body;
+  // 쿼리 문자열 생성
+  const query =
+    "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
+  // 쿼리 실행
+  connection.query(
+    query,
+    [selectedPjtIndex, pjtContents ],
+    (err, results, fields) => {
       if (err) {
-        console.error("Error fetching chat logs:", err);
-        res
-          .status(500)
-          .json({ message: "채팅 내용을 가져오는 중 오류가 발생했습니다." });
+        // 오류가 발생한 경우 오류 메시지를 로그에 기록하고 클라이언트에게 오류 응답을 보냄
+        console.error("Error chatlog Form :", err);
+        res.status(500).json({ message: "입력에 실패했습니다." });
         return;
       }
-      res.status(200).json({ chatLogs: results });
-    });
+      // 성공한 경우 클라이언트에게 성공 메시지를 응답으로 보냄
+      res.status(200).json({ message: "입력이 완료되었습니다." });
+    }
+  );
+});
+
+// GET 요청을 처리하는 핸들러
+server.get("/pjtForm/:pjtIndex", (req, res) => {
+  // URL에서 pjtIndex를 가져옴
+  const pjtIndex = req.params.pjtIndex;
+  // 쿼리 문자열 생성
+  const query = "SELECT pjtContents FROM project WHERE pjtNum = ?";
+  // 쿼리 실행
+  connection.query(query, [pjtIndex], (err, results, fields) => {
+    if (err) {
+      // 오류가 발생한 경우 오류 메시지를 로그에 기록하고 클라이언트에게 오류 응답을 보냄
+      console.error("Error fetching chat logs:", err);
+      res
+        .status(500)
+        .json({ message: "내용을 가져오는 중 오류가 발생했습니다." });
+      return;
+    }
+    // 성공한 경우 결과를 클라이언트에게 응답으로 보냄
+    res.status(200).json({ pjtContents: results });
   });
+});
 
   server.post("/searchItems", (req, res) => {
     const { keyword } = req.body; // 클라이언트가 전달한 검색어

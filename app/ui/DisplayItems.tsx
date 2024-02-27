@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
 import { openContext, selectContext } from "../context/styleContext";
+import ProjectLogs from "./ProjectLogs";
 
 export default function DisplayItems() {
   // 타입의 상태정보
@@ -115,14 +116,12 @@ export default function DisplayItems() {
     setSelectedModels((prevState) => prevState.filter((_, i) => i !== index));
   };
 
-
-
   // 선택된 프로젝트의 상태값을 가져오기
   const router = useRouter();
   const { selectedPjtIndex } = useContext(selectContext);
-  const [pjtContents, setPjtContents] = useState("");
-  const [pjtLogs, setPjtLogs] = useState([]);
+  const [pjtContents, setPjtContents] = useState([]);
 
+  // project 개별 페이지 라우팅
   useEffect(() => {
     if (selectedPjtIndex !== null) {
       const href = `/pjt${selectedPjtIndex}`;
@@ -130,21 +129,44 @@ export default function DisplayItems() {
     }
   }, [selectedPjtIndex, router]);
 
+  // selectedItemIndex가 변경될 때마다 채팅 내용을 불러옴
   useEffect(() => {
-    // selectedItemIndex가 변경될 때마다 채팅 내용을 불러옴
     if (selectedPjtIndex !== null) {
       fetchLogs();
     }
   }, [selectedPjtIndex]);
 
-  // 채팅 내용 불러오기 함수
+  // project 내용을 불러오기 함수
   const fetchLogs = async () => {
     try {
       const response = await fetch(`/pjtForm/${selectedPjtIndex}`);
       const data = await response.json();
-      setPjtLogs(data.chatLogs);
+      setPjtContents(data.pjtContents);
+      // 데이터가 성공적으로 불려왔는지 확인하기 위해 콘솔에 출력
+      console.log("Fetched project contents:", data.pjtContents);
     } catch (error) {
       console.error("Error fetching chat logs:", error);
+    }
+  };
+
+  // 선택한 모델을 입력 제출 함수
+  const handleRecordSelected = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await fetch("/pmpForm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ selectedPjtIndex, pjtContents: selectedModels }),
+      });
+      console.log("Chat submitted successfully!");
+      // 제출 후 채팅 내용 다시 불러오기
+      fetchLogs();
+      // 입력창 초기화
+      setPjtContents([]);
+    } catch (error) {
+      console.error("Error submitting chat:", error);
     }
   };
 
@@ -212,18 +234,22 @@ export default function DisplayItems() {
           <div key={index}>
             <button
               style={{ backgroundColor: "white", color: "black" }}
-              onClick={() => handleRemoveModel(index)}
-            >
+              onClick={() => handleRemoveModel(index)} >
               {model}
             </button>
           </div>
         ))}
       </div>
       {/* 선택된 모델들을 기록하는 버튼 */}
-      {/* <button onClick={handleRecordSelected}>담아두기</button> */}
+      <button onClick={() => {handleRecordSelected}}>담아두기</button>
       {selectedPjtIndex !== null && (
         <div style={{ width: "100%", height: "50%" }}>
-          <p>Selected Projects : {selectedPjtIndex}</p>
+          {/* 채팅 내용 출력 */}
+          <div style={{ width: "100%", overflowY: "scroll", maxHeight: "500px" }} >
+            {pjtContents.map((content) => (
+              <p key={content}>{content.pjtContents}</p>
+            ))}
+          </div>
         </div>
       )}
     </>

@@ -4,32 +4,32 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 
-export default function ProjectLogs() {
+export default function ChatLog() {
   const router = useRouter();
-  const { selectedPjtIndex } = useContext(selectContext);
-  const [pjtContents, setPjtContents] = useState("");
-  const [pjtLogs, setPjtLogs] = useState([]);
+  const { selectedItemIndex } = useContext(selectContext);
+  const [pmpContents, setPmpContents] = useState("");
+  const [chatLogs, setChatLogs] = useState([]);
 
   useEffect(() => {
-    if (selectedPjtIndex !== null) {
-      const href = `/pjt${selectedPjtIndex}`;
+    if (selectedItemIndex !== null) {
+      const href = `/item${selectedItemIndex}`;
       router.push(href);
     }
-  }, [selectedPjtIndex, router]);
+  }, [selectedItemIndex, router]);
 
   useEffect(() => {
     // selectedItemIndex가 변경될 때마다 채팅 내용을 불러옴
-    if (selectedPjtIndex !== null) {
-      fetchLogs();
+    if (selectedItemIndex !== null) {
+      fetchChatLogs();
     }
-  }, [selectedPjtIndex]);
+  }, [selectedItemIndex]);
 
   // 채팅 내용 불러오기 함수
-  const fetchLogs = async () => {
+  const fetchChatLogs = async () => {
     try {
-      const response = await fetch(`/pjtForm/${selectedPjtIndex}`);
+      const response = await fetch(`/pmpForm/${selectedItemIndex}`);
       const data = await response.json();
-      setPjtLogs(data.chatLogs);
+      setChatLogs(data.chatLogs);
     } catch (error) {
       console.error("Error fetching chat logs:", error);
     }
@@ -44,13 +44,13 @@ export default function ProjectLogs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedPjtIndex, pjtContents }),
+        body: JSON.stringify({ selectedItemIndex, pmpContents }),
       });
       console.log("Chat submitted successfully!");
       // 제출 후 채팅 내용 다시 불러오기
-      fetchLogs();
+      fetchChatLogs();
       // 입력창 초기화
-      setPjtContents("");
+      setPmpContents("");
     } catch (error) {
       console.error("Error submitting chat:", error);
     }
@@ -63,16 +63,16 @@ export default function ProjectLogs() {
         <input
           style={{ width: "90%", color: "black" }}
           type="text"
-          value={pjtContents}
-          onChange={(e) => setPjtContents(e.target.value)}
+          value={pmpContents}
+          onChange={(e) => setPmpContents(e.target.value)}
         />
         <button type="submit" style={{ width: "10%", textAlign: "center" }}>
           submit
         </button>
         {/* 채팅 내용 출력 */}
         <div style={{ width: "100%", overflowY: "scroll", maxHeight: "5%" }}>
-          {pjtLogs.map((log, index) => (
-            <p key={index}>{log.pjtContents}</p>
+          {chatLogs.map((log, index) => (
+            <p key={index}>{log.pmpContents}</p>
           ))}
         </div>
         {/* <DisplayItems/> */}
