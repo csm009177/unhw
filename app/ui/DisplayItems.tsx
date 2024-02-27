@@ -152,6 +152,7 @@ export default function DisplayItems() {
 
   // 선택된 모델들을 기록하는 함수
   const handleRecordSelected = async () => {
+    console.log(selectedModels)
     try {
       // POST 요청을 보내어 선택한 프로젝트 내용을 DB에 기록합니다.
       const response = await fetch("/pjtForm", {
@@ -159,7 +160,7 @@ export default function DisplayItems() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedPjtIndex, pjtContents: selectedModels }),
+        body: JSON.stringify({ selectedPjtIndex, pjtContents:selectedModels }),
       });
       if (response.ok) {
         console.log("Selected models recorded successfully!");
@@ -206,7 +207,8 @@ export default function DisplayItems() {
         }}
       >
         {models.map((model) => (
-          <button key={model} onClick={() => setSelectedModel(model)}>
+          <button 
+          key={model} onClick={() => setSelectedModel(model)}>
             {model}
           </button>
         ))}
@@ -246,9 +248,9 @@ export default function DisplayItems() {
         ))}
       </div>
       {/* 선택된 모델들을 기록하는 버튼 */}
-      <button onClick={() => {handleRecordSelected}}>담아두기</button>
+      <button onClick={handleRecordSelected}>담아두기</button>
       {selectedPjtIndex !== null && (
-        <div style={{ width: "100%", height: "50%" }}>
+        <div style={{ width: "100%", height: "50%" }} >
           {/* 채팅 내용 출력 */}
           <div style={{ width: "100%", overflowY: "scroll", maxHeight: "500px" }} >
             {pjtContents.map((content) => (
