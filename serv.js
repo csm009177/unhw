@@ -70,14 +70,14 @@ app.prepare().then(() => {
 // POST 요청을 처리하는 핸들러
 server.post("/pjtForm", (req, res) => {
   // 요청 본문에서 selectedPjtIndex와 pjtContents를 추출
-  const { selectedPjtIndex, pjtContents } = req.body;
+  const { pjtContents, selectedPjtIndex  } = req.body;
   // 쿼리 문자열 생성
   const query =
     "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
   // 쿼리 실행
   connection.query(
     query,
-    [selectedPjtIndex, pjtContents ],
+    [ pjtContents, selectedPjtIndex ],
     (err, results, fields) => {
       if (err) {
         // 오류가 발생한 경우 오류 메시지를 로그에 기록하고 클라이언트에게 오류 응답을 보냄

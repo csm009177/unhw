@@ -109,6 +109,7 @@ export default function DisplayItems() {
   // 모델을 선택하는 버튼 클릭 시 해당 모델을 배열에 추가하는 함수
   const handleClickModel = async (model) => {
     setSelectedModels((prevState) => [...prevState, model]);
+    console.log(selectedModels)
   };
 
   // 선택된 모델들을 제거하는 함수
@@ -149,33 +150,37 @@ export default function DisplayItems() {
     }
   };
 
-  // 선택한 모델을 입력 제출 함수
-  const handleRecordSelected = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // 선택된 모델들을 기록하는 함수
+  const handleRecordSelected = async () => {
     try {
-      await fetch("/pmpForm", {
+      // POST 요청을 보내어 선택한 프로젝트 내용을 DB에 기록합니다.
+      const response = await fetch("/pjtForm", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ selectedPjtIndex, pjtContents: selectedModels }),
       });
-      console.log("Chat submitted successfully!");
-      // 제출 후 채팅 내용 다시 불러오기
-      fetchLogs();
-      // 입력창 초기화
-      setPjtContents([]);
+      if (response.ok) {
+        console.log("Selected models recorded successfully!");
+        // 기록 완료 후 채팅 내용 다시 불러오기
+        fetchLogs();
+        // 선택된 모델 초기화
+        setSelectedModels([]);
+      } else {
+        console.error("Failed to record selected models.");
+      }
     } catch (error) {
-      console.error("Error submitting chat:", error);
+      console.error("Error recording selected models:", error);
     }
   };
 
   return (
     <>
-      <div>
-        <div>type : {selectedType}</div>
-        <div>brand : {selectedBrand}</div>
-        <div>model : {selectedModel}</div>
+      <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+        <div style={{width:"30vh"}}> type  : {selectedType } </div>
+        <div style={{width:"30vh"}}> brand : {selectedBrand} </div>
+        <div style={{width:"30vh"}}> model : {selectedModel} </div>
       </div>
       <div>
         {types.map((type) => (
