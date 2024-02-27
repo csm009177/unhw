@@ -105,11 +105,15 @@ export default function DisplayItems() {
     fetchModelInfos(selectedType, selectedBrand, selectedModel);
   }, [selectedType, selectedBrand, selectedModel]);
 
-  const [selectedModels, setSelectedModels] = useState([]);
+  const [selectedModelInfo, setSelectedModelInfo] = useState([]);
   // 모델을 선택하는 버튼 클릭 시 해당 모델을 배열에 추가하는 함수
   const handleClickModel = async (model) => {
-    setSelectedModels((prevState) => [...prevState, model]);
-    console.log(selectedModels)
+    setSelectedModelInfo((prevState) => [...prevState, model]);
+    console.log(selectedModelInfo);
+    // 선택된 모델을 기록하는 함수 호출
+    if (selectedModelInfo !== null && selectedPjtIndex !== null) {
+      handleRecordSelected();
+    }
   };
 
   // 선택된 모델들을 제거하는 함수
@@ -152,7 +156,7 @@ export default function DisplayItems() {
 
   // 선택된 모델들을 기록하는 함수
   const handleRecordSelected = async () => {
-    console.log(selectedModels)
+    console.log(selectedModelInfo);
     try {
       // POST 요청을 보내어 선택한 프로젝트 내용을 DB에 기록합니다.
       const response = await fetch("/pjtForm", {
@@ -160,14 +164,17 @@ export default function DisplayItems() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedPjtIndex, pjtContents:selectedModels }),
+        body: JSON.stringify({
+          selectedPjtIndex,
+          pjtContents: selectedModelInfo,
+        }),
       });
       if (response.ok) {
         console.log("Selected models recorded successfully!");
         // 기록 완료 후 채팅 내용 다시 불러오기
         fetchLogs();
         // 선택된 모델 초기화
-        setSelectedModels([]);
+        setSelectedModelInfo([]);
       } else {
         console.error("Failed to record selected models.");
       }
@@ -178,19 +185,43 @@ export default function DisplayItems() {
 
   return (
     <>
-      <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-        <div style={{width:"30vh"}}> type  : {selectedType } </div>
-        <div style={{width:"30vh"}}> brand : {selectedBrand} </div>
-        <div style={{width:"30vh"}}> model : {selectedModel} </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ width: "30vh" }}> type : {selectedType} </div>
+        <div style={{ width: "30vh" }}> brand : {selectedBrand} </div>
+        <div style={{ width: "30vh" }}> model : {selectedModel} </div>
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        types :
         {types.map((type) => (
-          <button key={type} onClick={() => setSelectedType(type)}>
+          <button
+            style={{ width: "auto" }}
+            key={type}
+            onClick={() => setSelectedType(type)}
+          >
             {type}
           </button>
         ))}
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        brands :
         {brands.map((brand) => (
           <button key={brand} onClick={() => setSelectedBrand(brand)}>
             {brand}
@@ -201,14 +232,18 @@ export default function DisplayItems() {
         style={{
           display: "flex",
           flexDirection: "row",
-          overflow: "scroll",
-          overflowY: "hidden",
-          maxWidth: "80vh",
+          overflowX: "auto",
+          maxWidth: "100vh",
+          scrollbarWidth: "thin", // 스크롤바 너비 설정
+          scrollbarColor: "#888 transparent", // 스크롤바 색상 설정
         }}
       >
         {models.map((model) => (
-          <button 
-          key={model} onClick={() => setSelectedModel(model)}>
+          <button
+            key={model}
+            onClick={() => setSelectedModel(model)}
+            style={{ minWidth: `${model.length * 10}px`, margin: "5px" }}
+          >
             {model}
           </button>
         ))}
@@ -226,7 +261,7 @@ export default function DisplayItems() {
                 <li>Benchmark: {info.benchmark}</li>
                 <li>Samples: {info.samples}</li>
                 <li>
-                  URL: <a href={info.url}>{info.url}</a>
+                  <a href={info.url}>Link Button</a>
                 </li>
               </ul>
             </button>
@@ -237,22 +272,24 @@ export default function DisplayItems() {
       </div>
       <div>
         {/* 선택된 모델들을 나타내는 표시 칸 */}
-        {selectedModels.map((model, index) => (
+        {selectedModelInfo.map((model, index) => (
           <div key={index}>
             <button
               style={{ backgroundColor: "white", color: "black" }}
-              onClick={() => handleRemoveModel(index)} >
+              onClick={() => handleRemoveModel(index)}
+            >
               {model}
             </button>
           </div>
         ))}
       </div>
-      {/* 선택된 모델들을 기록하는 버튼 */}
-      <button onClick={handleRecordSelected}>담아두기</button>
+      {/* 선택된 프로젝트가 있을때 프로젝트의 콘텐츠를 보여준다 */}
       {selectedPjtIndex !== null && (
-        <div style={{ width: "100%", height: "50%" }} >
-          {/* 채팅 내용 출력 */}
-          <div style={{ width: "100%", overflowY: "scroll", maxHeight: "500px" }} >
+        <div style={{ width: "100%", height: "50%", maxHeight: "50%" }}>
+          {/* 로그 내용 출력 */}
+          <div
+            style={{ width: "100%", overflowY: "scroll", maxHeight: "50vh" }}
+          >
             {pjtContents.map((content) => (
               <p key={content}>{content.pjtContents}</p>
             ))}
