@@ -16,7 +16,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   const [showChild, setshowChild] = useState(true);
   const [showLobby, setShowLobby] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const [selectedPjtIndex, setSelectedPjtIndex] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -40,7 +40,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   return (
     <div className="flex flex-row justify-between h-screen overflow-hidden">
       <selectContext.Provider
-        value={{ selectedItemIndex, setSelectedItemIndex }}
+        value={{ selectedPjtIndex, setSelectedPjtIndex }}
       >
         <openContext.Provider value={{ isOpen, setIsOpen }}>
           {showLeft ? <ToggleLeftVar /> : null}

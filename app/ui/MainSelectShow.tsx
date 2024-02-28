@@ -4,18 +4,18 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { openContext, selectContext } from "../context/styleContext";
 import DisplayItems from "./DisplayItems";
-import ChatLog from "./ChatLog";
+import ChatLog from "./ProjectLogs";
 
 export default function MainSelectShow() {
   const router = useRouter();
-  const { selectedItemIndex } = useContext(selectContext);
+  const { selectedPjtIndex } = useContext(selectContext);
 
   useEffect(() => {
-    if (selectedItemIndex !== null) {
-      const href = `/item${selectedItemIndex}`;
+    if (selectedPjtIndex !== null) {
+      const href = `/pjt${selectedPjtIndex}`;
       router.push(href);
     }
-  }, [selectedItemIndex, router]);
+  }, [selectedPjtIndex, router]);
 
   return (
     <div
@@ -32,9 +32,9 @@ export default function MainSelectShow() {
       }}
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
-      {selectedItemIndex !== null && (
+      {selectedPjtIndex !== null && (
         <div style={{ width: "100%", height: "50%" }}>
-          <p>Selected Item : {selectedItemIndex}</p>
+          <p>Selected Projects : {selectedPjtIndex}</p>
           <DisplayItems />
           {/* <DisplayItems2 /> */}
           {/* <ChatLog/> */}

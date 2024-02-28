@@ -12,8 +12,8 @@ export default function ToggleLeftVar() {
   const pathname = usePathname();
   const [items, setItems] = useState([]);
   const { isOpen, setIsOpen } = useContext(openContext);
-  const { selectedItemIndex, setSelectedItemIndex } = useContext(selectContext);
-  const href = `/item${selectedItemIndex}`; // 동적 URL 생성
+  const { selectedPjtIndex, setSelectedPjtIndex } = useContext(selectContext);
+  const href = `/pjt${selectedPjtIndex}`; // 동적 URL 생성
 
   const toggleList = () => {
     setIsOpen(!isOpen);
