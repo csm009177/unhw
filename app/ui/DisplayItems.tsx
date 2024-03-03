@@ -118,7 +118,7 @@ export default function DisplayItems() {
 
   // 선택된 모델들을 제거하는 함수
   const handleRemoveModel = (index) => {
-    setSelectedModels((prevState) => prevState.filter((_, i) => i !== index));
+    setSelectedModelInfo((prevState) => prevState.filter((_, i) => i !== index));
   };
 
   // 선택된 프로젝트의 상태값을 가져오기

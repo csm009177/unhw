@@ -18,6 +18,15 @@ const connection = mysql.createConnection({
   port: 3306,
 });
 
+// MariaDB, RDS 연결 설정
+// const connection = mysql.createConnection({
+//   host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
+//   user: "admin",
+//   password: "gerrard177!",
+//   database: "unhw",
+//   port: 3306,
+// });
+
 app.prepare().then(() => {
   const server = express();
   server.use(express.json({ limit: "10mb" }));
@@ -92,13 +101,13 @@ server.post("/pjtForm", (req, res) => {
 });
 
 // GET 요청을 처리하는 핸들러
-server.get("/pjtForm/:pjtIndex", (req, res) => {
+server.get("/pjtForm/:pjtNum", (req, res) => {
   // URL에서 pjtIndex를 가져옴
-  const pjtIndex = req.params.pjtIndex;
+  const pjtNum = req.params.pjtNum;
   // 쿼리 문자열 생성
   const query = "SELECT pjtContents FROM project WHERE pjtNum = ?";
   // 쿼리 실행
-  connection.query(query, [pjtIndex], (err, results, fields) => {
+  connection.query(query, [pjtNum], (err, results, fields) => {
     if (err) {
       // 오류가 발생한 경우 오류 메시지를 로그에 기록하고 클라이언트에게 오류 응답을 보냄
       console.error("Error fetching chat logs:", err);
