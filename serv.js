@@ -18,6 +18,15 @@ const connection = mysql.createConnection({
   port: 3306,
 });
 
+// MariaDB, RDS 연결 설정
+// const connection = mysql.createConnection({
+//   host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
+//   user: "admin",
+//   password: "gerrard177!",
+//   database: "unhw",
+//   port: 3306,
+// });
+
 app.prepare().then(() => {
   const server = express();
   server.use(express.json({ limit: "10mb" }));
