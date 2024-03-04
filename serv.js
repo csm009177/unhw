@@ -1,14 +1,14 @@
 // 시크릿
-const crypto = require("crypto");
+import crypto from "crypto";
 const secretKey = crypto.randomBytes(32).toString("hex");
-const jwt = require("jsonwebtoken"); // npm install jsonwebtoken
-const mysql = require("mysql2"); // npm install mysql2
-const express = require("express"); // npm install express
-const next = require("next");
+import jwt from "jsonwebtoken"; // npm install jsonwebtoken
+import mysql from "mysql2"; // npm install mysql2
+import express from "express"; // npm install express
+import next from "next";
 const isDev = process.env.NODE_ENV !== "development";
 const app = next({ dev: isDev });
 const handle = app.getRequestHandler();
-const fs = require("fs");
+import fs from "fs";
 
 const connection = mysql.createConnection({
   host: "localhost",
