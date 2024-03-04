@@ -1,9 +1,9 @@
 // 시크릿
 import crypto from "crypto";
 const secretKey = crypto.randomBytes(32).toString("hex");
-import jwt from "jsonwebtoken"; // npm install jsonwebtoken
-import mysql from "mysql2"; // npm install mysql2
-import express from "express"; // npm install express
+import jwt from "jsonwebtoken"; // npm install jsonwebtoken --save
+import mysql from "mysql2"; // npm install mysql2 --save
+import express from "express"; // npm install express --save
 import next from "next";
 const isDev = process.env.NODE_ENV !== "development";
 const app = next({ dev: isDev });
