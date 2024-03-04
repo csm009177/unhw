@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userPw, setUserPw] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter()
 
@@ -19,7 +19,7 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Identification: userId, password }),
+        body: JSON.stringify({ id: userId, password: userPw }),
       });
       const data = await response.json();
       setMessage(data.message);
@@ -55,8 +55,8 @@ export default function Login() {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userPw}
+              onChange={(e) => setUserPw(e.target.value)}
               required
             />
           </div>

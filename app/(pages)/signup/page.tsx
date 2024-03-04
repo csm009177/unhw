@@ -5,7 +5,7 @@ import "/app/globals.css";
 
 export default function SignUp() {
   const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userPw, setUserPw] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -16,7 +16,7 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Identification: userId, pw: password }),
+        body: JSON.stringify({ id: userId, pw: userPw }),
       });
       const data = await response.json();
       setMessage(data.message);
@@ -46,8 +46,8 @@ export default function SignUp() {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userPw}
+              onChange={(e) => setUserPw(e.target.value)}
               required
             />
           </div>

@@ -33,10 +33,10 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
   server.post("/signupForm", (req, res) => {
-    const { Identification, pw } = req.body;
+    const { id, pw } = req.body;
 
-    const query = "INSERT INTO users (id, pw) VALUES (?, ?)";
-    connection.query(query, [Identification, pw], (err, results, fields) => {
+    const query = "INSERT INTO users (id, pw, signupDate) VALUES (?, ?, NOW())";
+    connection.query(query, [id, pw], (err, results, fields) => {
       if (err) {
         console.error("Error signing up:", err);
         res.status(500).json({ message: "회원가입에 실패했습니다." });
