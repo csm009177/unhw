@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Create Desktop Project",
@@ -10,10 +10,8 @@ interface ChildrenProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: ChildrenProps) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+export default function MainLayout({ children }: ChildrenProps) {
+  return (<>
+  {children}
+  </>);
 }
