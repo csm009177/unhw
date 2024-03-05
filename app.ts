@@ -19,7 +19,7 @@ const connection: Connection = mysql.createConnection({
 //   host: "database-1.ctgo6osmy1q0.ap-northeast-2.rds.amazonaws.com",
 //   user: "admin",
 //   password: "gerrard177!",
-//   database: "unhw"
+//   database: "unhw",
 //   port: 3306,
 // });
 
