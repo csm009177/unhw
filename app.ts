@@ -56,10 +56,10 @@ app.prepare().then(() => {
    * @param {Response} res 응답 객체
    */
   server.post("/loginForm", (req: Request, res: Response) => {
-    const { Identification, password } = req.body;
+    const { id, pw } = req.body;
 
     const query: string = "SELECT * FROM users WHERE id = ? AND pw = ? ";
-    connection.query(query, [Identification, password], (err: QueryError | null, results: RowDataPacket[], fields: FieldPacket[]) => {
+    connection.query(query, [id, pw], (err: QueryError | null, results: RowDataPacket[], fields: FieldPacket[]) => {
       if (err) {
         console.error("Error logging in:", err);
         res.status(500).json({ message: "로그인에 실패했습니다." });
