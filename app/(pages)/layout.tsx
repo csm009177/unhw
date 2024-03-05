@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
 import Toggle from "@/app/ui/Toggle";
-import Lobby from "./lobby/page";
+import Lobby from "../ui/Lobby";
 import { usePathname, useRouter } from "next/navigation";
 
 interface ChildrenProps {
@@ -20,20 +20,19 @@ export default function MainLayout({ children }: ChildrenProps) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token && pathname === "/") {
-
       setShowLobby(false)
       setShowChildren(true);
       setShowToggle(true);
     }
-    if (!token && pathname) {
-      setShowToggle(false);
+    if (!token) {
       setShowChildren(false);
+      setShowToggle(false);
       setShowLobby(true);
-      if(pathname !=="/login"){
+      if(pathname ==="/login"){
         setShowChildren(true);
         setShowLobby(false);
       }
-      if(pathname !=="/signup"){
+      if(pathname ==="/signup"){
         setShowChildren(true);
         setShowLobby(false);
       }

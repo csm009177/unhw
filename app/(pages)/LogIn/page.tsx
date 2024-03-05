@@ -41,7 +41,7 @@ export default function Login() {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="userId">아이디:</label>
+            <label htmlFor="userId">user Id:</label>
             <input
               type="text"
               id="userId"
