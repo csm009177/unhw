@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import "../globals.css";
 import { tokenContext } from '../context/MainContext';
+import AddProjectList from './AddProjectList';
 
 
 export default function Toggle() {
@@ -38,6 +39,7 @@ export default function Toggle() {
           onClick={handleToggle}
           style={{ backgroundColor: "#434343", fontSize: "2vw" }}
         >
+          <AddProjectList/>
           {isOpen ? "◀" : "▶"}
         </button>
       </div>
