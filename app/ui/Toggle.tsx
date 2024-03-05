@@ -39,7 +39,8 @@ export default function Toggle() {
           onClick={handleToggle}
           style={{ backgroundColor: "#434343", fontSize: "2vw" }}
         >
-          <AddProjectList/>
+          
+          {/* <AddProjectList/> */}
           {isOpen ? "◀" : "▶"}
         </button>
       </div>

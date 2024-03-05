@@ -36,9 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="Login">
-      <div className="Lobby-RightCont">
-        <h2>로그인</h2>
+      <>Log in Page
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="userId">user Id:</label>
@@ -63,7 +61,6 @@ export default function Login() {
           <button type="submit">submit</button>
         </form>
         {message && <p>{message}</p>}
-      </div>
-    </div>
+      </>
   );
 }
