@@ -14,7 +14,7 @@
     // CommonJS 모듈을 ES 모듈로 변환할 때 interop을 사용하도록 설정
     "esModuleInterop": true,
     // ESNext를 사용하여 모듈을 생성합니다.
-    "module": "CommonJS",
+    "module": "esnext",
     // 모듈 해결 전략을 번들러에게 위임
     "moduleResolution": "bundler",
     // JSON 모듈을 해결할 것인지 여부를 지정
