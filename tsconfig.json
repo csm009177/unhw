@@ -14,7 +14,7 @@
     // CommonJS 모듈을 ES 모듈로 변환할 때 interop을 사용하도록 설정
     "esModuleInterop": true,
     // ESNext를 사용하여 모듈을 생성합니다.
-    "module": "ESNext",
+    "module": "CommonJS",
     // 모듈 해결 전략을 번들러에게 위임
     "moduleResolution": "node",
     // JSON 모듈을 해결할 것인지 여부를 지정
@@ -43,7 +43,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/**/*.tsx",
-    "app.tsx"
   ],
   // 컴파일러가 제외해야 할 파일의 목록을 지정
   "exclude": ["node_modules"]
