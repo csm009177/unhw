@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import Toggle from "@/app/ui/Toggle";
 import Lobby from "../ui/Lobby";
 import { usePathname, useRouter } from "next/navigation";
-import { selectedProjectContext } from '../context/MainContext';
+// import { selectedProjectContext } from '../context/MainContext';
 
 interface ChildrenProps {
   children: React.ReactNode;
