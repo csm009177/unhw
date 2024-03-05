@@ -3,7 +3,6 @@
 import { useContext, useState } from "react";
 import "../globals.css";
 import { tokenContext } from '../context/MainContext';
-import AddProjectList from './AddProjectList';
 
 
 export default function Toggle() {
