@@ -2,6 +2,6 @@
 
 export default function Main() {
   return <>
-  <div></div>
+  <div>Main Page</div>
   </>;
 }
