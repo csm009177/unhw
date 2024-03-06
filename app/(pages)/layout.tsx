@@ -45,7 +45,7 @@ export default function MainLayout({ children }: ChildrenProps) {
         setShowLobby(false);
       }
     }
-  }, [pathname, showToggle, showChildren, router]);
+  }, [pathname,showToggle, showChildren, showLobby, router]);
 
   const [isOpen, setIsOpen] = useState(true);
   const [selectedPjtIndex, setSelectedPjtIndex] = useState<number|null>(null);
