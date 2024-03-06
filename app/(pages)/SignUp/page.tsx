@@ -9,10 +9,11 @@ import React, { useState } from "react";
 export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const [username, setUsername] = useState("");
   const [userPwCheck, setUserPwCheck] = useState(""); // Added state for password check
-  const [useraddress, setUseraddress] = useState("");
+  const [username, setUsername] = useState("");
+  const [userphonnumber, setUserphonnumber] = useState("");
   const [useremail, setUseremail] = useState("");
+  const [useraddress, setUseraddress] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
 
@@ -39,8 +40,9 @@ export default function SignUp() {
           id: userId,
           pw: userPw,
           username:username,
-          useraddress: useraddress,
+          userphonnumber : userphonnumber,
           useremail: useremail,
+          useraddress: useraddress,
         }),
       });
       const data = await response.json();
@@ -95,22 +97,32 @@ export default function SignUp() {
         />
       </div>
       <div>
+        <label htmlFor="userphonnumber">phonnumber:</label>
+        <input
+          type="text"
+          id="userphonnumber"
+          value={userphonnumber}
+          onChange={(e) => setUserphonnumber(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="useremail">mail:</label>
+        <input
+          type="text"
+          id="useremail"
+          value={useremail}
+          onChange={(e) => setUseremail(e.target.value)}
+          required
+        />
+      </div>
+      <div>
         <label htmlFor="useraddress">address:</label>
         <input
           type="text"
           id="useraddress"
           value={useraddress}
           onChange={(e) => setUseraddress(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="useremail">useremail:</label>
-        <input
-          type="text"
-          id="useremail"
-          value={useremail}
-          onChange={(e) => setUseremail(e.target.value)}
           required
         />
       </div>

@@ -43,13 +43,13 @@ app.prepare().then(() => {
    * @param {Response} res 응답 객체
    */
   server.post("/signupForm", (req: Request, res: Response) => {
-    const { id, pw, username, useraddress, useremail } = req.body;
+    const { id, pw, username, useraddress, useremail, userphonnumber } = req.body;
 
     const query: string =
-      "INSERT INTO users (id, pw, username, useraddress, useremail, signupdate) VALUES (?, ?, ?, ?, ?, NOW())";
+      "INSERT INTO users (id, pw, username, useraddress, useremail, userphonnumber, signupdate) VALUES (?, ?, ?, ?, ?, ?, NOW())";
     connection.query(
       query,
-      [id, pw, username, useraddress, useremail],
+      [id, pw, username, useraddress, useremail, userphonnumber],
       (err: QueryError | null, results: any, fields: FieldPacket[]) => {
         if (err) {
           console.error("Error signing up:", err);
@@ -60,7 +60,7 @@ app.prepare().then(() => {
       }
     );
   });
-
+  
   /**
    * 로그인 요청 처리
    * @param {Request} req 요청 객체
