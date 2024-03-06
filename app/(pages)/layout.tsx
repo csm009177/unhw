@@ -51,14 +51,14 @@ export default function MainLayout({ children }: ChildrenProps) {
   const [selectedPjtIndex, setSelectedPjtIndex] = useState(null);
 
   return (
-    <>
-      <selectedProjectContext.Provider value={{selectedPjtIndex, setSelectedPjtIndex}}>
+    <selectedProjectContext.Provider value={{selectedPjtIndex, setSelectedPjtIndex}}>
         <openContext.Provider value={{ isOpen, setIsOpen }}>
-          {showToggle ? <Toggle /> : null}
-          {showChildren ? children : null}
-          {showLobby ? <Lobby /> : null}
+          <div style={{display:"flex", flexDirection:"row"}}>
+            {showToggle ? <Toggle /> : null}
+            {showChildren ? children : null}
+          </div>
+            {showLobby ? <Lobby /> : null}
         </openContext.Provider>
-      </selectedProjectContext.Provider>
-    </>
+    </selectedProjectContext.Provider>
   );
 }
