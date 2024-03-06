@@ -25,12 +25,12 @@ export default function MainLayout({ children }: ChildrenProps) {
       setShowLobby(false);
       setShowChildren(true);
       setShowToggle(true);
-      if (pathname === "/login") {
-        router.push('/')
-      }
-      if (pathname === "/signup") {
-        router.push('/')
-      }
+      // if (pathname === "/login") {
+      //   router.push('/')
+      // }
+      // if (pathname === "/signup") {
+      //   router.push('/')
+      // }
     }
     if (!token) {
       setShowChildren(false);
