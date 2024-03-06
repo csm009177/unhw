@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
 import { openContext, selectedProjectContext } from "../context/MainContext";
+import Searchbox from './Searchbox';
 
 export default function ProjectShow() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function ProjectShow() {
     <div
       className="Main-RightCont"
       style={{
-        width: isOpen? "80%": "100%",
+        width: isOpen? "80%": "98%",
         height: "100%",
         backgroundColor: "#373737",
         overflow: "hidden",
@@ -34,6 +35,7 @@ export default function ProjectShow() {
       {selectedPjtIndex !== null && (
         <div style={{ width: "100%", height: "50%" }}>
           <p>Selected Projects : {selectedPjtIndex}</p>
+          <Searchbox/>
         </div>
       )}
     </div>

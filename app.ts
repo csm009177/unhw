@@ -136,7 +136,7 @@ app.prepare().then(() => {
    * @param {Request} req 요청 객체 - Express 요청 객체
    * @param {Response} res 응답 객체 - Express 응답 객체
    */
-  server.post("/")
+  server.post("/fetchTypes", (req: Request, res: Response) => {
 
 
   /**
