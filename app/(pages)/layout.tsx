@@ -39,7 +39,7 @@ export default function MainLayout({ children }: ChildrenProps) {
     }
   }, [pathname, showToggle, showChildren, router]);
 
-  const [isOpen, setIsOpen] = useState(openContext);
+  const [isOpen, setIsOpen] = useState(true);
   const [selectedPjtIndex, setSelectedPjtIndex] = useState(selectedProjectContext);
 
   return (

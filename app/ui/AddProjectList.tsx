@@ -12,9 +12,10 @@ interface AddProjectListProps {
 }
 
 const AddProjectList: React.FC<AddProjectListProps> = (
-  {isOpen,setIsOpen, selectedPjtIndex, setSelectedPjtIndex}
 ) => {
   const [project, setProject] = useState<string[]>([]);
+  const {setSelectedPjtIndex} = useContext(selectedProjectContext)
+  const {isOpen} = useContext(openContext)
 
   const addProject = () => {
     const newProject = `project ${project.length}`;
