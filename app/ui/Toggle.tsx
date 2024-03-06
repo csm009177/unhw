@@ -35,16 +35,18 @@ export default function Toggle() {
           height: "100%",
         }}
       >
+        <div style={{width: isOpen? "100%":"0%"}}>
+        <AddProjectList
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedPjtIndex={selectedPjtIndex}
+          setSelectedPjtIndex={setSelectedPjtIndex}
+        />
+        </div>
         <button
           onClick={handleToggle}
           style={{ backgroundColor: "#434343", fontSize: "2vw" }}
         >
-          <AddProjectList
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            selectedPjtIndex={selectedPjtIndex}
-            setSelectedPjtIndex={setSelectedPjtIndex}
-          />
           {isOpen ? "◀" : "▶"}
         </button>
       </div>
