@@ -18,10 +18,10 @@ export default function LotationMent() {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => prevSeconds + 1);
       setCurrentCommentIndex((prevIndex) => (prevIndex + 1) % comments.length);
-    }, 500);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [comments.length]);
 
-  return <div className="">{comments[currentCommentIndex]}</div>;
+  return <>{comments[currentCommentIndex]}</>;
 }
