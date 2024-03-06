@@ -1,9 +1,10 @@
 "use client";
 // ItemPage 컴포넌트
-import DisplayProject from '../../ui/DisplayProject';
+
+import ProjectShow from '../../ui/ProjectShow';
 
 export default function ProjectPage() {
   return (<>
-    <DisplayProject/>
+    <ProjectShow/>
   </>);
 }
