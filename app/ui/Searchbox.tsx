@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import FetchTypes from "./searchBoxUI/FetchTypes";
+import { typesContext, selectedTypesContext } from "../context/MainContext";
 
 interface SearchboxProps {
   // Props에 대한 설명 추가
@@ -10,40 +12,15 @@ interface SearchboxProps {
 const Searchbox: React.FC<SearchboxProps> = () => {
   // types을 문자열의 배열로 설정합니다.
   const [types, setTypes] = useState<string[]>([]);
-  // selectedType의 타입을 넘버또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
-  const [selectedType, setSelectedType] = useState<number | null>(null);
-
-  const fetchTypes = async () => {
-    try {
-      const response = await fetch("/fetchTypes");
-      const data = await response.json();
-      setTypes(data.types);
-    } catch (err) {
-      console.error("Error fetching types:", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchTypes();
-  }, []);
+  // selectedType의 타입을 문자열 또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
+  const [selectedTypes, setSelectedTypes] = useState<string | null>(null);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        types :
-        {types.map((type, index) => (
-          <button key={index} onClick={() => setSelectedType(index)}>
-            {type}
-          </button>
-        ))}
-      </div>
-    </>
+    <typesContext.Provider value={{ types, setTypes }}>
+      <selectedTypesContext.Provider value={{ selectedTypes, setSelectedTypes }}>
+        <FetchTypes />
+      </selectedTypesContext.Provider>
+    </typesContext.Provider>
   );
 };
 

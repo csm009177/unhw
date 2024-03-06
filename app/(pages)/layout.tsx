@@ -48,7 +48,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   }, [pathname, showToggle, showChildren, router]);
 
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedPjtIndex, setSelectedPjtIndex] = useState(null);
+  const [selectedPjtIndex, setSelectedPjtIndex] = useState<number|null>(null);
 
   return (
     <selectedProjectContext.Provider value={{selectedPjtIndex, setSelectedPjtIndex}}>

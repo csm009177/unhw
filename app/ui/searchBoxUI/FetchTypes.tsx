@@ -1,21 +1,45 @@
-'use client'
+"use client";
 
-import React from 'react';
+import { selectedTypesContext, typesContext } from "@/app/context/MainContext";
+import React, { useContext, useEffect } from "react";
 
-interface TypeButtonProps {
-  type: string;
-}
 
-const TypeButton: React.FC<TypeButtonProps> = ({ type }) => {
-  const handleClick = () => {
-    
-  }
+const FetchTypes: React.FC = () => {
+  const { types, setTypes } = useContext(typesContext);
+  const {setSelectedTypes} = useContext(selectedTypesContext)
+
+  const fetchTypes = async () => {
+    try {
+      const response = await fetch("/fetchTypes");
+      const data = await response.json();
+      setTypes(data.types);
+    } catch (err) {
+      console.error("Error fetching types:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTypes();
+  },[]);
 
   return (
-    <button onClick={handleClick} style={{ width: 'auto' }}>
-      {type}
-    </button>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        types :
+        {types.map((type) => (
+          <button key={type} onClick={() => setSelectedTypes(type)}>
+            {type}
+          </button>
+        ))}
+      </div>
+    </>
   );
 };
 
-export default TypeButton;
+export default FetchTypes;
