@@ -9,9 +9,10 @@ import React, { useState } from "react";
 export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const [userPwCheck, setUserPwCheck] = useState(""); // Added state for password check
   const [username, setUsername] = useState("");
+  const [userPwCheck, setUserPwCheck] = useState(""); // Added state for password check
   const [useraddress, setUseraddress] = useState("");
+  const [useremail, setUseremail] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
 
@@ -34,7 +35,13 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: userId, pw: userPw, username, useraddress }),
+        body: JSON.stringify({
+          id: userId,
+          pw: userPw,
+          username:username,
+          useraddress: useraddress,
+          useremail: useremail,
+        }),
       });
       const data = await response.json();
       setMessage(data.message);
@@ -94,6 +101,16 @@ export default function SignUp() {
           id="useraddress"
           value={useraddress}
           onChange={(e) => setUseraddress(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="useremail">useremail:</label>
+        <input
+          type="text"
+          id="useremail"
+          value={useremail}
+          onChange={(e) => setUseremail(e.target.value)}
           required
         />
       </div>

@@ -1,11 +1,17 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import mysql, { Connection, FieldPacket, QueryError, ResultSetHeader, RowDataPacket } from "mysql2";
+import mysql, {
+  Connection,
+  FieldPacket,
+  QueryError,
+  ResultSetHeader,
+  RowDataPacket,
+} from "mysql2";
 import express, { Request, Response } from "express";
 import next from "next";
-
 const secretKey: string = crypto.randomBytes(32).toString("hex");
 
+// MariaDB 연결 설정
 const connection: Connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -37,17 +43,22 @@ app.prepare().then(() => {
    * @param {Response} res 응답 객체
    */
   server.post("/signupForm", (req: Request, res: Response) => {
-    const { id, pw, username, useraddress } = req.body;
+    const { id, pw, username, useraddress, useremail } = req.body;
 
-    const query: string = "INSERT INTO users (id, pw, username, useraddress, signupdate) VALUES (?, ?, ?, ?, NOW())";
-    connection.query(query, [id, pw, username, useraddress], (err: QueryError | null, results: any, fields: FieldPacket[]) => {
-      if (err) {
-        console.error("Error signing up:", err);
-        res.status(500).json({ message: "회원가입에 실패했습니다." });
-        return;
+    const query: string =
+      "INSERT INTO users (id, pw, username, useraddress, useremail, signupdate) VALUES (?, ?, ?, ?, ?, NOW())";
+    connection.query(
+      query,
+      [id, pw, username, useraddress, useremail],
+      (err: QueryError | null, results: any, fields: FieldPacket[]) => {
+        if (err) {
+          console.error("Error signing up:", err);
+          res.status(500).json({ message: "회원가입에 실패했습니다." });
+          return;
+        }
+        res.status(200).json({ message: "회원가입이 완료되었습니다." });
       }
-      res.status(200).json({ message: "회원가입이 완료되었습니다." });
-    });
+    );
   });
 
   /**
@@ -59,24 +70,34 @@ app.prepare().then(() => {
     const { id, pw } = req.body;
 
     const query: string = "SELECT * FROM users WHERE id = ? AND pw = ? ";
-    connection.query(query, [id, pw], (err: QueryError | null, results: RowDataPacket[], fields: FieldPacket[]) => {
-      if (err) {
-        console.error("Error logging in:", err);
-        res.status(500).json({ message: "로그인에 실패했습니다." });
-        return;
-      }
+    connection.query(
+      query,
+      [id, pw],
+      (
+        err: QueryError | null,
+        results: RowDataPacket[],
+        fields: FieldPacket[]
+      ) => {
+        if (err) {
+          console.error("Error logging in:", err);
+          res.status(500).json({ message: "로그인에 실패했습니다." });
+          return;
+        }
 
-      if (results.length > 0) {
-        const user = results[0];
-        const tokenPayload = {
-          username: user.username,
-        };
-        const token = jwt.sign(tokenPayload, secretKey, { expiresIn: "1h" });
-        res.status(200).json({ message: "로그인 성공", token });
-      } else {
-        res.status(401).json({ message: "아이디 또는 비밀번호가 올바르지 않습니다." });
+        if (results.length > 0) {
+          const user = results[0];
+          const tokenPayload = {
+            username: user.username,
+          };
+          const token = jwt.sign(tokenPayload, secretKey, { expiresIn: "1h" });
+          res.status(200).json({ message: "로그인 성공", token });
+        } else {
+          res
+            .status(401)
+            .json({ message: "아이디 또는 비밀번호가 올바르지 않습니다." });
+        }
       }
-    });
+    );
   });
 
   /**
@@ -87,15 +108,20 @@ app.prepare().then(() => {
   server.post("/pjtForm", (req: Request, res: Response) => {
     const { pjtContents, selectedPjtIndex } = req.body;
 
-    const query: string = "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
-    connection.query(query, [pjtContents, selectedPjtIndex], (err: QueryError | null, results: any, fields: FieldPacket[]) => {
-      if (err) {
-        console.error("Error chatlog Form :", err);
-        res.status(500).json({ message: "입력에 실패했습니다." });
-        return;
+    const query: string =
+      "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
+    connection.query(
+      query,
+      [pjtContents, selectedPjtIndex],
+      (err: QueryError | null, results: any, fields: FieldPacket[]) => {
+        if (err) {
+          console.error("Error chatlog Form :", err);
+          res.status(500).json({ message: "입력에 실패했습니다." });
+          return;
+        }
+        res.status(200).json({ message: "입력이 완료되었습니다." });
       }
-      res.status(200).json({ message: "입력이 완료되었습니다." });
-    });
+    );
   });
 
   /**
@@ -107,14 +133,24 @@ app.prepare().then(() => {
     const pjtNum: string = req.params.pjtNum;
 
     const query: string = "SELECT pjtContents FROM project WHERE pjtNum = ?";
-    connection.query(query, [pjtNum], (err: QueryError | null, results: RowDataPacket[], fields: FieldPacket[]) => {
-      if (err) {
-        console.error("Error fetching chat logs:", err);
-        res.status(500).json({ message: "내용을 가져오는 중 오류가 발생했습니다." });
-        return;
+    connection.query(
+      query,
+      [pjtNum],
+      (
+        err: QueryError | null,
+        results: RowDataPacket[],
+        fields: FieldPacket[]
+      ) => {
+        if (err) {
+          console.error("Error fetching chat logs:", err);
+          res
+            .status(500)
+            .json({ message: "내용을 가져오는 중 오류가 발생했습니다." });
+          return;
+        }
+        res.status(200).json({ pjtContents: results });
       }
-      res.status(200).json({ pjtContents: results });
-    });
+    );
   });
 
   // 나머지 엔드포인트도 비슷한 방식으로 작성 가능
