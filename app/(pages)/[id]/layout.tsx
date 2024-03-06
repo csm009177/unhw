@@ -10,7 +10,7 @@ import { selectContext, openContext } from "../../context/styleContext";
 import { devNull } from "os";
 import MainSelectShow from '../../ui/MainSelectShow';
 
-export default function MainLayout({ children }: ChildrenProps) {
+export default function IdLayout({ children }: ChildrenProps) {
 
   // useEffect(() => {
   //   const token = localStorage.getItem("jwtToken");
