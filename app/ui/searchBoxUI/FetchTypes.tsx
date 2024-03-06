@@ -4,12 +4,15 @@ import React from 'react';
 
 interface TypeButtonProps {
   type: string;
-  onClick: () => void;
 }
 
-const TypeButton: React.FC<TypeButtonProps> = ({ type, onClick }) => {
+const TypeButton: React.FC<TypeButtonProps> = ({ type }) => {
+  const handleClick = () => {
+    
+  }
+
   return (
-    <button onClick={onClick} style={{ width: 'auto' }}>
+    <button onClick={handleClick} style={{ width: 'auto' }}>
       {type}
     </button>
   );

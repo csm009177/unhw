@@ -11,12 +11,11 @@ const Searchbox: React.FC<SearchboxProps> = () => {
   // 타입을 문자열 배열로 설정합니다.
   const [types, setTypes] = useState<string[]>([]);
   // 선택된 타입의 초기값을 빈 문자열로 설정합니다.
-  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<number | null>(null);
 
   const fetchTypes = async () => {
     try {
       const response = await fetch("/fetchTypes");
-      console.log(response)
       const data = await response.json();
       setTypes(data.types);
     } catch (err) {
@@ -38,10 +37,10 @@ const Searchbox: React.FC<SearchboxProps> = () => {
         }}
       >
         types :
-        {types.map((type) => (
+        {types.map((type, index) => (
           <button
-            key={type}
-            onClick={() => setSelectedType(type)}
+            key={index}
+            onClick={() => setSelectedType(index)}
           >
             {type}
           </button>
