@@ -25,3 +25,16 @@ export const selectedTypesContext = createContext<{
   selectedTypes: string| null;
   setSelectedTypes: Dispatch<SetStateAction< string | null>>;
 }>({ selectedTypes: null, setSelectedTypes: () => {} });
+
+// brandContext - 브랜드의 넘버를 업데이트하는 함수
+export const brandsContext = createContext<{
+  brands: string[];
+  setBrands: Dispatch<SetStateAction<string[]>>;
+}>({ brands: [], setBrands: () => {} });
+
+// selectedBrandContext - 선택된 브랜드의 넘버를 업데이트하는 함수
+export const selectedBrandsContext = createContext<{
+  selectedBrands : string| null;
+  setSelectedBrands: Dispatch<SetStateAction< string | null>>;
+}>({ selectedBrands: null, setSelectedBrands: () => {} });
+
