@@ -11,18 +11,25 @@ interface ChildrenProps {
 }
 
 export default function MainLayout({ children }: ChildrenProps) {
-  const [showToggle, setShowToggle] = useState<boolean>(false);
-  const [showChildren, setShowChildren] = useState<boolean>(false);
-  const [showLobby, setShowLobby] = useState<boolean>(false);
   const pathname = usePathname();
   const router = useRouter();
 
+  const [showToggle, setShowToggle] = useState<boolean>(false);
+  const [showChildren, setShowChildren] = useState<boolean>(false);
+  const [showLobby, setShowLobby] = useState<boolean>(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token && pathname === "/") {
+    if (token) {
       setShowLobby(false);
       setShowChildren(true);
       setShowToggle(true);
+      if (pathname === "/login") {
+        router.push('/')
+      }
+      if (pathname === "/signup") {
+        router.push('/')
+      }
     }
     if (!token) {
       setShowChildren(false);

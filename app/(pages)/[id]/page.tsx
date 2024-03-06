@@ -1,10 +1,9 @@
 "use client";
 // ItemPage 컴포넌트
-import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import DisplayProject from '../../ui/DisplayProject';
 
 export default function ProjectPage() {
   return (<>
-    Project Page
+    <DisplayProject/>
   </>);
 }
