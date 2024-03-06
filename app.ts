@@ -131,29 +131,35 @@ app.prepare().then(() => {
     );
   });
 
-  /**
-   * 프로젝트 폼 입력 요청 처리
-   * @param {Request} req 요청 객체
-   * @param {Response} res 응답 객체
-   */
-  server.post("/pjtForm", (req: Request, res: Response) => {
-    const { pjtContents, selectedPjtIndex } = req.body;
+/**
+ * 프로젝트 폼 입력 요청 처리
+ * @param {Request} req 요청 객체 - Express 요청 객체
+ * @param {Response} res 응답 객체 - Express 응답 객체
+ */
+server.post("/pjtForm", (req: Request, res: Response) => {
+  // 요청에서 프로젝트 내용과 선택된 프로젝트 인덱스를 추출합니다.
+  const { pjtContents, selectedPjtIndex } = req.body;
 
-    const query: string =
-      "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
-    connection.query(
-      query,
-      [pjtContents, selectedPjtIndex],
-      (err: QueryError | null, results: any, fields: FieldPacket[]) => {
-        if (err) {
-          console.error("Error chatlog Form :", err);
-          res.status(500).json({ message: "입력에 실패했습니다." });
-          return;
-        }
-        res.status(200).json({ message: "입력이 완료되었습니다." });
+  // 삽입 쿼리를 생성합니다.
+  const query: string =
+    "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
+
+  // 데이터베이스에 쿼리를 실행합니다.
+  connection.query(
+    query,
+    [pjtContents, selectedPjtIndex],
+    (err: QueryError | null, results: any, fields: FieldPacket[]) => {
+      if (err) {
+        // 오류가 발생한 경우 오류를 로깅하고 클라이언트에게 오류 응답을 전송합니다.
+        console.error("Error chatlog Form :", err);
+        res.status(500).json({ message: "입력에 실패했습니다." });
+        return;
       }
-    );
-  });
+      // 성공적으로 데이터베이스에 입력된 경우 클라이언트에게 성공 응답을 전송합니다.
+      res.status(200).json({ message: "입력이 완료되었습니다." });
+    }
+  );
+});
 
   /**
    * 프로젝트 폼 정보 조회 요청 처리

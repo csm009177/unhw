@@ -2,13 +2,15 @@
 
 import { useContext, useState } from "react";
 import "../globals.css";
-import { tokenContext } from '../context/MainContext';
-
+import { openContext, selectedProjectContext } from "../context/MainContext";
+import AddProjectList from "./AddProjectList";
 
 export default function Toggle() {
-  const [ isOpen, setIsOpen ] = useState<boolean>(true);
-  useContext(tokenContext)
-  
+  const { isOpen, setIsOpen } = useContext(openContext);
+  const { selectedPjtIndex, setSelectedPjtIndex } = useContext(
+    selectedProjectContext
+  );
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -33,13 +35,16 @@ export default function Toggle() {
           height: "100%",
         }}
       >
-        {/* <AddItemList /> */}
         <button
           onClick={handleToggle}
           style={{ backgroundColor: "#434343", fontSize: "2vw" }}
         >
-          
-          {/* <AddProjectList/> */}
+          <AddProjectList
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            selectedPjtIndex={selectedPjtIndex}
+            setSelectedPjtIndex={setSelectedPjtIndex}
+          />
           {isOpen ? "◀" : "▶"}
         </button>
       </div>
