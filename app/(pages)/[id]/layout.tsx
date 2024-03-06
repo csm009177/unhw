@@ -1,5 +1,4 @@
 "use client";
-import "./globals.css";
 
 interface ChildrenProps {
   children: React.ReactNode;

@@ -3,7 +3,7 @@
 
 import ProjectShow from '../../ui/ProjectShow';
 
-export default function ProjectPage() {
+export default function IdPage() {
   return (<>
     <ProjectShow/>
   </>);

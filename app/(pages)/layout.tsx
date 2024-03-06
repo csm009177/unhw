@@ -5,6 +5,7 @@ import Toggle from "@/app/ui/Toggle";
 import Lobby from "../ui/Lobby";
 import { usePathname, useRouter } from "next/navigation";
 import { openContext, selectedProjectContext } from "../context/MainContext";
+import IdPage from './[id]/page';
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -47,7 +48,7 @@ export default function MainLayout({ children }: ChildrenProps) {
   }, [pathname, showToggle, showChildren, router]);
 
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedPjtIndex, setSelectedPjtIndex] = useState(selectedProjectContext);
+  const [selectedPjtIndex, setSelectedPjtIndex] = useState(null);
 
   return (
     <>

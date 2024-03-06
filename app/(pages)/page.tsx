@@ -1,10 +1,11 @@
 "use client";
 
-import DisplayProject from '../ui/DisplayProject';
+import IdPage from "./[id]/page";
 
 export default function Main() {
   return (
     <>
+      <IdPage />
     </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
-import { selectedProjectContext } from "../context/MainContext";
+import { selectedProjectContext } from "../app/context/MainContext";
 
 export default function DisplayProject() {
   const router = useRouter();
