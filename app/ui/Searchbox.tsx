@@ -26,8 +26,7 @@ const Searchbox: React.FC<SearchboxProps> = () => {
 
   useEffect(() => {
     fetchTypes();
-    console.log(types);
-  }, [types]);
+  }, []);
 
   return (
     <>
