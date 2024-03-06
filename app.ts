@@ -37,10 +37,10 @@ app.prepare().then(() => {
    * @param {Response} res 응답 객체
    */
   server.post("/signupForm", (req: Request, res: Response) => {
-    const { id, pw, username } = req.body;
+    const { id, pw, username, useraddress } = req.body;
 
-    const query: string = "INSERT INTO users (id, pw, username, signupDate) VALUES (?, ?, ?, NOW())";
-    connection.query(query, [id, pw, username], (err: QueryError | null, results: any, fields: FieldPacket[]) => {
+    const query: string = "INSERT INTO users (id, pw, username, useraddress, signupdate) VALUES (?, ?, ?, ?, NOW())";
+    connection.query(query, [id, pw, username, useraddress], (err: QueryError | null, results: any, fields: FieldPacket[]) => {
       if (err) {
         console.error("Error signing up:", err);
         res.status(500).json({ message: "회원가입에 실패했습니다." });
