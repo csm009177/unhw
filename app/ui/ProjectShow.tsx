@@ -2,10 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
-import { selectedProjectContext } from "../context/MainContext";
+import { openContext, selectedProjectContext } from "../context/MainContext";
 
 export default function ProjectShow() {
   const router = useRouter();
+  const {isOpen} = useContext(openContext)
   const { selectedPjtIndex} = useContext(selectedProjectContext);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function ProjectShow() {
     <div
       className="Main-RightCont"
       style={{
-        width: "100%",
+        width: isOpen? "80%": "100%",
         height: "100%",
         backgroundColor: "#373737",
         overflow: "hidden",
