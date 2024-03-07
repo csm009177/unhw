@@ -207,10 +207,9 @@ app.prepare().then(() => {
           }
           const models = results.map((result) => result.model);
           res.status(200).json({ models });
-    })
-
-
-
+      })
+    });
+    
   /**
    * 프로젝트 폼 입력 요청 처리
    * @param {Request} req 요청 객체 - Express 요청 객체

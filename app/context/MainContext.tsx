@@ -41,8 +41,8 @@ export const selectedBrandsContext = createContext<{
 // modelsContext - 모델의 문자열을 업데이트하는 함수
 export const modelsContext = createContext<{
   models: string[];
-  setBrands: Dispatch<SetStateAction<string[]>>;
-}>({ models: [], setBrands: () => {} });
+  setModels: Dispatch<SetStateAction<string[]>>;
+}>({ models: [], setModels: () => {} });
 
 // selectedModelsContext - 선택된 모델의 문자열을 업데이트하는 함수
 export const selectedModelsContext = createContext<{

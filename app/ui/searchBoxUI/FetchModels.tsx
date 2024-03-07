@@ -2,18 +2,19 @@
 
 import {
   brandsContext,
-  selectedBrandsContext,
+  modelsContext,
   selectedTypesContext,
+  selectedBrandsContext,
 } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useState } from "react";
 
 const FetchModels: React.FC = () => {
-  const { selectedTypes } = useContext(selectedTypesContext);
   const { setBrands } = useContext(brandsContext);
-  const { selectedBrands, setSelectedBrands } = useContext(
-    selectedBrandsContext
-  );
-  const [brands, setLocalBrands] = useState<string[]>([]); // brands 배열 추가
+  const {models, setModels} = useContext(modelsContext)
+
+
+  const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
+  const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
 
   const fetchModels = async (selectedType: string, selectedBrands:string) => {
     try {
@@ -27,7 +28,7 @@ const FetchModels: React.FC = () => {
 
   useEffect(() => {
     if (selectedTypes&& selectedBrands) {
-      fetchModels(selectedTypes);
+      fetchModels(selectedTypes, selectedBrands);
     }
   }, [selectedTypes, selectedBrands]);
 
