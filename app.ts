@@ -185,6 +185,31 @@ app.prepare().then(() => {
       }
     );
   });
+    /**
+   * 모델 버튼 나열 요청 처리
+   * @param {Request} req 요청 객체 - Express 요청 객체
+   * @param {Response} res 응답 객체 - Express 응답 객체
+   */
+    server.get("/fetchModels", (req: Request, res: Response) => {
+      const { type, brand } = req.query;
+      const query = `SELECT DISTINCT model FROM item WHERE type = ? AND brand = ?;`;
+      connection.query(query, [type, brand], (
+        err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
+        results: RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
+        fields: FieldPacket[] // 쿼리 결과의 필드 정보를 나타내는 매개변수
+        ) => {
+          if (err) {
+            console.error("fetchModels error:", err);
+            res
+              .status(500)
+              .json({ message: "모델을 가져오는 중 문제가 발생했습니다." });
+            return;
+          }
+          const models = results.map((result) => result.model);
+          res.status(200).json({ models });
+    })
+
+
 
   /**
    * 프로젝트 폼 입력 요청 처리
