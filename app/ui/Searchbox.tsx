@@ -12,7 +12,8 @@ import {
 import FetchTypes from "./searchBoxUI/FetchTypes";
 import FetchBrand from "./searchBoxUI/FetchBrands";
 import FetchModels from "./searchBoxUI/FetchModels";
-import { modelsContext, selectedModelsContext } from "../context/MainContext";
+import { modelsContext, selectedModelsContext, modelDatasContext } from '../context/MainContext';
+import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
 
 interface SearchboxProps {
   // Props에 대한 설명 추가
@@ -33,6 +34,9 @@ const Searchbox: React.FC<SearchboxProps> = () => {
   // selectedModels의 타입을 문자열 또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
   const [selectedModels, setSelectedModels] = useState<string | null>(null);
 
+  // modelDatas을 문자열의 배열로 설정합니다.
+  const [modelDatas, setModelDatas] = useState<[]>([]);
+
   return (
     <typesContext.Provider 
       value={{ types, setTypes }}>
@@ -46,9 +50,12 @@ const Searchbox: React.FC<SearchboxProps> = () => {
               value={{ models, setModels }}>
               <selectedModelsContext.Provider 
                 value={{ selectedModels, setSelectedModels }}>
-                <FetchTypes />
-                <FetchBrand />
-                <FetchModels />
+                <modelDatasContext.Provider value={{modelDatas, setModelDatas}}>
+                  <FetchTypes />
+                  <FetchBrand />
+                  <FetchModels />
+                  <FetchModelDatas/>
+                </modelDatasContext.Provider>
               </selectedModelsContext.Provider>
             </modelsContext.Provider>
           </selectedBrandsContext.Provider>
