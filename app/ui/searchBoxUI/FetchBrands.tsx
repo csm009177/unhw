@@ -8,18 +8,17 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 
 const FetchBrand: React.FC = () => {
-  const { selectedTypes } = useContext(selectedTypesContext);
-  const { setBrands } = useContext(brandsContext);
-  const { selectedBrands, setSelectedBrands } = useContext(
-    selectedBrandsContext
-  );
-  const [brands, setLocalBrands] = useState<string[]>([]); // brands 배열 추가
+  const { brands, setBrands } = useContext(brandsContext);
+
+  const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
+  const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
+  
 
   const fetchBrands = async (selectedType: string) => {
     try {
       const response = await fetch(`/fetchBrands?type=${selectedType}`);
       const data = await response.json();
-      setLocalBrands(data.brands); // brands 배열 설정
+      setBrands(data.brands); // brands 배열 설정
     } catch (error) {
       console.error("브랜드를 가져오는 도중 오류 발생:", error);
     }
