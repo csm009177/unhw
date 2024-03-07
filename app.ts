@@ -208,7 +208,7 @@ app.prepare().then(() => {
   /**
    * 모델데이터 버튼 나열 요청 처리
    */
-  server.get("/fetchModels", (req: Request, res: Response) => {
+  server.get("/fetchModelDatas", (req: Request, res: Response) => {
     const { type, brand, model } = req.query;
     const query = `SELECT * FROM item WHERE type = ? AND brand = ? AND model = ?;`;
     connection.query(
