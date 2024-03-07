@@ -1,25 +1,25 @@
 "use client";
 
 import {
-  modelsContext,
   selectedTypesContext,
   selectedBrandsContext,
   selectedModelsContext,
+  modelDatasContext,
 } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useState } from "react";
 
 const FetchModelDatas: React.FC = () => {
-  const {models, setModels} = useContext(modelsContext)
+  const {modelDatas, setModelDatas} = useContext(modelDatasContext)
 
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
   const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
   const { selectedModels, setSelectedModels } = useContext(selectedModelsContext)
 
-  const fetchModels = async (selectedTypes: string, selectedBrands:string) => {
+  const fetchModelDatas = async (selectedTypes: string, selectedBrands:string) => {
     try {
-      const response = await fetch(`/fetchModels?type=${selectedTypes}&brand=${selectedBrands}`);
+      const response = await fetch(`/fetchModelDatas?type=${selectedTypes}&brand=${selectedBrands}&model=${selectedModels}`);
       const data = await response.json();
-      setModels(data.models); // models 배열 설정
+      setModelDatas(data.modelDatas); // models 배열 설정
     } catch (error) {
       console.error("모델을 가져오는 도중 오류 발생:", error);
     }
@@ -27,7 +27,7 @@ const FetchModelDatas: React.FC = () => {
 
   useEffect(() => {
     if (selectedTypes && selectedBrands && selectedModels) {
-      fetchModels(selectedTypes, selectedBrands);
+      fetchModelDatas(selectedTypes, selectedBrands);
     }
   }, [selectedTypes, selectedBrands, selectedModels]);
 
@@ -40,8 +40,8 @@ const FetchModelDatas: React.FC = () => {
           justifyContent: "space-between",
         }}
       >
-        models :
-        {models.map(
+        modelDatas :
+        {modelDatas.map(
           (
             model: string // models 매개변수에 대한 타입 명시
           ) => (
