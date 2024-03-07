@@ -15,12 +15,9 @@ import FetchModels from "./searchBoxUI/FetchModels";
 import { modelsContext, selectedModelsContext, modelDatasContext } from '../context/MainContext';
 import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
 
-interface SearchboxProps {
-  // Props에 대한 설명 추가
-}
 
 // useState의 제네릭 타입을 설정하여 타입 안정성 제공
-const Searchbox: React.FC<SearchboxProps> = () => {
+const Searchbox: React.FC = () => {
   // types을 문자열의 배열로 설정합니다.
   const [types, setTypes] = useState<string[]>([]);
   // selectedType의 타입을 문자열 또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
@@ -33,7 +30,6 @@ const Searchbox: React.FC<SearchboxProps> = () => {
   const [models, setModels] = useState<string[]>([]);
   // selectedModels의 타입을 문자열 또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
   const [selectedModels, setSelectedModels] = useState<string | null>(null);
-
   // modelDatas을 문자열의 배열로 설정합니다.
   const [modelDatas, setModelDatas] = useState<[]>([]);
 
