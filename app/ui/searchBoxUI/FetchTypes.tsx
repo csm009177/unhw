@@ -1,14 +1,13 @@
 "use client";
 
 import { selectedTypesContext, typesContext } from "@/app/context/MainContext";
-import React, { useContext, useEffect } from "react";
-
+import React, { useContext, useEffect, useCallback } from "react";
 
 const FetchTypes: React.FC = () => {
   const { types, setTypes } = useContext(typesContext);
-  const {setSelectedTypes} = useContext(selectedTypesContext)
+  const { setSelectedTypes } = useContext(selectedTypesContext);
 
-  const fetchTypes = async () => {
+  const fetchTypes = useCallback(async () => {
     try {
       const response = await fetch("/fetchTypes");
       const data = await response.json();
@@ -16,11 +15,15 @@ const FetchTypes: React.FC = () => {
     } catch (err) {
       console.error("Error fetching types:", err);
     }
-  };
+  }, [setTypes]);
 
   useEffect(() => {
-    fetchTypes();
-  },[]);
+    const fetchAndSetTypes = async () => {
+      await fetchTypes();
+    };
+
+    fetchAndSetTypes();
+  }, [fetchTypes]); // fetchTypes 함수를 의존성 배열에 추가
 
   return (
     <>
