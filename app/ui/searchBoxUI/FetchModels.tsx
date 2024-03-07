@@ -19,7 +19,7 @@ const FetchModels: React.FC = () => {
     try {
       const response = await fetch(`/fetchModels?type=${selectedTypes}&brand=${selectedBrands}`);
       const data = await response.json();
-      setModels(data.models); // brands 배열 설정
+      setModels(data.models); // models 배열 설정
     } catch (error) {
       console.error("모델을 가져오는 도중 오류 발생:", error);
     }
@@ -43,7 +43,7 @@ const FetchModels: React.FC = () => {
         models :
         {models.map(
           (
-            model: string // brand 매개변수에 대한 타입 명시
+            model: string // models 매개변수에 대한 타입 명시
           ) => (
             <button key={model} onClick={() => setSelectedModels(model)}>
               {model}
