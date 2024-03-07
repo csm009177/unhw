@@ -80,8 +80,6 @@ app.prepare().then(() => {
 
   /**
    * 로그인 요청 처리
-   * @param {Request} req 요청 객체
-   * @param {Response} res 응답 객체
    */
   server.post("/loginForm", (req: Request, res: Response) => {
     // 요청에서 아이디와 비밀번호를 추출합니다.
@@ -133,8 +131,6 @@ app.prepare().then(() => {
 
   /**
    * 타입 버튼 나열 요청 처리
-   * @param {Request} req 요청 객체 - Express 요청 객체
-   * @param {Response} res 응답 객체 - Express 응답 객체
    */
   server.get("/fetchTypes", (req: Request, res: Response) => {
     const query = `SELECT DISTINCT type FROM item;`;
@@ -159,8 +155,6 @@ app.prepare().then(() => {
   });
   /**
    * 브랜드 버튼 나열 요청 처리
-   * @param {Request} req 요청 객체 - Express 요청 객체
-   * @param {Response} res 응답 객체 - Express 응답 객체
    */
   server.get("/fetchBrands", (req: Request, res: Response) => {
     const { type } = req.query;
@@ -185,35 +179,60 @@ app.prepare().then(() => {
       }
     );
   });
-    /**
+  /**
    * 모델 버튼 나열 요청 처리
-   * @param {Request} req 요청 객체 - Express 요청 객체
-   * @param {Response} res 응답 객체 - Express 응답 객체
    */
-    server.get("/fetchModels", (req: Request, res: Response) => {
-      const { type, brand } = req.query;
-      const query = `SELECT DISTINCT model FROM item WHERE type = ? AND brand = ?;`;
-      connection.query(query, [type, brand], (
+  server.get("/fetchModels", (req: Request, res: Response) => {
+    const { type, brand } = req.query;
+    const query = `SELECT DISTINCT model FROM item WHERE type = ? AND brand = ?;`;
+    connection.query(
+      query,
+      [type, brand],
+      (
         err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
         results: RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
         fields: FieldPacket[] // 쿼리 결과의 필드 정보를 나타내는 매개변수
+      ) => {
+        if (err) {
+          console.error("fetchModels error:", err);
+          res
+            .status(500)
+            .json({ message: "모델을 가져오는 중 문제가 발생했습니다." });
+          return;
+        }
+        const models = results.map((result) => result.model);
+        res.status(200).json({ models });
+      }
+    );
+  });
+    /**
+   * 모델데이터 버튼 나열 요청 처리
+   */
+    server.get("/fetchModels", (req: Request, res: Response) => {
+      const { type, brand, model } = req.query;
+      const query = `SELECT * FROM item WHERE type = ? AND brand = ? AND model = ?;`;
+      connection.query(
+        query,
+        [type, brand, model],
+        (
+          err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
+          results: RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
+          fields: FieldPacket[] // 쿼리 결과의 필드 정보를 나타내는 매개변수
         ) => {
           if (err) {
-            console.error("fetchModels error:", err);
-            res
-              .status(500)
-              .json({ message: "모델을 가져오는 중 문제가 발생했습니다." });
+            console.error("fetchModelInfos error:", err);
+            res.status(500).json({ message: "모델 정보를 가져오는 중 문제가 발생했습니다." });
             return;
           }
-          const models = results.map((result) => result.model);
-          res.status(200).json({ models });
-      })
-    });
-    
+          const modelDatas = results.map(result => result);
+          res.status(200).json({ modelDatas });
+        }
+      )
+    })
+
+
   /**
    * 프로젝트 폼 입력 요청 처리
-   * @param {Request} req 요청 객체 - Express 요청 객체
-   * @param {Response} res 응답 객체 - Express 응답 객체
    */
   server.post("/pjtForm", (req: Request, res: Response) => {
     // 요청에서 프로젝트 내용과 선택된 프로젝트 인덱스를 추출합니다.
@@ -246,8 +265,6 @@ app.prepare().then(() => {
 
   /**
    * 프로젝트 폼 정보 조회 요청 처리
-   * @param {Request} req 요청 객체
-   * @param {Response} res 응답 객체
    */
   server.get("/pjtForm/:pjtNum", (req: Request, res: Response) => {
     const pjtNum: string = req.params.pjtNum;
