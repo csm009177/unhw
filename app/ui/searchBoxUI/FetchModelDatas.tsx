@@ -43,7 +43,7 @@ const FetchModelDatas: React.FC<ModelData> = () => {
   }, [selectedTypes, selectedBrands, selectedModels]);
 
   const handleClickModel = async (model:string) =>{
-
+    
   }
 
   return (
