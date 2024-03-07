@@ -3,7 +3,7 @@
 /**
  * FetchTypes 컴포넌트는 서버로부터 타입 데이터를 가져와서 화면에 표시하는 컴포넌트입니다.
  */
-import { selectedTypesContext, typesContext } from "@/app/context/MainContext";
+import { selectedBrandsContext, selectedModelsContext, selectedTypesContext, typesContext } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useCallback } from "react";
 
 /**
@@ -13,7 +13,10 @@ const FetchTypes: React.FC = () => {
   // MainContext에서 types와 setTypes를 가져옵니다.
   const { types, setTypes } = useContext(typesContext);
   // MainContext에서 setSelectedTypes를 가져옵니다.
-  const { setSelectedTypes } = useContext(selectedTypesContext);
+  const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
+
+  const { setSelectedBrands } = useContext(selectedBrandsContext);
+  const { setSelectedModels } = useContext(selectedModelsContext)
 
   /**
    * fetchTypes 함수는 서버로부터 타입 데이터를 가져와서 types 상태를 업데이트합니다.
@@ -43,7 +46,14 @@ const FetchTypes: React.FC = () => {
 
     // fetchTypes 함수를 호출합니다.
     fetchAndSetTypes();
-  }, [fetchTypes]); // fetchTypes 함수를 의존성으로 설정합니다.
+    console.log(selectedTypes)
+  }, [fetchTypes, selectedTypes]); // fetchTypes 함수와 selectedTypes를 의존성으로 설정합니다.
+
+  // selectedTypes가 변경될 때, selectedBrands와 selectedModels를 초기화합니다.
+  useEffect(() => {
+    setSelectedBrands(null);
+    setSelectedModels(null);
+  }, [selectedTypes, setSelectedBrands, setSelectedModels]);
 
   return (
     <>
