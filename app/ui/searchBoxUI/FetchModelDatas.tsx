@@ -8,7 +8,18 @@ import {
 } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useState } from "react";
 
-const FetchModelDatas: React.FC = () => {
+interface ModelData {
+  type: string;
+  part_number: string;
+  brand: string;
+  model: string;
+  rank: number;
+  benchmark: number;
+  samples: number;
+  url: string;
+}
+
+const FetchModelDatas: React.FC<ModelData> = () => {
   const {modelDatas, setModelDatas} = useContext(modelDatasContext)
 
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
@@ -31,10 +42,14 @@ const FetchModelDatas: React.FC = () => {
     }
   }, [selectedTypes, selectedBrands, selectedModels]);
 
+  const handleClickModel = async (model:string) =>{
+
+  }
+
   return (
     <div>
     {modelDatas ? (
-      modelDatas.map((info, index) => (
+      modelDatas.map((info:ModelData, index:number) => (
         <button 
         key={index} onClick={() => handleClickModel(info.model)}>
           <ul>
