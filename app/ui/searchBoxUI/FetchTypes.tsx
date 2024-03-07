@@ -3,7 +3,12 @@
 /**
  * FetchTypes 컴포넌트는 서버로부터 타입 데이터를 가져와서 화면에 표시하는 컴포넌트입니다.
  */
-import { selectedBrandsContext, selectedModelsContext, selectedTypesContext, typesContext } from "@/app/context/MainContext";
+import {
+  selectedBrandsContext,
+  selectedModelsContext,
+  selectedTypesContext,
+  typesContext,
+} from "@/app/context/MainContext";
 import React, { useContext, useEffect, useCallback } from "react";
 
 /**
@@ -16,7 +21,7 @@ const FetchTypes: React.FC = () => {
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
 
   const { setSelectedBrands } = useContext(selectedBrandsContext);
-  const { setSelectedModels } = useContext(selectedModelsContext)
+  const { setSelectedModels } = useContext(selectedModelsContext);
 
   /**
    * fetchTypes 함수는 서버로부터 타입 데이터를 가져와서 types 상태를 업데이트합니다.
@@ -46,7 +51,7 @@ const FetchTypes: React.FC = () => {
 
     // fetchTypes 함수를 호출합니다.
     fetchAndSetTypes();
-    console.log(selectedTypes)
+    console.log(selectedTypes);
   }, [fetchTypes, selectedTypes]); // fetchTypes 함수와 selectedTypes를 의존성으로 설정합니다.
 
   // selectedTypes가 변경될 때, selectedBrands와 selectedModels를 초기화합니다.
@@ -65,8 +70,7 @@ const FetchTypes: React.FC = () => {
           justifyContent: "space-between",
         }}
       >
-        types :
-        {/* 타입 버튼들을 매핑하여 표시합니다. */}
+        types :{/* 타입 버튼들을 매핑하여 표시합니다. */}
         {types.map((type) => (
           <button key={type} onClick={() => setSelectedTypes(type)}>
             {type}

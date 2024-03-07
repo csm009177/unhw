@@ -56,3 +56,8 @@ export const modelDatasContext = createContext<{
   setModelDatas: Dispatch<SetStateAction<[]>>;
 }>({ modelDatas: [], setModelDatas: () => {} });
 
+// selectedProductContext - 선택된 상품의 배열을 업데이트하는 함수
+export const selectedProductContext = createContext<{
+  selectedProduct: []|null;
+  setSelectedProduct: Dispatch<SetStateAction< [] | null>>;
+}>({ selectedProduct: [], setSelectedProduct: () => {} });

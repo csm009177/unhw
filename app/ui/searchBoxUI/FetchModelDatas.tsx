@@ -26,6 +26,7 @@ const FetchModelDatas: React.FC<ModelData> = () => {
   const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
   const { selectedModels, setSelectedModels } = useContext(selectedModelsContext)
 
+  
   const fetchModelDatas = async (selectedTypes: string, selectedBrands:string, selectedModels:string) => {
     try {
       const response = await fetch(`/fetchModelDatas?type=${selectedTypes}&brand=${selectedBrands}&model=${selectedModels}`);
@@ -39,6 +40,9 @@ const FetchModelDatas: React.FC<ModelData> = () => {
   useEffect(() => {
     if (selectedTypes && selectedBrands && selectedModels) {
       fetchModelDatas(selectedTypes, selectedBrands, selectedModels);
+      if(selectedModels){
+        console.log("selectedModels : "+ selectedModels)
+      }
     }
   }, [selectedTypes, selectedBrands, selectedModels]);
 
@@ -61,9 +65,9 @@ const FetchModelDatas: React.FC<ModelData> = () => {
             <li>Benchmark: {info.benchmark}</li>
             <li>Samples: {info.samples}</li>
             <li>
-              <a href={info.url}>Link Button</a>
             </li>
           </ul>
+          <a href={info.url}>Link Button</a>
         </button>
       ))
     ) : (
