@@ -40,8 +40,8 @@ const FetchModels: React.FC = () => {
           justifyContent: "space-between",
         }}
       >
-        brands :
-        {brands.map(
+        models :
+        {models.map(
           (
             brand: string // brand 매개변수에 대한 타입 명시
           ) => (
