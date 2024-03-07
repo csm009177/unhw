@@ -136,24 +136,55 @@ app.prepare().then(() => {
    * @param {Request} req 요청 객체 - Express 요청 객체
    * @param {Response} res 응답 객체 - Express 응답 객체
    */
-  server.get('/fetchTypes', (req: Request, res: Response) => {
+  server.get("/fetchTypes", (req: Request, res: Response) => {
     const query = `SELECT DISTINCT type FROM item;`;
-    connection.query(query, 
+    connection.query(
+      query,
       (
-        err : QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
-        results:RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
+        err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
+        results: RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
         fields: FieldPacket[] // 쿼리 결과의 필드 정보를 나타내는 매개변수
       ) => {
-        if(err) {
+        if (err) {
           console.error("fetchTypes error:", err);
-          res.status(500).json({ message: "타입을 가져오는 중 문제가 발생했습니다." });
+          res
+            .status(500)
+            .json({ message: "타입을 가져오는 중 문제가 발생했습니다." });
           return;
         }
-        const types = results.map(result => result.type);
-        res.status(200).json({types})
-    })
-  })
-
+        const types = results.map((result) => result.type);
+        res.status(200).json({ types });
+      }
+    );
+  });
+  /**
+   * 브랜드 버튼 나열 요청 처리
+   * @param {Request} req 요청 객체 - Express 요청 객체
+   * @param {Response} res 응답 객체 - Express 응답 객체
+   */
+  server.get("/fetchBrands", (req: Request, res: Response) => {
+    const { type } = req.query;
+    const query = `SELECT DISTINCT brand FROM item WHERE type = ?;`;
+    connection.query(
+      query,
+      [type],
+      (
+        err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
+        results: RowDataPacket[], // 쿼리 실행 결과를 저장하는 매개변수
+        fields: FieldPacket[] // 쿼리 결과의 필드 정보를 나타내는 매개변수
+      ) => {
+        if (err) {
+          console.error("fetchBrands error:", err);
+          res
+            .status(500)
+            .json({ message: "브랜드를 가져오는 중 문제가 발생했습니다." });
+          return;
+        }
+        const brands = results.map((result) => result.brand);
+        res.status(200).json({ brands });
+      }
+    );
+  });
 
   /**
    * 프로젝트 폼 입력 요청 처리

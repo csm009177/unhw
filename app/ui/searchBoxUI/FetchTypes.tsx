@@ -1,32 +1,53 @@
 "use client";
 
+/**
+ * FetchTypes 컴포넌트는 서버로부터 타입 데이터를 가져와서 화면에 표시하는 컴포넌트입니다.
+ */
 import { selectedTypesContext, typesContext } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useCallback } from "react";
 
+/**
+ * FetchTypes 컴포넌트는 속성을 전달받지 않습니다.
+ */
 const FetchTypes: React.FC = () => {
+  // MainContext에서 types와 setTypes를 가져옵니다.
   const { types, setTypes } = useContext(typesContext);
+  // MainContext에서 setSelectedTypes를 가져옵니다.
   const { setSelectedTypes } = useContext(selectedTypesContext);
 
+  /**
+   * fetchTypes 함수는 서버로부터 타입 데이터를 가져와서 types 상태를 업데이트합니다.
+   */
   const fetchTypes = useCallback(async () => {
     try {
+      // 서버로부터 타입 데이터를 가져옵니다.
       const response = await fetch("/fetchTypes");
+      // JSON 형식으로 파싱합니다.
       const data = await response.json();
+      // 가져온 타입 데이터를 types 상태로 업데이트합니다.
       setTypes(data.types);
     } catch (err) {
+      // 에러 발생 시 콘솔에 로그를 출력합니다.
       console.error("Error fetching types:", err);
     }
-  }, [setTypes]);
+  }, [setTypes]); // setTypes 함수를 의존성으로 설정합니다.
 
+  /**
+   * 컴포넌트가 마운트될 때 fetchTypes 함수를 호출하여 타입 데이터를 가져옵니다.
+   */
   useEffect(() => {
     const fetchAndSetTypes = async () => {
+      // 타입 데이터를 가져와서 상태를 업데이트합니다.
       await fetchTypes();
     };
 
+    // fetchTypes 함수를 호출합니다.
     fetchAndSetTypes();
-  }, [fetchTypes]); // fetchTypes 함수를 의존성 배열에 추가
+  }, [fetchTypes]); // fetchTypes 함수를 의존성으로 설정합니다.
 
   return (
     <>
+      {/* 타입 버튼들을 화면에 표시합니다. */}
       <div
         style={{
           display: "flex",
@@ -35,6 +56,7 @@ const FetchTypes: React.FC = () => {
         }}
       >
         types :
+        {/* 타입 버튼들을 매핑하여 표시합니다. */}
         {types.map((type) => (
           <button key={type} onClick={() => setSelectedTypes(type)}>
             {type}
