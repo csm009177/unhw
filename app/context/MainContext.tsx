@@ -50,7 +50,7 @@ export const selectedModelsContext = createContext<{
   setSelectedModels: Dispatch<SetStateAction< string | null>>;
 }>({ selectedModels: null, setSelectedModels: () => {} });
 
-// modelsContext - 모델의 문자열을 업데이트하는 함수
+// modelDatasContext - 모델정보의 배열을 업데이트하는 함수
 export const modelDatasContext = createContext<{
   modelDatas: [];
   setModelDatas: Dispatch<SetStateAction<[]>>;

@@ -15,7 +15,7 @@ const FetchModelDatas: React.FC = () => {
   const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
   const { selectedModels, setSelectedModels } = useContext(selectedModelsContext)
 
-  const fetchModelDatas = async (selectedTypes: string, selectedBrands:string) => {
+  const fetchModelDatas = async (selectedTypes: string, selectedBrands:string, selectedModels:string) => {
     try {
       const response = await fetch(`/fetchModelDatas?type=${selectedTypes}&brand=${selectedBrands}&model=${selectedModels}`);
       const data = await response.json();
@@ -27,31 +27,34 @@ const FetchModelDatas: React.FC = () => {
 
   useEffect(() => {
     if (selectedTypes && selectedBrands && selectedModels) {
-      fetchModelDatas(selectedTypes, selectedBrands);
+      fetchModelDatas(selectedTypes, selectedBrands, selectedModels);
     }
   }, [selectedTypes, selectedBrands, selectedModels]);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        modelDatas :
-        {modelDatas.map(
-          (
-            model: string // models 매개변수에 대한 타입 명시
-          ) => (
-            <button key={model} onClick={() => setSelectedModels(model)}>
-              {model}
-            </button>
-          )
-        )}
-      </div>
-    </>
+    <div>
+    {modelDatas ? (
+      modelDatas.map((info, index) => (
+        <button 
+        key={index} onClick={() => handleClickModel(info.model)}>
+          <ul>
+            <li>Type: {info.type}</li>
+            <li>Part Number: {info.part_number}</li>
+            <li>Brand: {info.brand}</li>
+            <li>Model: {info.model}</li>
+            <li>Rank: {info.rank}</li>
+            <li>Benchmark: {info.benchmark}</li>
+            <li>Samples: {info.samples}</li>
+            <li>
+              <a href={info.url}>Link Button</a>
+            </li>
+          </ul>
+        </button>
+      ))
+    ) : (
+      <p>No model information available.</p>
+    )}
+  </div>
   );
 };
 
