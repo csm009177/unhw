@@ -45,7 +45,7 @@ const Searchbox: React.FC = () => {
   // modelDatas을 문자열의 배열로 설정합니다.
   const [modelDatas, setModelDatas] = useState<[]>([]); // ModelData 타입으로 변경
 
-  const [selectedProduct, setSelectedProduct] = useState<[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<[]|null>([]);
 
   return (
     <typesContext.Provider 
@@ -60,8 +60,10 @@ const Searchbox: React.FC = () => {
               value={{ models, setModels }}>
               <selectedModelsContext.Provider 
                 value={{ selectedModels, setSelectedModels }}>
-                <modelDatasContext.Provider value={{modelDatas, setModelDatas}}>
-                  <selectedProductContext.Provider value={{selectedProduct, setSelectedProduct}}>
+                <modelDatasContext.Provider 
+                  value={{modelDatas, setModelDatas}}>
+                  <selectedProductContext.Provider 
+                    value={{selectedProduct, setSelectedProduct}}>
                     <FetchTypes />
                     <FetchBrand />
                     <FetchModels />
