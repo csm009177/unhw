@@ -19,7 +19,7 @@ interface ModelData {
   url: string;
 }
 
-const FetchModelDatas: React.FC<ModelData> = () => {
+const FetchModelDatas: React.FC = () => {
   const {modelDatas, setModelDatas} = useContext(modelDatasContext)
 
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);

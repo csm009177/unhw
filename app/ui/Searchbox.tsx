@@ -18,16 +18,7 @@ import FetchBrand from "./searchBoxUI/FetchBrands";
 import FetchModels from "./searchBoxUI/FetchModels";
 import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
 
-interface ModelData {
-  type: string;
-  part_number: string;
-  brand: string;
-  model: string;
-  rank: number;
-  benchmark: number;
-  samples: number;
-  url: string;
-}
+
 // useState의 제네릭 타입을 설정하여 타입 안정성 제공
 const Searchbox: React.FC = () => {
   // types을 문자열의 배열로 설정합니다.
