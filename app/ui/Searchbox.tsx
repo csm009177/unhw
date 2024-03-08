@@ -45,7 +45,7 @@ const Searchbox: React.FC = () => {
   // modelDatas을 문자열의 배열로 설정합니다.
   const [modelDatas, setModelDatas] = useState<[]>([]); // ModelData 타입으로 변경
 
-  const [selectedProduct, setSelectedProduct] = useState<ModelData[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<[]>([]);
 
   return (
     <typesContext.Provider 
