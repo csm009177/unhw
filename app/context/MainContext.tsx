@@ -60,4 +60,4 @@ export const modelDatasContext = createContext<{
 export const selectedProductContext = createContext<{
   selectedProduct: []|null;
   setSelectedProduct: Dispatch<SetStateAction< [] | null>>;
-}>({ selectedProduct: [], setSelectedProduct: () => {} });
+}>({ selectedProduct: null, setSelectedProduct: () => {} });

@@ -1,21 +1,33 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   typesContext,
   selectedTypesContext,
   brandsContext,
   selectedBrandsContext,
+  selectedProductContext,
+  modelsContext, 
+  selectedModelsContext, 
+  modelDatasContext, 
 } from "../context/MainContext";
 
 import FetchTypes from "./searchBoxUI/FetchTypes";
 import FetchBrand from "./searchBoxUI/FetchBrands";
 import FetchModels from "./searchBoxUI/FetchModels";
-import { modelsContext, selectedModelsContext, modelDatasContext } from '../context/MainContext';
 import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
 
-
+interface ModelData {
+  type: string;
+  part_number: string;
+  brand: string;
+  model: string;
+  rank: number;
+  benchmark: number;
+  samples: number;
+  url: string;
+}
 // useState의 제네릭 타입을 설정하여 타입 안정성 제공
 const Searchbox: React.FC = () => {
   // types을 문자열의 배열로 설정합니다.
@@ -31,7 +43,9 @@ const Searchbox: React.FC = () => {
   // selectedModels의 타입을 문자열 또는 빈것을 허용 초기값을 빈 문자열로 설정합니다.
   const [selectedModels, setSelectedModels] = useState<string | null>(null);
   // modelDatas을 문자열의 배열로 설정합니다.
-  const [modelDatas, setModelDatas] = useState<[]>([]);
+  const [modelDatas, setModelDatas] = useState<[]>([]); // ModelData 타입으로 변경
+
+  const [selectedProduct, setSelectedProduct] = useState<ModelData[]>([]);
 
   return (
     <typesContext.Provider 
@@ -47,10 +61,12 @@ const Searchbox: React.FC = () => {
               <selectedModelsContext.Provider 
                 value={{ selectedModels, setSelectedModels }}>
                 <modelDatasContext.Provider value={{modelDatas, setModelDatas}}>
-                  <FetchTypes />
-                  <FetchBrand />
-                  <FetchModels />
-                  <FetchModelDatas/>
+                  <selectedProductContext.Provider value={{selectedProduct, setSelectedProduct}}>
+                    <FetchTypes />
+                    <FetchBrand />
+                    <FetchModels />
+                    <FetchModelDatas/>
+                  </selectedProductContext.Provider>
                 </modelDatasContext.Provider>
               </selectedModelsContext.Provider>
             </modelsContext.Provider>
