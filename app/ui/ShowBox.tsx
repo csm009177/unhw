@@ -28,7 +28,7 @@ const ShowBox: React.FC = () => {
   return (
     <selectedProductContext.Provider
       value={{ selectedProduct, setSelectedProduct }}>
-
+        
     </selectedProductContext.Provider>
   );
 };
