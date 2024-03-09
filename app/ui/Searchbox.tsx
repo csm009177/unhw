@@ -7,7 +7,6 @@ import {
   selectedTypesContext,
   brandsContext,
   selectedBrandsContext,
-  selectedProductContext,
   modelsContext, 
   selectedModelsContext, 
   modelDatasContext, 
@@ -17,7 +16,6 @@ import FetchTypes from "./searchBoxUI/FetchTypes";
 import FetchBrand from "./searchBoxUI/FetchBrands";
 import FetchModels from "./searchBoxUI/FetchModels";
 import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
-import ShowBox from './ShowBox';
 
 
 // useState의 제네릭 타입을 설정하여 타입 안정성 제공
@@ -36,8 +34,6 @@ const Searchbox: React.FC = () => {
   const [selectedModels, setSelectedModels] = useState<string | null>(null);
   // modelDatas을 문자열의 배열로 설정합니다.
   const [modelDatas, setModelDatas] = useState<[]>([]); // ModelData 타입으로 변경
-  // 선택된 Product의 배열을 배열로 설정합니다.
-  const [selectedProduct, setSelectedProduct] = useState<[]|null>([]);
 
   return (
     <typesContext.Provider 
@@ -54,14 +50,10 @@ const Searchbox: React.FC = () => {
                 value={{ selectedModels, setSelectedModels }}>
                 <modelDatasContext.Provider 
                   value={{modelDatas, setModelDatas}}>
-                  <selectedProductContext.Provider 
-                    value={{selectedProduct, setSelectedProduct}}>
-                    <FetchTypes />
-                    <FetchBrand />
-                    <FetchModels />
-                    <FetchModelDatas/>
-                    <ShowBox/>
-                  </selectedProductContext.Provider>
+                  <FetchTypes />
+                  <FetchBrand />
+                  <FetchModels />
+                  <FetchModelDatas/>
                 </modelDatasContext.Provider>
               </selectedModelsContext.Provider>
             </modelsContext.Provider>
