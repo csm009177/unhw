@@ -5,6 +5,7 @@ import {
   selectedBrandsContext,
   selectedModelsContext,
   modelDatasContext,
+  selectedProductContext,
 } from "@/app/context/MainContext";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -24,8 +25,8 @@ const FetchModelDatas: React.FC = () => {
 
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
   const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
-  const { selectedModels, setSelectedModels } = useContext(selectedModelsContext)
-
+  const { selectedModels, setSelectedModels } = useContext(selectedModelsContext);
+  const {selectedProduct, setSelectedProduct} = useContext(selectedProductContext);
   
   const fetchModelDatas = async (selectedTypes: string, selectedBrands:string, selectedModels:string) => {
     try {
@@ -46,8 +47,9 @@ const FetchModelDatas: React.FC = () => {
     }
   }, [selectedTypes, selectedBrands, selectedModels]);
 
-  const handleClickModel = async (model:string) =>{
-    
+  const handleClickProduct = async (selectedModels:[]) =>{
+    setSelectedProduct((prevState) => [...prevState, selectedModels])
+    console.log(selectedModels)
   }
 
   return (
@@ -55,7 +57,7 @@ const FetchModelDatas: React.FC = () => {
     {modelDatas ? (
       modelDatas.map((info:ModelData, index:number) => (
         <button 
-        key={index} onClick={() => handleClickModel(info.model)}>
+        key={index} onClick={() => handleClickProduct(selectedModels)}>
           <ul>
             <li>Type: {info.type}</li>
             <li>Part Number: {info.part_number}</li>
@@ -64,8 +66,6 @@ const FetchModelDatas: React.FC = () => {
             <li>Rank: {info.rank}</li>
             <li>Benchmark: {info.benchmark}</li>
             <li>Samples: {info.samples}</li>
-            <li>
-            </li>
           </ul>
           <a href={info.url}>Link Button</a>
         </button>

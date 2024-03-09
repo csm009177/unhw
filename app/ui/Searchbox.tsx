@@ -17,6 +17,7 @@ import FetchTypes from "./searchBoxUI/FetchTypes";
 import FetchBrand from "./searchBoxUI/FetchBrands";
 import FetchModels from "./searchBoxUI/FetchModels";
 import FetchModelDatas from "./searchBoxUI/FetchModelDatas";
+import ShowBox from './ShowBox';
 
 
 // useState의 제네릭 타입을 설정하여 타입 안정성 제공
@@ -59,6 +60,7 @@ const Searchbox: React.FC = () => {
                     <FetchBrand />
                     <FetchModels />
                     <FetchModelDatas/>
+                    <ShowBox/>
                   </selectedProductContext.Provider>
                 </modelDatasContext.Provider>
               </selectedModelsContext.Provider>
