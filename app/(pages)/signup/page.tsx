@@ -56,6 +56,7 @@ export default function SignUp() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>Sign up Page</div>
       <div>
         <label htmlFor="userId">Id:</label>
         <input

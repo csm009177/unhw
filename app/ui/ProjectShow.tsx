@@ -16,7 +16,7 @@ export default function ProjectShow() {
   // 선택된 프로젝트의 인덱스를 변경합니다.
   const { selectedPjtIndex } = useContext(selectedProjectContext);
   // 선택된 Product의 배열을 배열로 설정합니다.
-  const [selectedProduct, setSelectedProduct] = useState<[] | null>([]);
+  const [selectedProduct, setSelectedProduct] = useState<[]|null>([]);
 
   useEffect(() => {
     if (selectedPjtIndex !== null) {
