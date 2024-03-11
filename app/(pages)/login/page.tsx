@@ -67,6 +67,7 @@ export default function Login() {
                 alignItems: "center",
                 backgroundColor: "#373737",
                 textAlign: "center",
+                color:'white'
               }}
               type="text"
               id="userId"
@@ -87,6 +88,7 @@ export default function Login() {
                 alignItems: "center",
                 backgroundColor: "#373737",
                 textAlign: "center",
+                color:'white'
               }}
               type="password"
               id="userPw"
@@ -105,11 +107,12 @@ export default function Login() {
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#373737",
+              color:'white'
             }}
             type="submit"
           >
             {message ? (
-              <p style={{ color: "red" }}>{message}</p>
+              <p style={{ color: "white" }}>{message}</p>
             ) : (
               <p style={{ color: "green" }}>submit</p>
             )}

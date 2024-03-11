@@ -39,8 +39,8 @@ export default function SignUp() {
         body: JSON.stringify({
           id: userId,
           pw: userPw,
-          username:username,
-          userphonnumber : userphonnumber,
+          username: username,
+          userphonnumber: userphonnumber,
           useremail: useremail,
           useraddress: useraddress,
         }),
@@ -55,80 +55,181 @@ export default function SignUp() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>Sign up Page</div>
-      <div>
-        <label htmlFor="userId">Id:</label>
-        <input
-          type="text"
-          id="userId"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#373737",
+      }}
+    >
+      <div
+        style={{
+          width: "50vw",
+          height: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#434343",
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="text"
+            id="userId"
+            value={userId}
+            placeholder="type Id"
+            onChange={(e) => setUserId(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="password"
+            id="userPw"
+            value={userPw}
+            placeholder="type Pw"
+            onChange={(e) => setUserPw(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="password"
+            id="userPwCheck"
+            value={userPwCheck}
+            placeholder="type Pw Check"
+            onChange={(e) => setUserPwCheck(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="text"
+            id="username"
+            value={username}
+            placeholder="type user name"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="text"
+            id="userphonnumber"
+            value={userphonnumber}
+            placeholder="type user phonnumber"
+            onChange={(e) => setUserphonnumber(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="text"
+            id="useremail"
+            value={useremail}
+            placeholder="type user mail"
+            onChange={(e) => setUseremail(e.target.value)}
+            required
+          />
+          <br />
+          <input
+            style={{
+              width: "40vw",
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              textAlign: "center",
+              color: "white",
+            }}
+            type="text"
+            id="useraddress"
+            value={useraddress}
+            placeholder="type user address"
+            onChange={(e) => setUseraddress(e.target.value)}
+            required
+          />
+          <br />
+          <button
+            style={{
+              width: "40vw",
+              height: "20vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+              color: "white",
+            }}
+            type="submit"
+          >
+            {message ? (
+              <p style={{ color: "white" }}>{message}</p>
+            ) : (
+              <p style={{ color: "green" }}>submit</p>
+            )}
+          </button>
+        </form>
       </div>
-      <div>
-        <label htmlFor="userPw">Pw:</label>
-        <input
-          type="password"
-          id="userPw"
-          value={userPw}
-          onChange={(e) => setUserPw(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="userPwCheck">Pw check:</label>
-        <input
-          type="password"
-          id="userPwCheck"
-          value={userPwCheck}
-          onChange={(e) => setUserPwCheck(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="username">name:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="userphonnumber">phonnumber:</label>
-        <input
-          type="text"
-          id="userphonnumber"
-          value={userphonnumber}
-          onChange={(e) => setUserphonnumber(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="useremail">mail:</label>
-        <input
-          type="text"
-          id="useremail"
-          value={useremail}
-          onChange={(e) => setUseremail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="useraddress">address:</label>
-        <input
-          type="text"
-          id="useraddress"
-          value={useraddress}
-          onChange={(e) => setUseraddress(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">submit</button>
-      {message && <p>{message}</p>}
-    </form>
+    </div>
   );
 }
