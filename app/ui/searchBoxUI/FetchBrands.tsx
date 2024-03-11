@@ -48,7 +48,9 @@ const FetchBrand: React.FC = () => {
           (
             brand: string // brand 매개변수에 대한 타입 명시
           ) => (
-            <button key={brand} onClick={() => setSelectedBrands(brand)}>
+            <button 
+            style={{marginLeft:'3vw'}}
+            key={brand} onClick={() => setSelectedBrands(brand)}>
               {brand}
             </button>
           )

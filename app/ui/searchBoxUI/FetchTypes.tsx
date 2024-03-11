@@ -70,7 +70,7 @@ const FetchTypes: React.FC = () => {
           justifyContent: "space-between",
           overflowX:'hidden',
           maxWidth:"100vh",
-          overflow:'scroll'
+          overflow:'scroll',
         }}
       >
         {/* 타입 버튼들을 매핑하여 표시합니다. */}
