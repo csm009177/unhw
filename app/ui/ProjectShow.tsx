@@ -29,10 +29,9 @@ export default function ProjectShow() {
     <div
       className="Main-RightCont"
       style={{
-        width: isOpen ? "80%" : "98%",
-        height: "100%",
+        width: '100vw',
+        height: "100vh",
         backgroundColor: "#373737",
-        overflow: "hidden",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -41,7 +40,7 @@ export default function ProjectShow() {
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedPjtIndex !== null && (
-        <div style={{ width: "100%", height: "50%" }}>
+        <div style={{ width: "100%", height: "100%" }}>
           <p>Selected Projects : {selectedPjtIndex}</p>
           <selectedProductContext.Provider 
             value={{selectedProduct, setSelectedProduct}}>
