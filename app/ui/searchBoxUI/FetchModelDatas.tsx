@@ -73,8 +73,8 @@ const FetchModelDatas: React.FC = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           overflowX: "hidden",
-          maxWidth: "100vw",
           overflow: "scroll",
+          maxWidth: "80vw",
         }}
       >
         {modelDatas ? (

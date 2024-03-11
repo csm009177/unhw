@@ -38,18 +38,15 @@ const FetchBrand: React.FC = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
-          maxWidth:"100vw",
-          overflowX:'hidden',
-          overflow:'scroll'
+          maxWidth:"80vw",
+          overflow:'scroll',
         }}
       >
-        
         {brands.map(
           (
             brand: string // brand 매개변수에 대한 타입 명시
           ) => (
             <button 
-            style={{marginLeft:'3vw'}}
             key={brand} onClick={() => setSelectedBrands(brand)}>
               {brand}
             </button>

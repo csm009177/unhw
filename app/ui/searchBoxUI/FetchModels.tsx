@@ -47,7 +47,7 @@ const FetchModels: React.FC = () => {
       justifyContent: "space-between",
       overflowX:'hidden',
       overflow:'scroll',
-      maxWidth:"100vw",
+      maxWidth:"80vw",
     }}
   >
       {models.map(
@@ -55,7 +55,6 @@ const FetchModels: React.FC = () => {
           model: string // models 매개변수에 대한 타입 명시
         ) => (
           <button 
-          style={{marginLeft:'3vw'}}
           key={model} onClick={() => setSelectedModels(model)}>
             {model}
           </button>
