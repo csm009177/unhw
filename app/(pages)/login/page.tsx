@@ -53,8 +53,7 @@ export default function Login() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#434343",          
-
+          backgroundColor: "#434343",
         }}
       >
         <form onSubmit={handleSubmit}>
@@ -67,7 +66,7 @@ export default function Login() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#373737",
-                textAlign:'center'
+                textAlign: "center",
               }}
               type="text"
               id="userId"
@@ -87,7 +86,7 @@ export default function Login() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#373737",
-                textAlign:'center'
+                textAlign: "center",
               }}
               type="password"
               id="userPw"
@@ -109,10 +108,13 @@ export default function Login() {
             }}
             type="submit"
           >
-            submit
+            {message ? (
+              <p style={{ color: "red" }}>{message}</p>
+            ) : (
+              <p style={{ color: "green" }}>submit</p>
+            )}
           </button>
         </form>
-        <div>{message && <p>{message}</p>}</div>
       </div>
     </div>
   );
