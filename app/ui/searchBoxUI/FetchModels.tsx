@@ -47,7 +47,7 @@ const FetchModels: React.FC = () => {
       justifyContent: "space-between",
       overflowX:'hidden',
       overflow:'scroll',
-      maxWidth:"100vh",
+      maxWidth:"100vw",
     }}
   >
       {models.map(

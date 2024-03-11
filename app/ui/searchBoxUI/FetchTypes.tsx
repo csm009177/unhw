@@ -69,7 +69,7 @@ const FetchTypes: React.FC = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           overflowX:'hidden',
-          maxWidth:"100vh",
+          maxWidth:"100vw",
           overflow:'scroll',
         }}
       >

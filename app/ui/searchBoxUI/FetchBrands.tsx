@@ -38,7 +38,7 @@ const FetchBrand: React.FC = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
-          maxWidth:"100vh",
+          maxWidth:"100vw",
           overflowX:'hidden',
           overflow:'scroll'
         }}
