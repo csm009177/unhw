@@ -53,7 +53,16 @@ const FetchModelDatas: React.FC = () => {
   }
 
   return (
-    <div>
+    <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      // justifyContent: "space-between",
+      overflowX:'hidden',
+      maxWidth:"100vh",
+      overflow:'scroll'
+    }}
+  >
     {modelDatas ? (
       modelDatas.map((info:ModelData, index:number) => (
         <button 

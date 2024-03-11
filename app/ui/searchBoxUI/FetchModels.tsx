@@ -9,15 +9,21 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 
 const FetchModels: React.FC = () => {
-  const {models, setModels} = useContext(modelsContext)
+  const { models, setModels } = useContext(modelsContext);
 
   const { selectedTypes, setSelectedTypes } = useContext(selectedTypesContext);
-  const { selectedBrands, setSelectedBrands } = useContext(selectedBrandsContext);
-  const { selectedModels, setSelectedModels } = useContext(selectedModelsContext)
+  const { selectedBrands, setSelectedBrands } = useContext(
+    selectedBrandsContext
+  );
+  const { selectedModels, setSelectedModels } = useContext(
+    selectedModelsContext
+  );
 
-  const fetchModels = async (selectedType: string, selectedBrands:string) => {
+  const fetchModels = async (selectedType: string, selectedBrands: string) => {
     try {
-      const response = await fetch(`/fetchModels?type=${selectedTypes}&brand=${selectedBrands}`);
+      const response = await fetch(
+        `/fetchModels?type=${selectedTypes}&brand=${selectedBrands}`
+      );
       const data = await response.json();
       setModels(data.models); // models 배열 설정
     } catch (error) {
@@ -32,26 +38,27 @@ const FetchModels: React.FC = () => {
   }, [selectedTypes, selectedBrands]);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        models :
-        {models.map(
-          (
-            model: string // models 매개변수에 대한 타입 명시
-          ) => (
-            <button key={model} onClick={() => setSelectedModels(model)}>
-              {model}
-            </button>
-          )
-        )}
-      </div>
-    </>
+    <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      // justifyContent: "space-between",
+      overflowX:'hidden',
+      overflow:'scroll',
+      maxWidth:"100vh",
+    }}
+  >
+      models :
+      {models.map(
+        (
+          model: string // models 매개변수에 대한 타입 명시
+        ) => (
+          <button key={model} onClick={() => setSelectedModels(model)}>
+            {model}
+          </button>
+        )
+      )}
+    </div>
   );
 };
 

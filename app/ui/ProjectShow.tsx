@@ -40,12 +40,16 @@ export default function ProjectShow() {
     >
       {/* 선택된 아이템이 있을 경우 메시지 표시 */}
       {selectedPjtIndex !== null && (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div style={{ width: "90%", height: "90%" }}>
           <p>Selected Projects : {selectedPjtIndex}</p>
           <selectedProductContext.Provider 
             value={{selectedProduct, setSelectedProduct}}>
-            <Searchbox />
-            <ShowBox />
+            <div style = {{width:'100%', height:'45%'}}>
+              <Searchbox />
+            </div>
+            <div style = {{width:'100%', height:'45%'}}>
+              <ShowBox />
+            </div>
           </selectedProductContext.Provider>
         </div>
       )}
