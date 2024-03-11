@@ -75,7 +75,9 @@ const FetchTypes: React.FC = () => {
       >
         {/* 타입 버튼들을 매핑하여 표시합니다. */}
         {types.map((type) => (
-          <button key={type} onClick={() => setSelectedTypes(type)}>
+          <button 
+          style={{minWidth:'7vw', marginLeft:"3vw"}}
+          key={type} onClick={() => setSelectedTypes(type)}>
             {type}
           </button>
         ))}
