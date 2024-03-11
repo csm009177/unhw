@@ -17,7 +17,6 @@ export default function Toggle() {
 
   return (
     <div
-      className="Main-LeftVar"
       style={{
         width: isOpen ? "20vw" : "2vw",
         display: "flex",

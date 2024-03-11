@@ -2,7 +2,8 @@
 
 import { useContext, useState } from "react";
 import "../globals.css";
-import { openContext, selectedProjectContext } from '../context/MainContext';
+import { openContext, selectedProjectContext } from "../context/MainContext";
+import LogOut from './Logout';
 
 interface AddProjectListProps {
   isOpen: boolean;
@@ -11,11 +12,10 @@ interface AddProjectListProps {
   setSelectedPjtIndex: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const AddProjectList: React.FC<AddProjectListProps> = (
-) => {
+const AddProjectList: React.FC<AddProjectListProps> = () => {
   const [project, setProject] = useState<string[]>([]);
-  const {setSelectedPjtIndex} = useContext(selectedProjectContext)
-  const {isOpen} = useContext(openContext)
+  const { setSelectedPjtIndex } = useContext(selectedProjectContext);
+  const { isOpen } = useContext(openContext);
 
   const addProject = () => {
     const newProject = `project ${project.length}`;
@@ -28,14 +28,19 @@ const AddProjectList: React.FC<AddProjectListProps> = (
 
   return (
     <div style={{ width: isOpen ? "100%" : "0%", color: "#FFFFFF" }}>
-      <p onClick={addProject} style={{ fontSize: "5vh" }}>unhw</p>
-      <ul>
-        {project.map((project, index) => (
-          <li key={index} onClick={() => handleProjectClick(index)}>
-            {project}
-          </li>
-        ))}
-      </ul>
+      <div style={{ height: "90vh" }}>
+        <p onClick={addProject} style={{ fontSize: "5vh" }}>
+          unhw
+        </p>
+        <ul>
+          {project.map((project, index) => (
+            <li key={index} onClick={() => handleProjectClick(index)}>
+              {project}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <LogOut/>
     </div>
   );
 };
