@@ -61,7 +61,7 @@ const FetchTypes: React.FC = () => {
   }, [selectedTypes, setSelectedBrands, setSelectedModels]);
 
   return (
-    <>
+    <>types :
       {/* 타입 버튼들을 화면에 표시합니다. */}
       <div
         style={{
@@ -73,7 +73,7 @@ const FetchTypes: React.FC = () => {
           overflow:'scroll'
         }}
       >
-        types :{/* 타입 버튼들을 매핑하여 표시합니다. */}
+        {/* 타입 버튼들을 매핑하여 표시합니다. */}
         {types.map((type) => (
           <button key={type} onClick={() => setSelectedTypes(type)}>
             {type}

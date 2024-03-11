@@ -8,8 +8,6 @@ import RenderProduct from "./showBoxUI/RenderProduct";
 const ShowBox: React.FC = () => {
   return (
     <>
-      <br />
-      selected Product
       <RenderProduct />
     </>
   );

@@ -39,6 +39,7 @@ const FetchModels: React.FC = () => {
 
   return (
     <>
+    models :
     <div
     style={{
       display: "flex",
@@ -48,7 +49,7 @@ const FetchModels: React.FC = () => {
       overflow:'scroll',
       maxWidth:"100vh",
     }}
-  >models :
+  >
       {models.map(
         (
           model: string // models 매개변수에 대한 타입 명시

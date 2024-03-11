@@ -24,12 +24,16 @@ const RenderProduct: React.FC = () => {
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
+          overflowX:'scroll',
+          maxWidth:"100vh",
         }}
       >
         {/* 각각의 선택된 모델을 버튼으로 표시합니다. */}
         {selectedProduct.map((product, index) => (
-          <button key={index} onClick={() => handleDelete(index)}>
+          <button 
+          style={{maxWidth:'5vw', minWidth:'5vw', minHeight:'15vh', maxHeight:'15vh'}}
+          key={index} onClick={() => handleDelete(index)}>
             {product}
           </button>
         ))}

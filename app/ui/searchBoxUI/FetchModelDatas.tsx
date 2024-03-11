@@ -63,6 +63,7 @@ const FetchModelDatas: React.FC = () => {
       overflow:'scroll'
     }}
   >
+    <div>Detail : </div>
     {modelDatas ? (
       modelDatas.map((info:ModelData, index:number) => (
         <button 
