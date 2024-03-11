@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // Login 컴포넌트
 // import "/app/globals.css";
@@ -9,9 +9,9 @@ export default function Login() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [message, setMessage] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const response = await fetch("/loginForm", {
@@ -19,7 +19,7 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: userId, pw:userPw }),
+        body: JSON.stringify({ id: userId, pw: userPw }),
       });
       const data = await response.json();
       setMessage(data.message);
@@ -27,7 +27,7 @@ export default function Login() {
       if (response.status === 200) {
         localStorage.setItem("token", data.token);
         // 로그인 후 리다이렉션 또는 다른 작업을 수행할 수 있습니다.
-        router.push('/')
+        router.push("/");
       }
     } catch (error) {
       console.error("Error logging in:", error);
@@ -36,32 +36,84 @@ export default function Login() {
   };
 
   return (
-      <>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#373737",
+      }}
+    >
+      <div
+        style={{
+          width: "50vw",
+          height: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#434343",          
+
+        }}
+      >
         <form onSubmit={handleSubmit}>
-        <div>Log in Page</div>
           <div>
-            <label htmlFor="userId">user Id:</label>
             <input
+              style={{
+                width: "40vw",
+                height: "20vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#373737",
+                textAlign:'center'
+              }}
               type="text"
               id="userId"
               value={userId}
+              placeholder="type Id:"
               onChange={(e) => setUserId(e.target.value)}
               required
             />
           </div>
+          <br />
           <div>
-            <label htmlFor="userPw">user Pw:</label>
             <input
+              style={{
+                width: "40vw",
+                height: "20vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#373737",
+                textAlign:'center'
+              }}
               type="password"
               id="userPw"
               value={userPw}
+              placeholder="type Pw:"
               onChange={(e) => setUserPw(e.target.value)}
               required
             />
           </div>
-          <button type="submit">submit</button>
+          <br />
+          <button
+            style={{
+              width: "40vw",
+              height: "20vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#373737",
+            }}
+            type="submit"
+          >
+            submit
+          </button>
         </form>
-        {message && <p>{message}</p>}
-      </>
+        <div>{message && <p>{message}</p>}</div>
+      </div>
+    </div>
   );
 }
