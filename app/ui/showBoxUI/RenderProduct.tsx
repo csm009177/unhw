@@ -1,6 +1,6 @@
 "use client";
 
-//! RenderProduct selectedProduct의 상태를 가져와서 화면에 표시하는 컴포넌트입니다 
+//! RenderProduct selectedProduct의 상태를 가져와서 화면에 표시하는 컴포넌트입니다
 
 import React, { useContext } from "react";
 import { selectedProductContext } from "@/app/context/MainContext";
@@ -25,22 +25,31 @@ const RenderProduct: React.FC = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
-          overflowX:'scroll',
-          overflow:"hidden",
-          maxWidth:"100vw",
-          maxHeight:'17vh'
+          overflowX: "scroll",
+          overflow: "hidden",
+          maxWidth: "100vw",
+          maxHeight: "17vh",
         }}
       >
         {/* 각각의 선택된 모델을 버튼으로 표시합니다. */}
-        <div style={{minHeight:'17vh'}}>
-        {selectedProduct.map((product, index) => (
-          <button 
-          style={{maxWidth:'5vw', minWidth:'5vw', minHeight:'17vh', maxHeight:'17vh', marginLeft:"3vw"}}
-          key={index} onClick={() => handleDelete(index)}>
-            {product}
-          </button>
-          
-        ))}
+        <div style={{ minHeight: "17vh" }}>
+          <br />
+          {selectedProduct.map((product, index) => (
+            <button
+              style={{
+                maxWidth: "5vw",
+                minWidth: "5vw",
+                minHeight: "15vh",
+                maxHeight: "15vh",
+                marginLeft: "3vw",
+                backgroundColor: "#434343",
+              }}
+              key={index}
+              onClick={() => handleDelete(index)}
+            >
+              {product}
+            </button>
+          ))}
         </div>
       </div>
     </>

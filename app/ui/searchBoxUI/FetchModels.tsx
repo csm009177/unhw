@@ -55,7 +55,7 @@ const FetchModels: React.FC = () => {
           model: string // models 매개변수에 대한 타입 명시
         ) => (
           <button 
-          style={{minWidth:'7vw', marginLeft:"3vw"}}
+          style={{minWidth:'7vw', marginLeft:"3vw", backgroundColor: "#434343",}}
           key={model} onClick={() => setSelectedModels(model)}>
             {model}
           </button>

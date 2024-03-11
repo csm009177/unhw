@@ -75,11 +75,13 @@ const FetchModelDatas: React.FC = () => {
           overflowX: "hidden",
           overflow: "scroll",
           maxWidth: "80vw",
+          minHeight:"30vh"
         }}
       >
         {modelDatas ? (
           modelDatas.map((info: ModelData, index: number) => (
             <button
+              style={{backgroundColor: "#434343",marginLeft:'3vw'}}
               key={index}
               onClick={() => handleClickProduct(selectedModels)}
             >
