@@ -38,27 +38,29 @@ const FetchModels: React.FC = () => {
   }, [selectedTypes, selectedBrands]);
 
   return (
+    <>
     <div
     style={{
       display: "flex",
       flexDirection: "row",
-      // justifyContent: "space-between",
+      justifyContent: "space-between",
       overflowX:'hidden',
       overflow:'scroll',
       maxWidth:"100vh",
     }}
-  >
-      models :
+  >models :
       {models.map(
         (
           model: string // models 매개변수에 대한 타입 명시
         ) => (
-          <button key={model} onClick={() => setSelectedModels(model)}>
+          <button 
+          key={model} onClick={() => setSelectedModels(model)}>
             {model}
           </button>
         )
       )}
     </div>
+    </>
   );
 };
 

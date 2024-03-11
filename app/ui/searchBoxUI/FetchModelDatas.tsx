@@ -57,7 +57,7 @@ const FetchModelDatas: React.FC = () => {
     style={{
       display: "flex",
       flexDirection: "row",
-      // justifyContent: "space-between",
+      justifyContent: "space-between",
       overflowX:'hidden',
       maxWidth:"100vh",
       overflow:'scroll'

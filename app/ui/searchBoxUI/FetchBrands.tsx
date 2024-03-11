@@ -32,17 +32,18 @@ const FetchBrand: React.FC = () => {
 
   return (
     <>
+      brands :
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          // justifyContent: "space-between",
+          justifyContent: "space-around",
           maxWidth:"100vh",
           overflowX:'hidden',
           overflow:'scroll'
         }}
       >
-        brands :
+        
         {brands.map(
           (
             brand: string // brand 매개변수에 대한 타입 명시
