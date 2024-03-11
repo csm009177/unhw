@@ -42,6 +42,7 @@ const RenderProduct: React.FC = () => {
                 minHeight: "15vh",
                 maxHeight: "15vh",
                 marginLeft: "3vw",
+                backgroundColor: "#434343"
               }}
               key={index}
               onClick={() => handleDelete(index)}
