@@ -1,13 +1,14 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useState, Dispatch } from 'react';
 import "../globals.css";
 import { openContext, selectedProjectContext } from "../context/MainContext";
 import AddProjectList from "./AddProjectList";
 
-export default function Toggle() {
+
+export default function Toggle () {
   const { isOpen, setIsOpen } = useContext(openContext);
-  const { selectedPjtIndex, setSelectedPjtIndex } = useContext(
+  const { selectedPjtIndex, setSelectedPjtIndex} = useContext(
     selectedProjectContext
   );
 

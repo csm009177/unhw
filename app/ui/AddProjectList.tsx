@@ -8,8 +8,8 @@ import LogOut from './Logout';
 interface AddProjectListProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedPjtIndex: number;
-  setSelectedPjtIndex: React.Dispatch<React.SetStateAction<number>>;
+  selectedPjtIndex: number|null;
+  setSelectedPjtIndex: React.Dispatch<React.SetStateAction<number|null>>;
 }
 
 const AddProjectList: React.FC<AddProjectListProps> = () => {
