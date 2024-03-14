@@ -1,13 +1,10 @@
-
-import { useRouter } from "next/navigation";
-
+import Link from 'next/link';
 
 export default function LogOut() {
-  const router = useRouter()
+
   const handleClickLogOut = () => {
     localStorage.removeItem("token");
-    router.push('/')
-  }
+  };
 
   return (
     <button
@@ -20,7 +17,7 @@ export default function LogOut() {
         alignItems: "center",
       }}
     >
-      Log out
+      <Link href={"/"}>Log out</Link>
     </button>
   );
 }
