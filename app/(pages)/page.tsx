@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import IdPage from "./[id]/page";
 

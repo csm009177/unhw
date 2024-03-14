@@ -1,4 +1,4 @@
-"use client";
+
 
 //! RenderProduct selectedProduct의 상태를 가져와서 화면에 표시하는 컴포넌트입니다
 

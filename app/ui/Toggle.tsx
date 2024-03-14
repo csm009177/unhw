@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useContext, useState, Dispatch } from 'react';
 import "../globals.css";
