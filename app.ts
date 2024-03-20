@@ -267,6 +267,26 @@ app.prepare().then(() => {
   });
 
   /**
+   * handleSave에 대한 엔드포인트 추가
+   */
+  server.post("/api/saveProject", (req: Request, res: Response) => {
+    const { selectedProduct, selectedPjtIndex, userkey } = req.body;
+    const query: string = "INSERT INTO project (pjtContents, pjtNum, userkey, pjtDate) VALUES (?, ?, ?, NOW())";
+    connection.query(
+      query,
+      [selectedProduct, selectedPjtIndex, userkey],
+      (err: QueryError | null, results: any, fields: FieldPacket[]) => {
+        if (err) {
+          console.error("Error save Poject:", err);
+          res.status(500).json({ message: "프로젝를 저장하는 중 오류가 발생했습니다." });
+          return;
+        }
+        res.status(200).json({ message: "프로젝를 저장했습니다." });
+      }
+    );
+  });
+
+  /**
    * 프로젝트 폼 정보 조회 요청 처리
    */
   server.get("/pjtForm/:pjtNum", (req: Request, res: Response) => {
