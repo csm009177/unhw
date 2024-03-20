@@ -112,11 +112,12 @@ app.prepare().then(() => {
           // JWT를 생성하기 위한 payload를 설정합니다.
           const tokenPayload = {
             username: user.username, // 사용자 이름을 토큰에 담습니다.
+            userkey: user.userkey, // 사용자 키를 토큰에 담습니다.
           };
-
+          
+          console.log("token:", tokenPayload);
           // JWT를 생성하고 토큰을 반환합니다. 토큰은 1시간 동안 유효합니다.
           const token = jwt.sign(tokenPayload, secretKey, { expiresIn: "1h" });
-
           // 클라이언트에게 로그인 성공 메시지와 토큰을 전달합니다.
           res.status(200).json({ message: "로그인 성공", token });
         } else {
@@ -128,6 +129,7 @@ app.prepare().then(() => {
       }
     );
   });
+
 
   /**
    * 타입 버튼 나열 요청 처리
@@ -237,16 +239,16 @@ app.prepare().then(() => {
    */
   server.post("/pjtForm", (req: Request, res: Response) => {
     // 요청에서 프로젝트 내용과 선택된 프로젝트 인덱스를 추출합니다.
-    const { pjtContents, selectedPjtIndex } = req.body;
+    const { pjtContents, selectedPjtIndex, userkey } = req.body;
 
     // 삽입 쿼리를 생성합니다.
     const query: string =
-      "INSERT INTO project (pjtContents, pjtNum, pjtDate) VALUES (?, ?, NOW())";
+      "INSERT INTO project (pjtContents, pjtNum, pjtDate, userkey) VALUES (?, ?, ?, NOW())";
 
     // 데이터베이스에 쿼리를 실행합니다.
     connection.query(
       query,
-      [pjtContents, selectedPjtIndex],
+      [pjtContents, selectedPjtIndex, userkey],
       (
         err: QueryError | null, // 오류 객체 또는 null 값을 나타내는 매개변수
         results: any, // 쿼리 실행 결과를 저장하는 매개변수

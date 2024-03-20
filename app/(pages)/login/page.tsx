@@ -25,8 +25,9 @@ export default function Login() {
       setMessage(data.message);
       // 로그인 성공 시 토큰을 localStorage에 저장하거나 다른 곳으로 관리할 수 있습니다.
       if (response.status === 200) {
-        localStorage.setItem("token", data.token);
         // 로그인 후 리다이렉션 또는 다른 작업을 수행할 수 있습니다.
+        localStorage.setItem("token", data.token);
+        // 로그인 후 리다이렉션
         router.push("/");
       }
     } catch (error) {
