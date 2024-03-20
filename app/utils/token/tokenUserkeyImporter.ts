@@ -1,6 +1,7 @@
 // app\utils\token\tokenUserkeyImporter.ts
 //! 로컬스토리지에서 토큰을 가져와서 디코딩하여 userkey를 가져오는 함수 
 
+// 로컬에서 토큰만 가져오면 해석이 가능해서 위험할 수 있음
 export default function tokenUserkeyImporter(): string | null {
   // 1. 로컬스토리지에서 토큰을 가져옵니다.
   const token = localStorage.getItem("token");
